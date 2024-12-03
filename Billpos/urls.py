@@ -21,4 +21,5 @@ from Billpos import view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
+    path('index/', view.Index),
 ]
