@@ -22,7 +22,7 @@ from django.contrib import admin
 from django.urls import path
 from Billpos import view
 from Billpos import brandview
-
+from Billpos import Taxview
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
@@ -31,6 +31,8 @@ urlpatterns = [
    
     path('brand-list/', brandview.Brands),
     path('brand-view/<id>', brandview.BrandView),
+
+    path('taxlist/', Taxview.TaxList), 
 
 
 ]
