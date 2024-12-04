@@ -1,0 +1,56 @@
+{% include "Component/Header.html" %}
+{% include "Component/Sidebar.html" %}
+   <div class="content-wrapper">
+    <div class="container">
+        <div class="card">
+            <<div class="card-header">
+                <h5 style="text-align: center;">CATEGORY LIST</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsiew">
+                    <table class="table text-center">
+                        <tr>
+                            <th>Id</th>
+                            <th>CATEGORY NAME</th>
+                            <th>CATEGORY IMAGE</th>
+                            <th>BANNER IMAGE</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for i in categoryData %}
+                        {% if i.id == id %}
+                        <tr>
+                            <td>
+                                {{ forloop.counter }}
+                            </td>
+                            <td>
+                                {{ i.c_name}}
+                            </td>
+                
+                            <td>
+                                <img height="100px" width="100px" src="../media/{{ i.c_img }}">
+                            </td>
+                            <td>
+                                <img height="100px" width="100px" src="../media/{{ i.B_img }}">
+                            </td>
+
+                            <td>
+                                <a href="/category-list/" class="btn btn-primary">Back </a> 
+                                    
+                                 
+                            </td>
+                           </tr>
+                            {% endif %}
+                            {% endfor%}
+                            
+                        
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+   </div>
+  
+{% include "Component/Footer.html" %}

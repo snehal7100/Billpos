@@ -21,11 +21,20 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from Billpos import view
+from Billpos import categoryview
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
     path('index/', view.Index),
+
+
+    path('category-list/',categoryview.category),
+    path('category-add/',categoryview.addcategory),
+    path('category-view/<id>',categoryview.categoryview),
+    path('category-edit/<id>',categoryview.editcategory),
+    path('category-delete/<id>',categoryview.delete),
 
 ]
 if settings.DEBUG:  
