@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
     path('index/', view.Index),
+
 ]
+# urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
