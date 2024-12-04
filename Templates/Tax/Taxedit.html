@@ -1,0 +1,65 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tax Edit Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <div class="container mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Edit Tax Form</h1>
+                    <style>
+                        #h1 {
+                            padding-top: 10px;
+                            font-weight: bold;
+                            font-size: 20px;
+                        }
+
+                        .card-header {
+                            padding-top: 10px;
+                            font-weight: bold;
+                            font-size: 15px;
+                        }
+                    </style>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <!-- SR No Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="sr_no">Sr No:</label>
+                            <input type="text" class="form-control" id="sr_no" name="sr_no" value="{{ taxData.sr_no }}" placeholder="Enter SR No" required>
+                        </div>
+
+                        <!-- Tax Name Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="taxname">Tax Name:</label>
+                            <input type="text" class="form-control" id="taxname" name="taxname" value="{{ taxData.taxname }}" placeholder="Enter Tax Name" required>
+                        </div>
+
+                        <!-- Tax Percentage Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="taxpercentage">Tax Percentage (%):</label>
+                            <input type="number" class="form-control" id="taxpercentage" name="taxpercentage" value="{{ taxData.taxpercentage }}" placeholder="Enter Tax Percentage" step="0.01" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% include "Component/footer.html" %}
