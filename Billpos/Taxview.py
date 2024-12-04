@@ -57,4 +57,4 @@ def addTax(request):
         newTax.save()
         return redirect(TaxList)
     else:
-        return render(request, "Tax/addform.html")
+        return render(request, "Tax/Taxaddform.html")
