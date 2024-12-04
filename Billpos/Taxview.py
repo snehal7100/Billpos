@@ -7,7 +7,7 @@ def TaxList(request):
     context = {
         "taxData": taxData
     }
-    return render(request, "Tax/index.html", context)  
+    return render(request, "Tax/Taxindex.html", context)  
 
 
 # def TaxView(request, id):
