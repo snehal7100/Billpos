@@ -1,42 +1,58 @@
-{% include "components/header.html" %}
-{% include "components/sidebar.html" %}
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
 
 <div class="content-wrapper">
     <div class="container">
         <div class="card">
             <div class="card-header">
-                Category List
+
+                <div class="card-header text-center text-black">
+                    <h1 style="font-weight: bold;">Tax Records</h1>
+                    <a href="/tax-add/" class="btn btn-primary a">Add Tax</a>
+                </div>
             </div>
-            <a href="/category-add/" class="btn btn-primary">Add Category</a>
+
+            <style>
+                .a {
+                    font-weight: bold;
+                    font-size: 12px;
+                    height: 40px;
+                    width: 100px;
+                    margin-left: 900px;
+                    margin-top: 10px;
+                    padding-top: 12px;
+                    font-weight: bold;
+                }
+            </style>
+
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table text-center">
+                    <table class="table table-striped table-hover text-center">
                         <tr>
-                            <th>ID</th>
-                            <th>Category Name</th>
-                            <th>Image</th>
-                            <th>Actions</th>
+                            <th>#</th>
+                            <th>Serial Number</th>
+                            <th>Tax Name</th>
+                            <th>Tax Percentage</th>
+                            <th>Action</th>
                         </tr>
-                        {% for category in categoryData %}
+
+                        {% for tax in taxData %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ category.cat_name }}</td>
-                            <td>{{ category.cat_img }}</td>
+                            <td>{{ tax.sr_no }}</td>
+                            <td>{{ tax.taxname }}</td>
+                            <td>{{ tax.taxpercentage }}</td>
                             <td>
-                                <a href="/category-view/{{ category.id }}">
-                                    <button type="button" class="btn btn-primary">View</button>
-                                </a>
-                                <a href="/category-edit/{{ category.id }}">
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                </a>
-                                <a href="/category-delete/{{ category.id }}">
-                                    <button type="button" class="btn btn-danger">Delete</button>
-                                </a>
+                                <a href="/tax-view/{{ tax.id }}" class="btn btn-primary">View</a>
+                                <a href="/tax-edit/{{ tax.id }}" class="btn btn-primary">Edit</a>
+                                <a href="/tax-delete/{{ tax.id }}" class="btn btn-primary">Delete</a>
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="4">No categories available</td>
+                            <td colspan="5">
+                                <span class="text-primary">No tax records found</span>
+                            </td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -46,4 +62,4 @@
     </div>
 </div>
 
-{% include "components/footer.html" %}
+{% include "Component/footer.html" %}
