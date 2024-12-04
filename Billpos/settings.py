@@ -38,8 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Login',
+<<<<<<< HEAD
+    'Brand',
+=======
     'category',
+<<<<<<< HEAD
     'Taxes'
+=======
+>>>>>>> f04f554f7fefff79f6cee5609dcbf53b20731d73
+>>>>>>> 3f66931af64dd48874bb04d83e48062a79683f99
 ]
 
 MIDDLEWARE = [
@@ -128,5 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS=[
     BASE_DIR,"static"
 ]
-# MEDIA_URL='/media/'
-# MEDIA_ROOT=BASE_DIR,"media"
+MEDIA_ROOT=BASE_DIR/"media"
+MEDIA_URL="/media/"
