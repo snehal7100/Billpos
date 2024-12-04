@@ -26,6 +26,7 @@ from Billpos import Taxview
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
+    path('valid/',view.login_view),
     path('index/', view.Index),
 
    
