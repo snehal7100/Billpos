@@ -26,7 +26,7 @@ def editTax(request, id):
         taxData.taxname = request.POST.get("taxname", taxData.taxname)
         taxData.taxpercentage = request.POST.get("taxpercentage", taxData.taxpercentage)
         taxData.save()
-        return redirect(TaxList)
+        return redirect('tax-view', id=id)  # Redirect to the updated tax record detail
     else:
         context = {
             "taxData": taxData

@@ -17,23 +17,15 @@
                             <th>Tax Percentage (%)</th>
                             <th>Action</th>
                         </tr>
-                        {% for i in taxData %}
-                        {% if i.id == id %}
                         <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ i.sr_no }}</td>
-                            <td>{{ i.taxname }}</td>
-                            <td>{{ i.taxpercentage }}</td>
+                            <td>1</td>  <!-- Fixed the static counter since it's a single object -->
+                            <td>{{ taxData.sr_no }}</td>
+                            <td>{{ taxData.taxname }}</td>
+                            <td>{{ taxData.taxpercentage }}</td>
                             <td>
-                                <a href="/Tax-list/" class="btn btn-primary">Back</a>
+                                <a href="/tax-list/" class="btn btn-primary">Back</a>
                             </td>
                         </tr>
-                        {% endif %}
-                        {% empty %}
-                        <tr>
-                            <td colspan="5">No Tax Record Found</td>
-                        </tr>
-                        {% endfor %}
                     </table>
                 </div>
             </div>
