@@ -23,10 +23,11 @@ from django.urls import path
 from Billpos import view
 from Billpos import brandview
 from Billpos import Taxview
+from Billpos import loginvalid
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
-    path('valid/',view.login_view),
+    path('valid/',loginvalid.login_view),
     path('index/', view.Index),
 
    
