@@ -27,7 +27,7 @@ def editBrand(request,id):
         return render(request,"Brand/edit.html",bData)
     else:
         name = request.POST.get("bname")
-        img= request.POST.get("img")
+        img= request.FILES.get("img")
         bData.bname=name
         bData.img=img  
         bData.save()
@@ -43,7 +43,7 @@ def AddBrand(request):
         return render(request,"Brand/addform.html")
     else:
         name = request.POST.get("bname")
-        img= request.POST.get("img")
+        img= request.FILES.get("img")
    
         saveData = BrandForm(
             bname=name,
