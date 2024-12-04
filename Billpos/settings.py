@@ -43,11 +43,11 @@ INSTALLED_APPS = [
 
     'category',
 
-<<<<<<< HEAD
-=======
+
+
     'Taxes'
 
->>>>>>> f3dc596972694f5ff1271d30b9e41b8683805be5
+
 ]
 
 MIDDLEWARE = [
