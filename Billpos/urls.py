@@ -21,11 +21,17 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from Billpos import view
+from Billpos import brandview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
     path('index/', view.Index),
+
+   
+    path('brand-list/', brandview.Brands),
+    path('brand-view/<id>', brandview.BrandView),
+
 
 ]
 if settings.DEBUG:  
