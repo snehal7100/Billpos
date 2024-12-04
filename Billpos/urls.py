@@ -32,7 +32,7 @@ urlpatterns = [
     path('brand-list/', brandview.Brands),
     path('brand-view/<id>', brandview.BrandView),
 
-    path('taxlist/', Taxview.TaxList), 
+    path('Tax-list/', Taxview.TaxList), 
 
 
 ]

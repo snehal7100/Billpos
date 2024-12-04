@@ -10,9 +10,9 @@ def TaxList(request):
     return render(request, "Tax/index.html", context)  
 
 
-def TaxView(request, id):
-    taxData = Taxs.objects.filter(id=id).first()  
-    context = {
-        "taxData": taxData
-    }
-    return render(request, "Tax/view.html", context)  
+# def TaxView(request, id):
+#     taxData = Taxs.objects.filter(id=id).first()  
+#     context = {
+#         "taxData": taxData
+#     }
+#     return render(request, "Tax/view.html", context)  
