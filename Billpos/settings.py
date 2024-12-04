@@ -42,7 +42,15 @@ INSTALLED_APPS = [
     'Brand',
 
     'category',
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+    'Taxes'
+=======
+>>>>>>> f04f554f7fefff79f6cee5609dcbf53b20731d73
+>>>>>>> 3f66931af64dd48874bb04d83e48062a79683f99
+>>>>>>> a2241b5c85a9bd6092e54f0c4167f4e97af32012
 ]
 
 MIDDLEWARE = [
