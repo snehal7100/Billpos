@@ -7,10 +7,11 @@
             <div class="card-header">
 
                 <div class="card-header text-center text-black">
-                    <h1 style="font-weight: bold;">Brand Record</h1>
-                    <a href="/Brand-add/" class="btn btn-primary a">Add Brand</a>
-            
+                    <h1 style="font-weight: bold;">Tax Records</h1>
+                    <a href="/tax-add/" class="btn btn-primary a">Add Tax</a>
+                </div>
             </div>
+
             <style>
                 .a {
                     font-weight: bold;
@@ -23,38 +24,34 @@
                     font-weight: bold;
                 }
             </style>
+
             <div class="card-body">
-                <div class="table-responsiew">
+                <div class="table-responsive">
                     <table class="table table-striped table-hover text-center">
                         <tr>
                             <th>#</th>
-                            <th>BrandName</th>
-                            <th>Image</th>
+                            <th>Serial Number</th>
+                            <th>Tax Name</th>
+                            <th>Tax Percentage</th>
                             <th>Action</th>
                         </tr>
-                        {% for i in bData %}
-                        
+
+                        {% for tax in taxData %}
                         <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ tax.sr_no }}</td>
+                            <td>{{ tax.taxname }}</td>
+                            <td>{{ tax.taxpercentage }}</td>
                             <td>
-                                {{ forloop.counter }}
-                            </td>
-                            <td>
-                                {{ i.bname }}
-                            </td>
-                            <td>
-                                {{ i.img }}
-                            </td>
-                            <td>
-                              
-                                <a href="/brand-view/{{i.id}}"  class="dark fas fa-eye"></a>
-                                <a href="/brand-edit/{{i.id}}"  class="fa fa-edit"> </a>
-                                <a href="/brand-delete/{{i.id}}"  class="fa fa-trash"></a>  
+                                <a href="/tax-view/{{ tax.id }}" class="btn btn-primary">View</a>
+                                <a href="/tax-edit/{{ tax.id }}" class="btn btn-primary">Edit</a>
+                                <a href="/tax-delete/{{ tax.id }}" class="btn btn-primary">Delete</a>
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="2">
-                                <span class="text-primary">Book Not found</span>
+                            <td colspan="5">
+                                <span class="text-primary">No tax records found</span>
                             </td>
                         </tr>
                         {% endfor %}
@@ -64,4 +61,5 @@
         </div>
     </div>
 </div>
+
 {% include "Component/footer.html" %}
