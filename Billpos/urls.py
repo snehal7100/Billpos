@@ -26,8 +26,12 @@ from Billpos import categoryview
 
 =======
 from Billpos import brandview
+<<<<<<< HEAD
 >>>>>>> f3dc596972694f5ff1271d30b9e41b8683805be5
 
+=======
+from Billpos import Taxview
+>>>>>>> 6d758955df8cc3a114622fc220efee0abb354f0d
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
@@ -44,6 +48,12 @@ urlpatterns = [
    
     path('brand-list/', brandview.Brands),
     path('brand-view/<id>', brandview.BrandView),
+    path('brand-edit/<id>', brandview.editBrand),
+    path('brand-delete/<id>', brandview.delete),
+    path('brand-add/', brandview.AddBrand),
+    
+
+    path('Tax-list/', Taxview.TaxList), 
 
 >>>>>>> f3dc596972694f5ff1271d30b9e41b8683805be5
 
