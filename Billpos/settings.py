@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Login',
+<<<<<<< HEAD
     'Brand',
+=======
+    'category',
+>>>>>>> f04f554f7fefff79f6cee5609dcbf53b20731d73
 ]
 
 MIDDLEWARE = [
