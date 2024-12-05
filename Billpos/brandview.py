@@ -1,9 +1,6 @@
 
 from django.shortcuts import render,redirect
 from Brand.models import BrandForm
-from django.contrib import messages
-
-
 def Brands(request):
     bData = BrandForm.objects.all()
     bdata={
@@ -56,17 +53,3 @@ def AddBrand(request):
         return redirect(Brands)
 
 
-def brand_form(request):
-    if request.method == "POST":
-        brand_name = request.POST.get('bname', 'unique=True').strip()
-        brand_image = request.FILES.get('img')  
-
-        if not brand_name or not brand_image:
-            messages.error(request, "Both Brand Name and Brand Image are required.")
-            return render(request, 'brand-list')
-
-    
-        messages.success(request, "Brand added successfully!")
-        return redirect('brand-lis')  
-
-    return render(request, 'brand-lis')
