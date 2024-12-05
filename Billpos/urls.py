@@ -21,30 +21,24 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from Billpos import view
-<<<<<<< HEAD
 from Billpos import categoryview
 
-=======
 from Billpos import brandview
-<<<<<<< HEAD
->>>>>>> f3dc596972694f5ff1271d30b9e41b8683805be5
 
-=======
+
 from Billpos import Taxview
->>>>>>> 6d758955df8cc3a114622fc220efee0abb354f0d
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.Login),
     path('index/', view.Index),
 
-<<<<<<< HEAD
 
     path('category-list/',categoryview.category),
     path('category-add/',categoryview.addcategory),
     path('category-view/<id>',categoryview.categoryview),
     path('category-edit/<id>',categoryview.editcategory),
     path('category-delete/<id>',categoryview.delete),
-=======
+
    
     path('brand-list/', brandview.Brands),
     path('brand-view/<id>', brandview.BrandView),
@@ -55,7 +49,6 @@ urlpatterns = [
 
     path('Tax-list/', Taxview.TaxList), 
 
->>>>>>> f3dc596972694f5ff1271d30b9e41b8683805be5
 
 ]
 if settings.DEBUG:  
