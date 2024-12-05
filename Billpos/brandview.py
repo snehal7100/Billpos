@@ -1,6 +1,8 @@
 
 from django.shortcuts import render,redirect
 from Brand.models import BrandForm
+from django.contrib import messages
+
 def Brands(request):
     bData = BrandForm.objects.all()
     bdata={
@@ -38,18 +40,31 @@ def delete(request,id):
     bData.delete() 
     return redirect(Brands)
 
+
+
+
+
 def AddBrand(request):
-    if request.method == "GET":
-        return render(request,"Brand/addform.html")
-    else:
-        name = request.POST.get("bname")
-        img= request.FILES.get("img")
-   
-        saveData = BrandForm(
-            bname=name,
-            img=img,
-            )
-        saveData.save()
-        return redirect(Brands)
+    if request.method == "POST":
+        name = request.POST.get("bname", "").strip()
+        img = request.FILES.get("img")
+
+        # Server-side validation
+        if not name or not img:
+            messages.error(request, "Both Brand Name and Brand Image are required.")
+            return render(request, "Brand/addform.html")
+
+        # Check if brand name already exists
+        if BrandForm.objects.filter(bname__iexact=name).exists():
+            messages.error(request, "Brand Name already exists. Please choose a different name.")
+            return render(request, "Brand/addform.html")
+
+        # Save the new brand
+        BrandForm.objects.create(bname=name, img=img)
+        messages.success(request, "Brand added successfully!")
+        return redirect("brand-list")
+
+    return render(request, "Brand/addform.html")
+
 
 
