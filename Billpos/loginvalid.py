@@ -21,5 +21,5 @@ def login_view(request):
             messages.error(request, "Invalid email or password.")
             return render(request, 'Component/index.html')
 
-    # Render the login page if GET request
+  
     return render(request, 'Component/index.html')
