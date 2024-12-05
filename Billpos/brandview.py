@@ -1,6 +1,7 @@
 
 from django.shortcuts import render,redirect
 from Brand.models import BrandForm
+from django.contrib import messages
 def Brands(request):
     bData = BrandForm.objects.all()
     bdata={
@@ -51,5 +52,7 @@ def AddBrand(request):
             )
         saveData.save()
         return redirect(Brands)
+
+
 
 
