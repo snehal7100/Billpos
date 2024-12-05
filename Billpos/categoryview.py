@@ -61,22 +61,6 @@ def delete(request,id):
     return redirect(category)
 
 
-def category_form(request):
-    if request.method == "POST":
-        c_name = request.POST.get('c_name', 'unique=True').strip()
-        c_img = request.FILES.get('img')
-        B_img = request.FILES.get('img1')  
-  
-
-        if not c_name or not c_img or not B_img:
-            messages.error(request, "Both category Name and category Image and banner Image are required.")
-            return render(request, 'category-list')
-
-    
-        messages.success(request, "Category added successfully!")
-        return redirect('category-list')  
-
-    return render(request, 'category-list')
 
 
     
