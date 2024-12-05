@@ -15,7 +15,7 @@ def login_view(request):
         if email == "sukhdi@gmail.com" and password == "sukhda@":
             # Successful login, redirect to the admin dashboard
             messages.success(request, f"Welcome back, Admin!")
-            return redirect('/admin_dashboard/')  # Change to your admin dashboard URL
+            return redirect('/admin/')  # Redirect to Django admin or your admin dashboard URL
         else:
             # Invalid credentials, show error message and render login form again
             messages.error(request, "Invalid email or password.")

@@ -25,11 +25,11 @@ from Billpos import brandview
 from Billpos import Taxview
 from Billpos import loginvalid
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', view.Login),
-    path('valid/',loginvalid.login_view),
-    path('index/', view.Index),
 
+    path('admin/', admin.site.urls),  # Admin URL
+    path('', view.Login),  # Login page (if it needs to be used for a different purpose)
+    path('valid/', loginvalid.login_view),  # Map /valid/ to login_view
+    path('index/', view.Index),  # Index URL
    
     path('brand-list/', brandview.Brands),
     path('brand-view/<id>', brandview.BrandView),
