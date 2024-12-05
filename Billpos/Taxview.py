@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from Taxes.models import Taxs
+from django.contrib import messages
 
 # View to display all tax records
 def TaxList(request):
@@ -44,17 +45,28 @@ def deleteTax(request, id):
 # View to add a new tax record
 def addTax(request):
     if request.method == "POST":
-        sr_no = request.POST.get("sr_no")
-        taxname = request.POST.get("taxname")
-        taxpercentage = request.POST.get("taxpercentage")
+        sr_no = request.POST.get("sr_no").strip()
+        taxname = request.POST.get("taxname").strip()
+        taxpercentage = request.POST.get("taxpercentage").strip()
 
-        # Save the new tax record
+        # Server-side validation
+        if not sr_no or not taxname or not taxpercentage:
+            messages.error(request, "All fields are required.")
+            return render(request, "Tax/Taxaddform.html", {
+                'sr_no': sr_no,
+                'taxname': taxname,
+                'taxpercentage': taxpercentage
+            })
+
+        # Save the new tax record if validation passes
         newTax = Taxs(
             sr_no=sr_no,
             taxname=taxname,
             taxpercentage=taxpercentage
         )
         newTax.save()
-        return redirect(TaxList)
-    else:
-        return render(request, "Tax/Taxaddform.html")
+        messages.success(request, "Tax record added successfully.")
+        return redirect('tax-list')  # Redirect to the list page
+
+    # Render the form for GET requests
+    return render(request, "Tax/Taxaddform.html")

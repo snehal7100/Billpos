@@ -21,15 +21,29 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from Billpos import view
+from Billpos import categoryview
+
 from Billpos import brandview
+
+
 from Billpos import Taxview
 from Billpos import loginvalid
 urlpatterns = [
+
+
+
+    path('category-list/',categoryview.category),
+    path('category-add/',categoryview.addcategory),
+    path('category-view/<id>',categoryview.categoryview),
+    path('category-edit/<id>',categoryview.editcategory),
+    path('category-delete/<id>',categoryview.delete),
+
 
     path('admin/', admin.site.urls),  # Admin URL
     path('', view.Login),  # Login page (if it needs to be used for a different purpose)
     path('valid/', loginvalid.login_view),  # Map /valid/ to login_view
     path('index/', view.Index),  # Index URL
+
    
     path('brand-list/', brandview.Brands),
     path('brand-view/<id>', brandview.BrandView),
