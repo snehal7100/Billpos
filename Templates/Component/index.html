@@ -111,6 +111,16 @@ button:hover {
         <div class="form-container">
             <h1>BillerPOS</h1>
             <p>Hello <span class="highlight">Good Morning</span>, Welcome Back!</p>
+
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
             <form method="post" action="/valid/">  <!-- Update the action to /valid/ -->
                 {% csrf_token %}
                 <label for="email">Email</label>
