@@ -1,6 +1,7 @@
 
 from django.shortcuts import render,redirect
 from Brand.models import BrandForm
+from django.contrib import messages
 def Brands(request):
     bData = BrandForm.objects.all()
     bdata={
@@ -38,18 +39,29 @@ def delete(request,id):
     bData.delete() 
     return redirect(Brands)
 
+
+
 def AddBrand(request):
     if request.method == "GET":
-        return render(request,"Brand/addform.html")
+        return render(request, "Brand/addform.html")
     else:
-        name = request.POST.get("bname")
-        img= request.FILES.get("img")
-   
+      
+        name = request.POST.get("bname").strip()
+        img = request.FILES.get("img")
+
+      
+        if BrandForm.objects.filter(bname__iexact=name).exists():
+            messages.error(request, "Duplicate entry not allowed! Brand name already exists.")
+            return render(request, "Brand/addform.html")  
+
         saveData = BrandForm(
             bname=name,
             img=img,
-            )
+        )
         saveData.save()
-        return redirect(Brands)
+        messages.success(request, "Brand added successfully!")
+        return redirect(Brands)  
+
+
 
 
