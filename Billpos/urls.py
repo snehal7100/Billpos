@@ -52,11 +52,12 @@ urlpatterns = [
     path('brand-add/', brandview.AddBrand),
     
 
-    path('Tax-list/', Taxview.TaxList),
-    path('tax-view/<id>/', Taxview.TaxView),
-    path('tax-edit/<id>/', Taxview.editTax),
-    path('tax-delete/<id>/', Taxview.deleteTax),
-    path('tax-add/', Taxview.addTax),
+    path('tax-list/', Taxview.TaxList),  # List all tax records
+    path('tax-view/<id>/', Taxview.TaxView),  # View a single tax record
+    path('tax-edit/<id>/', Taxview.editTax),  # Edit a tax record
+    path('tax-delete/<id>/', Taxview.deleteTax),  # Delete a tax record
+    path('tax-add/', Taxview.addTax),  # Add a new tax record
+
 
 ]
 if settings.DEBUG:  

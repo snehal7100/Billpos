@@ -27,19 +27,21 @@ def editTax(request, id):
         taxData.taxname = request.POST.get("taxname", taxData.taxname)
         taxData.taxpercentage = request.POST.get("taxpercentage", taxData.taxpercentage)
         taxData.save()
+        messages.success(request, "Tax record updated successfully.")
         return redirect('tax-view', id=id)  # Redirect to the updated tax record detail
-    else:
-        context = {
-            "taxData": taxData
-        }
-        return render(request, "Tax/Taxedit.html", context)
+
+    context = {
+        "taxData": taxData
+    }
+    return render(request, "Tax/Taxedit.html", context)
 
 
 # View to delete a tax record
 def deleteTax(request, id):
     taxData = get_object_or_404(Taxs, id=id)
     taxData.delete()
-    return redirect(TaxList)
+    messages.success(request, "Tax record deleted successfully.")
+    return redirect('tax-list')  # Correct redirect to tax-list
 
 
 # View to add a new tax record
@@ -51,15 +53,15 @@ def addTax(request):
         taxpercentage = request.POST.get("taxpercentage", "").strip()
 
         # Server-side validation for empty fields
-        if not sr_no:
-            messages.error(request, "SR No is required.")
-        if not taxname:
-            messages.error(request, "Tax Name is required.")
-        if not taxpercentage:
-            messages.error(request, "Tax Percentage is required.")
+        if not sr_no or not taxname or not taxpercentage:
+            if not sr_no:
+                messages.error(request, "SR No is required.")
+            if not taxname:
+                messages.error(request, "Tax Name is required.")
+            if not taxpercentage:
+                messages.error(request, "Tax Percentage is required.")
 
-        # If there are any error messages, re-render the form with previous data
-        if messages.get_messages(request):
+            # Re-render the form with previous data if validation fails
             return render(request, "Tax/Taxaddform.html", {
                 'sr_no': sr_no,
                 'taxname': taxname,
@@ -72,17 +74,11 @@ def addTax(request):
             taxname=taxname,
             taxpercentage=taxpercentage
         )
-<<<<<<< HEAD
         new_tax.save()
 
         # Success message
         messages.success(request, "Tax record added successfully!")
         return redirect('tax-list')  # Redirect to the tax list page
-=======
-        newTax.save()
-        messages.success(request, "Tax record added successfully.")
-        return redirect('Tax-list')  # Redirect to the list page
->>>>>>> 77c0f027cf669358cf9ed59a426acb83f0341fd7
 
     # Render the form for GET requests
     return render(request, "Tax/Taxaddform.html")
