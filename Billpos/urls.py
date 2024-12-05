@@ -29,10 +29,7 @@ from Billpos import brandview
 from Billpos import Taxview
 from Billpos import loginvalid
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', view.Login),
-    path('valid/',loginvalid.login_view),
-    path('index/', view.Index),
+
 
 
     path('category-list/',categoryview.category),
@@ -40,6 +37,12 @@ urlpatterns = [
     path('category-view/<id>',categoryview.categoryview),
     path('category-edit/<id>',categoryview.editcategory),
     path('category-delete/<id>',categoryview.delete),
+
+
+    path('admin/', admin.site.urls),  # Admin URL
+    path('', view.Login),  # Login page (if it needs to be used for a different purpose)
+    path('valid/', loginvalid.login_view),  # Map /valid/ to login_view
+    path('index/', view.Index),  # Index URL
 
    
     path('brand-list/', brandview.Brands),

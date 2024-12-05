@@ -103,34 +103,33 @@ button:hover {
 }
 
 </style>
+
+
+
 <body>
-    <div class="container">c
+    <div class="container">
         <div class="form-container">
             <h1>BillerPOS</h1>
             <p>Hello <span class="highlight">Good Morning</span>, Welcome Back!</p>
-            <form method="post" action="/index/">
-             {% csrf_token %}
+            <form method="post" action="/valid/">  <!-- Update the action to /valid/ -->
+                {% csrf_token %}
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Enter Email" required>
-                
+                <input type="email" id="uname" name="uname" placeholder="Enter Email" required>  <!-- Add name attribute -->
+
                 <label for="password">Password</label>
                 <div class="password-container">
-                    <input type="password" id="password" placeholder="Enter Password" required>
-                    
+                    <input type="password" id="password" name="passw" placeholder="Enter Password" required>  <!-- Add name attribute -->
                 </div>
-                
+
                 <div class="options">
-                   
                     <a href="#">Forgot password?</a>
                     <br><br>
                 </div>
+
                 <br>
-                
                 <button type="submit">Sign In</button>
             </form>
         </div>
     </div>
-
-   
 </body>
 </html>
