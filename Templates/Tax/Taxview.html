@@ -1,0 +1,36 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Tax Record Details
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover text-center">
+                        <tr>
+                            <th>#</th>
+                            <th>Sr No</th>
+                            <th>Tax Name</th>
+                            <th>Tax Percentage (%)</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>  <!-- Fixed the static counter since it's a single object -->
+                            <td>{{ taxData.sr_no }}</td>
+                            <td>{{ taxData.taxname }}</td>
+                            <td>{{ taxData.taxpercentage }}</td>
+                            <td>
+                                <a href="/tax-list/" class="btn btn-primary">Back</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "Component/footer.html" %}
