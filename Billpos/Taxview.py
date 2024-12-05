@@ -72,11 +72,17 @@ def addTax(request):
             taxname=taxname,
             taxpercentage=taxpercentage
         )
+<<<<<<< HEAD
         new_tax.save()
 
         # Success message
         messages.success(request, "Tax record added successfully!")
         return redirect('tax-list')  # Redirect to the tax list page
+=======
+        newTax.save()
+        messages.success(request, "Tax record added successfully.")
+        return redirect('Tax-list')  # Redirect to the list page
+>>>>>>> 77c0f027cf669358cf9ed59a426acb83f0341fd7
 
     # Render the form for GET requests
     return render(request, "Tax/Taxaddform.html")
