@@ -43,7 +43,10 @@ INSTALLED_APPS = [
 
     'category',
 
+
+
     'Taxes'
+
 
 ]
 
