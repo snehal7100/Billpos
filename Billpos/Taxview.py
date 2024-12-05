@@ -45,13 +45,21 @@ def deleteTax(request, id):
 # View to add a new tax record
 def addTax(request):
     if request.method == "POST":
-        sr_no = request.POST.get("sr_no").strip()
-        taxname = request.POST.get("taxname").strip()
-        taxpercentage = request.POST.get("taxpercentage").strip()
+        # Getting form data
+        sr_no = request.POST.get("sr_no", "").strip()
+        taxname = request.POST.get("taxname", "").strip()
+        taxpercentage = request.POST.get("taxpercentage", "").strip()
 
-        # Server-side validation
-        if not sr_no or not taxname or not taxpercentage:
-            messages.error(request, "All fields are required.")
+        # Server-side validation for empty fields
+        if not sr_no:
+            messages.error(request, "SR No is required.")
+        if not taxname:
+            messages.error(request, "Tax Name is required.")
+        if not taxpercentage:
+            messages.error(request, "Tax Percentage is required.")
+
+        # If there are any error messages, re-render the form with previous data
+        if messages.get_messages(request):
             return render(request, "Tax/Taxaddform.html", {
                 'sr_no': sr_no,
                 'taxname': taxname,
@@ -59,14 +67,16 @@ def addTax(request):
             })
 
         # Save the new tax record if validation passes
-        newTax = Taxs(
+        new_tax = Taxs(
             sr_no=sr_no,
             taxname=taxname,
             taxpercentage=taxpercentage
         )
-        newTax.save()
-        messages.success(request, "Tax record added successfully.")
-        return redirect('tax-list')  # Redirect to the list page
+        new_tax.save()
+
+        # Success message
+        messages.success(request, "Tax record added successfully!")
+        return redirect('tax-list')  # Redirect to the tax list page
 
     # Render the form for GET requests
     return render(request, "Tax/Taxaddform.html")

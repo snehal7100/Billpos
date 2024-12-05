@@ -20,11 +20,11 @@
                     <!-- Display success or error messages -->
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="alert alert-warning">{{ message }}</div>
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
                         {% endfor %}
                     {% endif %}
 
-                    <form action="" method="post">
+                    <form method="POST" action="">
                         {% csrf_token %}
 
                         <!-- SR No Field -->
@@ -53,6 +53,21 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Optional: you can add some client-side validation if needed
+        // For example, check if fields are empty before submitting.
+        document.querySelector("form").addEventListener("submit", function(event) {
+            var sr_no = document.getElementById("sr_no").value.trim();
+            var taxname = document.getElementById("taxname").value.trim();
+            var taxpercentage = document.getElementById("taxpercentage").value.trim();
+
+            if (!sr_no || !taxname || !taxpercentage) {
+                alert("All fields are required!");
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
 </body>
 
 </html>

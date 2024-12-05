@@ -53,11 +53,10 @@ urlpatterns = [
     
 
     path('Tax-list/', Taxview.TaxList),
-    path('tax-view/<id>', Taxview.TaxView),
-    path('tax-edit/<id>', Taxview.editTax),
-    path('tax-delete/<id>', Taxview.deleteTax),
+    path('tax-view/<id>/', Taxview.TaxView),
+    path('tax-edit/<id>/', Taxview.editTax),
+    path('tax-delete/<id>/', Taxview.deleteTax),
     path('tax-add/', Taxview.addTax),
-
 
 ]
 if settings.DEBUG:  
