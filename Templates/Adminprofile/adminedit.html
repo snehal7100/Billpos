@@ -1,12 +1,15 @@
+<!-- Profile Edit (edit.html) -->
 <h1>Edit Profile</h1>
+
 <form method="POST">
     {% csrf_token %}
-    <label>First Name:</label>
+    <label for="first_name">First Name:</label>
     <input type="text" name="first_name" value="{{ user.first_name }}">
-    <label>Last Name:</label>
+    <label for="last_name">Last Name:</label>
     <input type="text" name="last_name" value="{{ user.last_name }}">
-    <label>Email:</label>
+    <label for="email">Email:</label>
     <input type="email" name="email" value="{{ user.email }}">
     <button type="submit">Save Changes</button>
 </form>
+
 <a href="{% url 'view_profile' %}">Cancel</a>

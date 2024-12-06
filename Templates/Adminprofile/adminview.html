@@ -1,6 +1,19 @@
+<!-- Profile View (view.html) -->
+<h1>Profile Details</h1>
+<p>Username: {{ user.username }}</p>
+<p>First Name: {{ user.first_name }}</p>
+<p>Last Name: {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+<a href="{% url 'edit_profile' %}">Edit Profile</a>
+<a href="{% url 'logout_user' %}">Logout</a>
 
+<hr>
+
+<!-- Admin Details Section -->
 <h1>Admin Details</h1>
 <p>Selected Admin ID: {{ id }}</p>
+
+<!-- Display all admin data -->
 <table border="1">
     <thead>
         <tr>
@@ -31,6 +44,8 @@
 </table>
 
 <hr>
+
+<!-- Specific Admin Details -->
 <h3>Specific Admin Details (ID: {{ id }})</h3>
 <table>
     <tr>
@@ -56,12 +71,3 @@
         <td>{{ admin_data.created_at }}</td>
     </tr>
 </table>
-
-<h1>Profile Details</h1>
-<p>Username: {{ user.username }}</p>
-<p>First Name: {{ user.first_name }}</p>
-<p>Last Name: {{ user.last_name }}</p>
-<p>Email: {{ user.email }}</p>
-<a href="{% url 'edit_profile' %}">Edit Profile</a>
-<a href="{% url 'logout_user' %}">Logout</a>
-
