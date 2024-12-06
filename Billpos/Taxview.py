@@ -58,7 +58,7 @@ def deleteTax(request, id):
     taxData = get_object_or_404(Taxs, id=id)
     taxData.delete()
     messages.success(request, "Tax record deleted successfully.")
-    return redirect('tax-list')  # Correct redirect to tax-list
+    return redirect(TaxList)  # Correct redirect to tax-list
 
 
 # View to add a new tax record

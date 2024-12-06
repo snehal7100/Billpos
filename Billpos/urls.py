@@ -24,13 +24,15 @@ from Billpos import view
 from Billpos import categoryview
 
 from Billpos import brandview
-from Billpos import Adminview
+
 
 from Billpos import Taxview
 from Billpos import loginvalid
 urlpatterns = [
-
-
+    
+    path('profile/view/', views.view_profile, name='view_profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('profile/logout/', views.logout_user, name='logout_user'),
 
     path('category-list/',categoryview.category),
     path('category-add/',categoryview.addcategory),
@@ -38,12 +40,10 @@ urlpatterns = [
     path('category-edit/<id>',categoryview.editcategory),
     path('category-delete/<id>',categoryview.delete),
 
-
     path('admin/', admin.site.urls), 
     path('', view.Login),  
     path('valid/', loginvalid.login_view), 
     path('index/', view.Index), 
-
    
     path('brand-list/', brandview.Brands),
     path('brand-view/<id>', brandview.BrandView),
@@ -51,20 +51,11 @@ urlpatterns = [
     path('brand-delete/<id>', brandview.delete),
     path('brand-add/', brandview.AddBrand),
 
-
-    path('admin-view/<id>',Adminview.AdminV),
-
-
-
-    
-
     path('tax-list/', Taxview.TaxList),  
     path('tax-view/<id>/', Taxview.TaxView), 
     path('tax-edit/<id>/', Taxview.editTax),  
     path('tax-delete/<id>/', Taxview.deleteTax), 
-    path('tax-add/', Taxview.addTax),  
-
-
+    path('tax-add/', Taxview.addTax), 
 ]
 if settings.DEBUG:  
         urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)  

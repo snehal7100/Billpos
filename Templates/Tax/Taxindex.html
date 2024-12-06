@@ -43,9 +43,9 @@
                             <td>{{ tax.taxname }}</td>
                             <td>{{ tax.taxpercentage }}</td>
                             <td>
-                                <a href="/tax-view/{{ tax.id }}" class="btn btn-primary">View</a>
-                                <a href="/tax-edit/{{ tax.id }}" class="btn btn-primary">Edit</a>
-                                <a href="/tax-delete/{{ tax.id }}" class="btn btn-primary">Delete</a>
+                                <a href="/tax-view/{{ tax.id }}" class="fa fa-eye"></a>
+                                <a href="/tax-edit/{{ tax.id }}" class="fa fa-edit"></a>
+                                <a href="/tax-delete/{{ tax.id }}"class="fa fa-trash"></a>
                             </td>
                         </tr>
                         {% empty %}
