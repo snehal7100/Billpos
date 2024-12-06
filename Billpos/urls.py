@@ -24,7 +24,7 @@ from Billpos import view
 from Billpos import categoryview
 
 from Billpos import brandview
-from Billpos import Adminview
+
 
 from Billpos import Taxview
 from Billpos import loginvalid
@@ -52,11 +52,6 @@ urlpatterns = [
     path('brand-add/', brandview.AddBrand),
 
 
-    path('admin-view/<id>',Adminview.AdminV),
-
-
-
-    
 
     path('tax-list/', Taxview.TaxList),  
     path('tax-view/<id>/', Taxview.TaxView), 
