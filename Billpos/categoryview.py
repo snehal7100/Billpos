@@ -36,21 +36,25 @@ def categoryview(request,id):
     }
     return render(request,'Category/view.html',data)
 
-def editcategory(request,id):
+def editcategory(request, id):
     categoryData = Category.objects.get(id=id)
     if request.method == 'GET':
         data = {
-            "categoryData":categoryData,
+            "categoryData": categoryData,
         }
-        return render(request, "Category/edit.html",data)
+        return render(request, "Category/edit.html", data)
     else:
         name = request.POST.get("c_name")
         img = request.FILES.get("c_img")
         img1 = request.FILES.get("B_img")
 
-        categoryData.c_name= name,
-        categoryData.c_img= img,
-        categoryData.B_img= img1,
+        # Assign values directly without a trailing comma
+        categoryData.c_name = name
+        if img:  # Only update if a new file is uploaded
+            categoryData.c_img = img
+        if img1:  # Only update if a new file is uploaded
+            categoryData.B_img = img1
+        
         categoryData.save()
         return redirect(category)
     
