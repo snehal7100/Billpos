@@ -1,0 +1,41 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Admin Profile
+            </div>
+            <div class="card-body">
+                {% for i in aData %}
+                {% if i.id == id %}
+                <form method="POST" action="/update-brand/" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" value="{{ i.username}}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="brandName" class="form-label">Email</label>
+                        <input type="text" id="email" name="emil" class="form-control" value="{{ i.email }}" readonly>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="brandImage" class="form-label">Image</label><br>
+                        <img id="img" height="100px" width="100px" src="../media/{{ i.img }}" alt="Image">
+                    </div>
+                    
+                    {% comment %} <div class="mb-3">
+                        <a href="/admin-list/" class="btn btn-primary">Back</a>
+                    </div> {% endcomment %}
+                </form>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "Component/footer.html" %}
