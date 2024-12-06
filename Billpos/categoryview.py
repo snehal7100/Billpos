@@ -37,12 +37,12 @@ def categoryview(request,id):
     return render(request,'Category/view.html',data)
 
 def editcategory(request,id):
-    categoryData = Category.objects.get(id=id)
+    categoryData= Category.objects.get(id=int(id))
     if request.method == 'GET':
-        data = {
+        categoryData = {
             "categoryData":categoryData,
         }
-        return render(request, "Category/edit.html",data)
+        return render(request, "Category/edit.html",categoryData)
     else:
         name = request.POST.get("c_name")
         img = request.FILES.get("c_img")
