@@ -52,16 +52,17 @@
                         }
                     </style>
 
-                    <!-- Messages Block -->
                     {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
+                    <div class="alert alert-warning">
+                        <ul>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                     {% endif %}
 
-                    <!-- Form -->
+                   
                     <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm(event)">
                         {% csrf_token %}
                         <div class="mb-3 mt-3">

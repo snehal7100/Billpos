@@ -36,7 +36,6 @@ def categoryview(request,id):
     }
     return render(request,'Category/view.html',data)
 
-<<<<<<< HEAD
 def editcategory(request,id):
     categoryData= Category.objects.get(id=int(id))
     if request.method == 'GET':
@@ -44,7 +43,7 @@ def editcategory(request,id):
             "categoryData":categoryData,
         }
         return render(request, "Category/edit.html",categoryData)
-=======
+
 def editcategory(request, id):
     categoryData = Category.objects.get(id=id)
     if request.method == 'GET':
@@ -52,17 +51,16 @@ def editcategory(request, id):
             "categoryData": categoryData,
         }
         return render(request, "Category/edit.html", data)
->>>>>>> 92d7f0aed4b71b0d387a4f4ec8124ffbdc16165e
+
     else:
         name = request.POST.get("c_name")
         img = request.FILES.get("c_img")
         img1 = request.FILES.get("B_img")
 
-        # Assign values directly without a trailing comma
         categoryData.c_name = name
-        if img:  # Only update if a new file is uploaded
+        if img:  
             categoryData.c_img = img
-        if img1:  # Only update if a new file is uploaded
+        if img1: 
             categoryData.B_img = img1
         
         categoryData.save()
@@ -73,14 +71,3 @@ def delete(request,id):
     categoryData = Category.objects.get(id=int(id))
     categoryData.delete()
     return redirect(category)
-
-
-
-
-    
-    
-
-
-
-
-

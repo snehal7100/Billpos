@@ -11,13 +11,27 @@
 </head>
 <body>
     <div class="content-wrapper">
-        <div class="container mt-3">  
-            <div class="card">
-                <div class="card-header">
- <h1 style="text-align: center;">category Form </h1>
+      <div class="container mt-3">
+          <div class="card">
+              <div class="card-header">
+                
+                <h1>Category Form</h1>
+                <style>
+                    #h1 {
+                        padding-top: 10px;
+                        font-weight: bold;
+                        font-size: 20px;
+                    }
+
+                    .card-header {
+                        padding-top: 10px;
+                        font-weight: bold;
+                        font-size: 15px;
+                    }
+                </style>
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="row g-3 border border-dark p-3 m-2 rounded shadow-lg"> 
+    <div class="row g-3 "> 
     <div class="mb-3 mt-3">
       <label for="name">Category Name:</label>
       <input type="text" class="form-control" value="{{categoryData.c_name}}" id="c_name" placeholder="Enter name" name="c_name">

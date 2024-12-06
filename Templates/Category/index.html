@@ -22,6 +22,14 @@
                 }
             </style>
             <div class="card-body">
+                {% if messages %}
+                    <div class="alert alert-primary">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            
                 <div class="table-responsiew">
                     <table class="table table-striped table-hover text-center">
                         <tr>
