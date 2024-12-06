@@ -29,6 +29,10 @@ from Billpos import brandview
 from Billpos import Taxview
 from Billpos import loginvalid
 urlpatterns = [
+    
+    path('profile/view/', views.view_profile, name='view_profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('profile/logout/', views.logout_user, name='logout_user'),
 
     path('category-list/',categoryview.category),
     path('category-add/',categoryview.addcategory),
