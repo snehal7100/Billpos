@@ -1,0 +1,10 @@
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-toggle="dropdown" aria-expanded="false">
+        Admin Profile
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+        <li><a class="dropdown-item" href="{% url 'view_profile' %}">View Profile</a></li>
+        <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
+        <li><a class="dropdown-item" href="{% url 'logout_user' %}">Logout</a></li>
+    </ul>
+</div>
