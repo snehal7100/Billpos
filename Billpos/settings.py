@@ -38,13 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Login',
-
+    'Admin',
     'Brand',
-
     'category',
-
-
-
     'Taxes'
 
 

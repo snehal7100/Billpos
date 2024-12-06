@@ -24,7 +24,7 @@ from Billpos import view
 from Billpos import categoryview
 
 from Billpos import brandview
-
+from Billpos import Adminview
 
 from Billpos import Taxview
 from Billpos import loginvalid
@@ -39,10 +39,10 @@ urlpatterns = [
     path('category-delete/<id>',categoryview.delete),
 
 
-    path('admin/', admin.site.urls),  # Admin URL
-    path('', view.Login),  # Login page (if it needs to be used for a different purpose)
-    path('valid/', loginvalid.login_view),  # Map /valid/ to login_view
-    path('index/', view.Index),  # Index URL
+    path('admin/', admin.site.urls), 
+    path('', view.Login),  
+    path('valid/', loginvalid.login_view), 
+    path('index/', view.Index), 
 
    
     path('brand-list/', brandview.Brands),
@@ -50,13 +50,19 @@ urlpatterns = [
     path('brand-edit/<id>', brandview.editBrand),
     path('brand-delete/<id>', brandview.delete),
     path('brand-add/', brandview.AddBrand),
+
+
+    path('admin-view/<id>',Adminview.AdminV),
+
+
+
     
 
-    path('tax-list/', Taxview.TaxList),  # List all tax records
-    path('tax-view/<id>/', Taxview.TaxView),  # View a single tax record
-    path('tax-edit/<id>/', Taxview.editTax),  # Edit a tax record
-    path('tax-delete/<id>/', Taxview.deleteTax),  # Delete a tax record
-    path('tax-add/', Taxview.addTax),  # Add a new tax record
+    path('tax-list/', Taxview.TaxList),  
+    path('tax-view/<id>/', Taxview.TaxView), 
+    path('tax-edit/<id>/', Taxview.editTax),  
+    path('tax-delete/<id>/', Taxview.deleteTax), 
+    path('tax-add/', Taxview.addTax),  
 
 
 ]
