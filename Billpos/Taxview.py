@@ -106,7 +106,7 @@ def addTax(request):
         )
         new_tax.save()
         messages.success(request, "Tax record added successfully!")
-        return redirect('tax-list')  # Redirect to the tax list page
+        return redirect(TaxList)  # Redirect to the tax list page
 
     # Render the form for GET requests
     return render(request, "Tax/Taxaddform.html")
