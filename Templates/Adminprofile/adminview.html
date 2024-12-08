@@ -1,4 +1,4 @@
-<!-- Profile View (view.html) -->
+{% comment %} <!-- Profile View (view.html) -->
 <h1>Profile Details</h1>
 <p>Username: {{ user.username }}</p>
 <p>First Name: {{ user.first_name }}</p>
@@ -71,12 +71,9 @@
         <td>{{ admin_data.created_at }}</td>
     </tr>
 </table>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> a90187e58b0c438d2b2e0715b920e588f5614898
+
+
 <h1>Profile Details</h1>
 <p>Username: {{ user.username }}</p>
 <p>First Name: {{ user.first_name }}</p>
@@ -84,9 +81,4 @@
 <p>Email: {{ user.email }}</p>
 <a href="{% url 'edit_profile' %}">Edit Profile</a>
 <a href="{% url 'logout_user' %}">Logout</a>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> a90187e58b0c438d2b2e0715b920e588f5614898
->>>>>>> 49701ed803a05c2a25dc6e0c776514ade2d553c1
+ {% endcomment %}
