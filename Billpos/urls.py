@@ -30,7 +30,8 @@ from Billpos import Taxview
 from Billpos import loginvalid
 urlpatterns = [
 
-    path('profile/view/<id>', Adminview.view_profile),
+    path('profile-view/<id>', Adminview.view_profile),
+
     path('profile/edit/', Adminview.edit_profile),
     path('profile/logout/', Adminview.logout_user),
 
