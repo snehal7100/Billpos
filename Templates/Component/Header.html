@@ -179,16 +179,20 @@
           <i class="fas fa-user"></i> Admin Profile
         </a>
         <div class="dropdown-menu dropdown-menu-right">
+<<<<<<< HEAD
+          <a href="{% url 'view_profile' %}" class="dropdown-item">
+=======
           <a href="/profile-view/{{admin.id}}" class="dropdown-item">
            
+>>>>>>> 49701ed803a05c2a25dc6e0c776514ade2d553c1
             <i class="fas fa-id-card mr-2"></i> View Profile
           </a>
           <div class="dropdown-divider"></div>
-          <a href="" class="dropdown-item">
+          <a href="{% url 'edit_profile' %}" class="dropdown-item">
             <i class="fas fa-edit mr-2"></i> Edit Profile
           </a>
           <div class="dropdown-divider"></div>
-          <a href="" class="dropdown-item">
+          <a href="{% url 'logout_user' %}" class="dropdown-item">
             <i class="fas fa-sign-out-alt mr-2"></i> Logout
           </a>
         </div>
