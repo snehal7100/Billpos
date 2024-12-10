@@ -72,6 +72,8 @@ def delete(request,id):
     categoryData.delete()
     return redirect(category)
 
+from django.db import IntegrityError
+
 def AddCategory(request):
     if request.method == "GET":
         return render(request, "Category/add.html")
@@ -92,16 +94,17 @@ def AddCategory(request):
             messages.error(request, "Banner Image is required.")
             return render(request, "Category/add.html")
 
-        if Category.objects.filter(c_name__iexact=name).exists():
+        try:
+            
+            saveData = Category(
+                c_name=name,
+                c_img=img,
+                B_img=img1
+            )
+            saveData.save()
+            messages.success(request, "Category added successfully!")
+            return redirect('category-list')
+        except IntegrityError:
             messages.error(request, "Duplicate entry not allowed! Category name already exists.")
             return render(request, "Category/add.html")
-
-        saveData = Category(
-            c_name=name,
-            c_img=img,
-            B_img=img1
-        )
-        saveData.save()
-        messages.success(request, "Category added successfully!")
-        return redirect('category-list')
 

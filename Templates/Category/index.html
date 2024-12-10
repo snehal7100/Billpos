@@ -21,16 +21,17 @@
                 }
             </style>
 
+            
             <div class="card-body">
                 {% if messages %}
-                    <div class="alert-container">
+                    <div class="alert alert-primary">
                         {% for message in messages %}
-                            <div class="alert {% if message.tags == 'primary' %}alert-success{% elif message.tags == 'error' %}alert-danger{% else %}alert-info{% endif %}">
-                                {{ message }}
-                            </div>
+                            <p>{{ message }}</p>
                         {% endfor %}
                     </div>
                 {% endif %}
+            </div>
+            
 
                 <div class="table-responsive">
                     <table class="table table-striped table-hover text-center">
@@ -48,9 +49,9 @@
                             <td><img height="100px" width="100px" src="../media/{{ i.c_img }}"></td>
                             <td><img height="100px" width="100px" src="../media/{{ i.B_img }}"></td>
                             <td>
-                                <a href="/category-view/{{i.id}}" class="btn btn-primary">View</a>
-                                <a href="/category-edit/{{i.id}}" class="btn btn-primary">Edit</a>
-                                <a href="/category-delete/{{i.id}}" class="btn btn-primary">Delete</a>
+                                <a href="/category-view/{{i.id}}" class="dark fas fa-eye"></a>
+                                <a href="/category-edit/{{i.id}}" class="fa fa-edit"></a>
+                                <a href="/category-delete/{{i.id}}" class="fa fa-trash"></a>
                             </td>
 
                         </tr>
