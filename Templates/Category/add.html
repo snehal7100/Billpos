@@ -12,24 +12,38 @@
 </head>
 <script>
   function validateForm() {
-      var c_name = document.getElementById("c_name").value;
-      var c_img = document.getElementById("c_img").files.length;
-      var B_img = document.getElementById("B_img").files.length;
+    var c_name = document.getElementById("c_name").value.trim();
+    var c_img = document.getElementById("c_img").files.length; 
+    var B_img = document.getElementById("B_img").files.length; 
 
-      if (c_name.trim() === "") {
-          alert("category Name is required.");
-          return false;
-      }
-      if (c_img === 0) {
-          alert("category Image is required.");
-          return false;
-      }
-      if (B_img === 0) {
-          alert("Banner Image is required.");
-          return false;
-      }
-      return true; 
-  }
+    
+    if (c_name === "") {
+        alert("Category Name is required.");
+        return false;
+    }
+
+    
+    if (c_img === 0) {
+        alert("Category Image is required.");
+        return false;
+    }
+
+    
+    if (B_img === 0) {
+        alert("Banner Image is required.");
+        return false;
+    }
+
+    
+    var existingCategoryNames = ['ExistingCategory1', 'ExistingCategory2']; 
+    if (existingCategoryNames.includes(c_name)) {
+        alert("Duplicate entry not allowed! Category name already exists.");
+        return false;
+    }
+
+    return true;
+}
+
 </script>
 
 <body>
@@ -51,19 +65,8 @@
                             font-size: 15px;
                         }
                     </style>
-
-                    {% if messages %}
-                    <div class="alert alert-warning">
-                        <ul>
-                            {% for message in messages %}
-                                <li>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %}
-
                    
-                    <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm(event)">
+                    <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                         {% csrf_token %}
                         <div class="mb-3 mt-3">
                             <label for="name">category Name:</label>
