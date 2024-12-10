@@ -54,9 +54,7 @@ def AddBrand(request):
             messages.error(request, "Brand Name is required.")
             return render(request, "Brand/addform.html") 
 
-        if not img:
-            messages.error(request, "Brand Image is required.")
-            return render(request, "Brand/addform.html")
+        
 
         if BrandForm.objects.filter(bname__iexact=name).exists():
             messages.error(request, "Duplicate entry not allowed! Brand name already exists.")
