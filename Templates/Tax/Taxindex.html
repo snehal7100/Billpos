@@ -1,11 +1,101 @@
 {% include "Component/header.html" %}
 {% include "Component/sidebar.html" %}
 
-<div class="content-wrapper">
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
+<style>
+    .a {
+        font-weight: bold;
+        font-size: 12px;
+        height: 40px;
+        width: 100px;
+        margin-left: 900px;
+        margin-top: 10px;
+        padding-top: 12px;
+    }
+</style>
 
+<<<<<<< HEAD
+<div class="container-fluid">
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Brand Records &amp; View</h3>
+                            <a href="/brand-add/" class="btn btn-primary a">Add Brand</a>
+                        </div>
+                        <div class="card-body">
+                            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Brand Name</th>
+                                                    <th>Image</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for i in bData %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ i.bname }}</td>
+                                                    <td><img height="100px" width="100px" src="../media/{{ i.img }}"></td>
+                                                    <td>
+                                                        <a href="/brand-view/{{ i.id }}" class="dark fas fa-eye"></a>
+                                                        <a href="/brand-edit/{{ i.id }}" class="fa fa-edit"></a>
+                                                        <a href="/brand-delete/{{ i.id }}" class="fa fa-trash"></a>
+                                                    </td>
+                                                </tr>
+                                                {% empty %}
+                                                <tr>
+                                                    <td colspan="4">No brand records found</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Brand Name</th>
+                                                    <th>Image</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                            <ul class="pagination">
+                                                <li class="paginate_button page-item previous disabled" id="example1_previous">
+                                                    <a href="#" class="page-link">Previous</a>
+                                                </li>
+                                                <li class="paginate_button page-item active">
+                                                    <a href="#" class="page-link">1</a>
+                                                </li>
+                                                <li class="paginate_button page-item">
+                                                    <a href="#" class="page-link">2</a>
+                                                </li>
+                                                <li class="paginate_button page-item">
+                                                    <a href="#" class="page-link">3</a>
+                                                </li>
+                                                <li class="paginate_button page-item next" id="example1_next">
+                                                    <a href="#" class="page-link">Next</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+=======
                 <div class="card-header text-center text-black">
                     <h1 style="font-weight: bold;">Tax Records</h1>
                     <a href="/tax-add/" class="btn btn-primary a">Add Tax</a>
@@ -236,9 +326,8 @@
         </div>
         <!-- /.row -->
       </div>
+>>>>>>> 22184ffb7ae2eb9dd952d971d81e0980899ba02d
     </div>
-
-    
 </div>
 
 {% include "Component/footer.html" %}
