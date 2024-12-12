@@ -66,13 +66,7 @@ def addcategory(request):
             messages.error(request, "Category Name is required.")
             return render(request, "Category/add.html")
 
-        if not img:
-            messages.error(request, "Category Image is required.")
-            return render(request, "Category/add.html")
 
-        if not img1:
-            messages.error(request, "Banner Image is required.")
-            return render(request, "Category/add.html")
 
         if Category.objects.filter(c_name__iexact=name).exists():
             messages.error(request, "Duplicate entry not allowed! Category name already exists.")
