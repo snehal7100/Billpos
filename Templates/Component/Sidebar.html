@@ -1,4 +1,9 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-light-mode elevation-4">
+  <style>
+    .elevation-4{
+      background-color: whitesmoke;
+    }
+  </style>
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       {% comment %} <img src="/static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> {% endcomment %}
@@ -17,10 +22,7 @@
         </div>
       </div> {% endcomment %}
 
-      <!-- SidebarSearch Form -->
       
-
-      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
@@ -90,41 +92,40 @@
                 </a>
               </li>
               
-              <li class="nav-item">
-                <a href="/settings/" class="nav-link">
-                  <i class="nav-icon fas fa-cogs"></i> <!-- Settings Icon -->
-                  <p>Settings</p>
-                </a>
+              
 
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>
+                    Settings
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="/category-list/" class="nav-link">
-                      <i class="nav-icon fas fa-arrow-right"></i>
-                      <p>
-                        Category
-                      </p>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Category</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="/brand-list/" class="nav-link">
-                      <i class="nav-icon fas fa-arrow-right"></i>
-                      <p>
-                        Brand
-                      </p>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Brand</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="/tax-list/" class="nav-link">
-                      <i class="nav-icon fas fa-arrow-right"></i>
-                      <p>
-                        Tax
-                      </p>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tax</p>
                     </a>
                   </li>
+                  
                 </ul>
-
               </li>
-              
+ 
               <li class="nav-item">
                 <a href="/payment-receipt/" class="nav-link">
                   <i class="nav-icon fas fa-credit-card"></i> <!-- Payment/Receipt Icon -->

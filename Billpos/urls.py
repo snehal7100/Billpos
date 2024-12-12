@@ -50,7 +50,7 @@ urlpatterns = [
 
    
     path('brand-list/', brandview.Brands),
-    path('brand-view/<id>', brandview.BrandView),
+    # path('brand-view/<id>', brandview.BrandView),
     path('brand-edit/<id>', brandview.editBrand),
     path('brand-delete/<id>', brandview.delete),
     path('brand-add/', brandview.AddBrand),
