@@ -1,5 +1,5 @@
-
-
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,48 +12,18 @@
     <script>
         function validateForm() {
             var bname = document.getElementById("bname").value;
+            var img = document.getElementById("img").files.length;
+
             if (bname.trim() === "") {
                 alert("Brand Name is required.");
                 return false;
             }
+            
         }
     </script>
 </head>
 
 <body>
-<<<<<<< HEAD
-    <div class="container mt-5">
-        <!-- Add Button -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#brandFormModal">
-            Add
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="brandFormModal" tabindex="-1" aria-labelledby="brandFormModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="brandFormModalLabel">Add Brand</h5>
-                        
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
-                            {% csrf_token %}
-                            <div class="mb-3">
-                                <label for="bname" class="form-label">Brand Name:</label>
-                                <input type="text" class="form-control" id="bname" placeholder="Enter name" name="bname">
-                            </div>
-                            <div class="mb-3">
-                                <label for="img" class="form-label">Image:</label>
-                                <input type="file" class="form-control" id="img" name="img">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-=======
     <div class="content-wrapper">
         <div class="container mt-3">
             <div class="card">
@@ -88,11 +58,31 @@
                                 <li>{{ message }}</li>
                             {% endfor %}
                         </ul>
->>>>>>> 919367ec70cdb6ee590b90d41ad52ebe039fbd22
                     </div>
+                    {% endif %} {% endcomment %}
+                    <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                        {% csrf_token %}
+                        <div class="mb-3 mt-3">
+                            <label for="name">Brand Name:</label>
+                            <input type="text" class="form-control" id="bname" placeholder="Enter name" name="bname">
+                        </div>
+
+                        <div class="mb-3 mt-3">
+                            <label for="name"> Image:</label>
+                            <input type="file" class="form-control" id="img" placeholder="Choose image" name="img">
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </body>
 </html>
+{% include "Component/footer.html" %}
