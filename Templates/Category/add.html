@@ -41,6 +41,7 @@
             <div class="card">
                 <div class="card-header">
                     <h1>Category Form</h1>
+                    <a href="/category-list/" class="btn btn-primary">View</a>
                     <style>
                         #h1 {
                             padding-top: 10px;
@@ -61,6 +62,7 @@
                    
                     <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                         {% csrf_token %}
+                        
                         <div class="mb-3 mt-3">
                             <label for="name" class="star">category Name:</label>
                             <input type="text" class="form-control" id="c_name" placeholder="Enter name" name="c_name">
