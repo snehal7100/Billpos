@@ -1,8 +1,6 @@
 from django.contrib import admin
-
-
-from Admin.models import product
+from Product.models import ProductModel
 
 class productAdmin(admin.ModelAdmin):
     list_display=("pname","hsncode","category","brand","tax","punit","aunit",)
-admin.site.register(product,productAdmin)
+admin.site.register(ProductModel,productAdmin)
