@@ -84,34 +84,36 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" id="settings-toggle">
             <i class="nav-icon fas fa-cog"></i>
-            <p class="dark">
+            <p>
               Settings
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
+          <ul class="nav nav-treeview d-none" id="settings-menu">
             <li class="nav-item">
               <a href="/category-list/" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p class="dark">Category</p>
+                <p>Category</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/brand-list/" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p class="dark">Brand</p>
+                <p>Brand</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/tax-list/" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p class="dark">Tax</p>
+                <p>Tax</p>
               </a>
             </li>
-          </ul>
+          </ul>  
         </li>
+        
+        
 
         <li class="nav-item">
           <a href="/payment-receipt/" class="nav-link">
@@ -151,3 +153,24 @@
     </nav>
   </div>
 </aside>
+
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+  const settingsToggle = document.getElementById("settings-toggle");
+  const settingsMenu = document.getElementById("settings-menu");
+
+  settingsToggle.addEventListener("click", function (event) {
+    event.preventDefault(); 
+    settingsMenu.classList.toggle("d-none");
+  });
+});
+
+
+</script>
+<style>
+ .d-none {
+  display: none;
+}
+
+
+</style>
