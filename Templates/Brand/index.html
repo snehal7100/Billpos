@@ -3,27 +3,36 @@
 
 <style>
     .a {
-        font-weight: bold;
-        font-size: 12px;
-        height: 40px;
-        width: 100px;
-        margin-left: 900px;
-        margin-top: 10px;
-        padding-top: 12px;
+    font-weight: bold;
+    font-size: 12px;
+    height: 40px;
+    width: 100px;
+    margin-top: 10px;
+    margin-right: 20px;
+    
+
+
+    }
+    .content-wrapper {
+        margin-top: 80px; /* You can adjust this value as needed */
     }
 </style>
 
+
+     
 <div class="container-fluid">
-    <div class="content-wrapper">
+    <div class="container content-wrapper">
         <div class="container">
     <div class="row">
       <div class="col-12">
         <div class="card">
         
-          <div class="card-header">
-            <h3 class="card-title">Brand Records &amp; view </h3>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="card-title">Brand Records &amp; view</h3>
+
             <a href="/brand-add/" class="btn btn-primary a">Add Brand</a>
-          </div>
+        </div>
+        
           
           <!-- /.card-header -->
           <div class="card-body">
@@ -59,49 +68,18 @@
                         <td class="dtr-control sorting_1" tabindex="0">{{ forloop.counter }}</td>
                         <td>{{ i.bname }}</td>
                         <td><img height="100px" width="100px" src="../media/{{ i.img }}"></td>
-                        <td><a href="/brand-view/{{ i.id }}" class="dark fas fa-eye"></a>
+                        <td>
                             <a href="/brand-edit/{{ i.id }}" class="fa fa-edit"></a>
                             <a href="/brand-delete/{{ i.id }}" class="fa fa-trash"></a></td>
                       </tr>
                       {% empty %}
                       {% endfor %}
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th rowspan="1" colspan="1">ID</th>
-                        <th rowspan="1" colspan="1">Brand Name</th>
-                        <th rowspan="1" colspan="1">Image</th>
-                        <th rowspan="1" colspan="1">Action</th>
-
-                      </tr>
-                    </tfoot>
+                    
                   </table>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-12 col-md-7">
-                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                    <ul class="pagination">
-                      <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#"
-                          aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                      <li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1"
-                          tabindex="0" class="page-link">1</a></li>
-                      <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2"
-                          tabindex="0" class="page-link">2</a></li>
-                      <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3"
-                          tabindex="0" class="page-link">3</a></li>
-                      <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="4"
-                          tabindex="0" class="page-link">4</a></li>
-                      <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5"
-                          tabindex="0" class="page-link">5</a></li>
-                      <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="6"
-                          tabindex="0" class="page-link">6</a></li>
-                      <li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1"
-                          data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              
             </div>
           </div>
           <!-- /.card-body -->
@@ -116,6 +94,7 @@
     <!-- /.row -->
   </div>
 </div>
+
 
 
 
