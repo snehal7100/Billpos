@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'Admin',
     'Brand',
     'category',
-    'Taxes'
+    'Taxes',
+    'Product',
 
 
 ]

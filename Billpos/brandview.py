@@ -9,15 +9,15 @@ def Brands(request):
     }
     return render(request,"Brand/index.html",bdata)
 
-def BrandView(request,id):
-    bData = BrandForm.objects.all()
-    print(id)
-    bData={
-        "bData":bData,
-        "id":int(id),
+# def BrandView(request,id):
+#     bData = BrandForm.objects.all()
+#     print(id)
+#     bData={
+#         "bData":bData,
+#         "id":int(id),
         
-    }
-    return render(request,"Brand/view.html",bData)
+#     }
+#     return render(request,"Brand/view.html",bData)
 
 def editBrand(request,id):
     bData= BrandForm.objects.get(id=int(id))
