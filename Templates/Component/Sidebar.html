@@ -1,172 +1,153 @@
 <aside class="main-sidebar sidebar-light-mode elevation-4">
-  <style>
-    .elevation-4{
-      background-color: whitesmoke;
-    }
-  </style>
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      {% comment %} <img src="/static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> {% endcomment %}
-      <span class="brand-text font-weight-light">Biller Pos</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      {% comment %} <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/static/dist\img\user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Itachi Uchiha</a>
-        </div>
-      </div> {% endcomment %}
-
-      
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-
-
-               <li class="nav-item">
-                <a href="/customer-list/" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i> <!-- Dashboard Icon -->
-                  <p>Dashboard</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/pos/" class="nav-link">
-                  <i class="nav-icon fas fa-cash-register"></i> <!-- POS Icon -->
-                  <p>POS</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/purchase/" class="nav-link">
-                  <i class="nav-icon fas fa-shopping-cart"></i> <!-- Purchase Icon -->
-                  <p>Purchase</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/sale/" class="nav-link">
-                  <i class="nav-icon fas fa-dollar-sign"></i> <!-- Sale Icon -->
-                  <p>Sale</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/products/" class="nav-link">
-                  <i class="nav-icon fas fa-box-open"></i> <!-- Products Icon -->
-                  <p>Products</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/barcode-print/" class="nav-link">
-                  <i class="nav-icon fas fa-barcode"></i> <!-- Barcode Print Icon -->
-                  <p>Barcode Print</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/customers/" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i> <!-- Customers Icon -->
-                  <p>Customers</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/suppliers/" class="nav-link">
-                  <i class="nav-icon fas fa-truck"></i> <!-- Supplier Icon -->
-                  <p>Supplier</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/stock/" class="nav-link">
-                  <i class="nav-icon fas fa-warehouse"></i> <!-- Stock Icon -->
-                  <p>Stock</p>
-                </a>
-              </li>
-              
-              
-
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-cog"></i>
-                  <p>
-                    Settings
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/category-list/" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Category</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/brand-list/" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Brand</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/tax-list/" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tax</p>
-                    </a>
-                  </li>
-                  
-                </ul>
-              </li>
  
-              <li class="nav-item">
-                <a href="/payment-receipt/" class="nav-link">
-                  <i class="nav-icon fas fa-credit-card"></i> <!-- Payment/Receipt Icon -->
-                  <p>Payment/Receipt</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/reward-points/" class="nav-link">
-                  <i class="nav-icon fas fa-gift"></i> <!-- Reward Points Icon -->
-                  <p>Reward Points</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/hr-departments/" class="nav-link">
-                  <i class="nav-icon fas fa-building"></i> <!-- HR Departments Icon -->
-                  <p>HR Departments</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/reports/" class="nav-link">
-                  <i class="nav-icon fas fa-chart-line"></i> <!-- Reports Icon -->
-                  <p>Reports</p>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/user-management/" class="nav-link">
-                  <i class="nav-icon fas fa-user-shield"></i> <!-- User Management Icon -->
-                  <p>User Management</p>
-                </a>
-              </li>
-              
+  <a href="index3.html" class="brand-link">
+    <span class="brand-text">Biller Pos</span>
+</a>
 
-          
-     
-        </ul>
-      </nav>
-   
-    </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    {% comment %} <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="/static/dist\img\user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">Itachi Uchiha</a>
+      </div>
+    </div> {% endcomment %}
 
-  </aside>
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+        
+        <li class="nav-item">
+          <a href="/customer-list/" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i> <!-- Dashboard Icon -->
+            <p class="dark">Dashboard</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/pos/" class="nav-link">
+            <i class="nav-icon fas fa-cash-register"></i> <!-- POS Icon -->
+            <p class="dark">POS</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/purchase/" class="nav-link">
+            <i class="nav-icon fas fa-shopping-cart"></i> <!-- Purchase Icon -->
+            <p class="dark">Purchase</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/sale/" class="nav-link">
+            <i class="nav-icon fas fa-dollar-sign"></i> <!-- Sale Icon -->
+            <p class="dark">Sale</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/products/" class="nav-link">
+            <i class="nav-icon fas fa-box-open"></i> <!-- Products Icon -->
+            <p class="dark">Products</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/barcode-print/" class="nav-link">
+            <i class="nav-icon fas fa-barcode"></i> <!-- Barcode Print Icon -->
+            <p class="dark">Barcode Print</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/customers/" class="nav-link">
+            <i class="nav-icon fas fa-users"></i> <!-- Customers Icon -->
+            <p class="dark">Customers</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/suppliers/" class="nav-link">
+            <i class="nav-icon fas fa-truck"></i> <!-- Supplier Icon -->
+            <p class="dark">Supplier</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/stock/" class="nav-link">
+            <i class="nav-icon fas fa-warehouse"></i> <!-- Stock Icon -->
+            <p class="dark">Stock</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cog"></i>
+            <p class="dark">
+              Settings
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/category-list/" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p class="dark">Category</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/brand-list/" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p class="dark">Brand</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/tax-list/" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p class="dark">Tax</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="/payment-receipt/" class="nav-link">
+            <i class="nav-icon fas fa-credit-card"></i> <!-- Payment/Receipt Icon -->
+            <p class="dark">Payment/Receipt</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/reward-points/" class="nav-link">
+            <i class="nav-icon fas fa-gift"></i> <!-- Reward Points Icon -->
+            <p class="dark">Reward Points</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/hr-departments/" class="nav-link">
+            <i class="nav-icon fas fa-building"></i> <!-- HR Departments Icon -->
+            <p class="dark">HR Departments</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/reports/" class="nav-link">
+            <i class="nav-icon fas fa-chart-line"></i> <!-- Reports Icon -->
+            <p class="dark">Reports</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/user-management/" class="nav-link">
+            <i class="nav-icon fas fa-user-shield"></i> <!-- User Management Icon -->
+            <p class="dark">User Management</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>
