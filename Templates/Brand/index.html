@@ -12,14 +12,26 @@
   }
 
   .card-header .btn {
+<<<<<<< HEAD
     margin-left: auto;
   }
 
   .content-wrapper {
     margin-top: 30px;
+=======
+    margin-left: auto; 
+  }
+
+  .content-wrapper {
+    margin-top: 80px; 
+>>>>>>> 3da1090441971ed6cefc88fdd163bc238f8c1da9
   }
 </style>
+<<<<<<< HEAD
+  
+=======
 
+<<<<<<< HEAD
 <div class="container-fluid">
   <div class="container content-wrapper">
     <div class="container">
@@ -32,6 +44,170 @@
               <button type="button" class="btn btn-primary a" data-bs-toggle="modal" data-bs-target="#addBrandModal">
                 Add Brand
               </button>
+=======
+
+>>>>>>> 5b6718680fc47cf8cc94d9333dff95843897a177
+<div class="container-fluid">
+    <div class="container content-wrapper">
+        <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+        
+          <div class="card-header d-flex align-items-center">
+            <h3 class="card-title">Brand Records &amp; View</h3>
+            <a href="/brand-add/" class="btn btn-primary a">Add Brand</a>
+          </div>
+          
+          
+          
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                   
+                </div>
+                <div class="col-sm-12 col-md-6">
+                   
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
+                    aria-describedby="example1_info">
+                    <thead>
+                      <tr>
+                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                          aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                          ID</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                          aria-label="Browser: activate to sort column ascending">Brand Name</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                          aria-label="Platform(s): activate to sort column ascending">Image</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                          aria-label="Engine version: activate to sort column ascending">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in bData %}
+                      <tr class="odd">
+                        <td class="dtr-control sorting_1" tabindex="0">{{ forloop.counter }}</td>
+                        <td>{{ i.bname }}</td>
+                        <td><img height="100px" width="100px" src="../media/{{ i.img }}"></td>
+                        <td>
+                            <a href="/brand-edit/{{ i.id }}" class="fa fa-edit"></a>
+                            <a href="/brand-delete/{{ i.id }}" class="fa fa-trash"></a></td>
+                      </tr>
+                      {% empty %}
+                      {% endfor %}
+                    </tbody>
+                    
+                  </table>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+<<<<<<< HEAD
+       
+        <!-- /.card -->
+=======
+        <!-- Modal -->
+        <div class="overlay" onclick="closeModal()"></div>
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="card-title">Add Brand</h3>
+            <button class="close" onclick="closeModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="bname">Brand Name</label>
+                <input type="text" name="bname" id="bname" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="img">Image</label>
+                <input type="file" name="img" id="img" class="form-control" required>
+              </div>
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+              </div>
+            </form>
+          </div>
+<<<<<<< HEAD
+
+=======
+=======
+>>>>>>> b78d27d8de65ac20c3e6a62b82e73febc873d76d
+>>>>>>> 2376dc015c8e63b9dafab848df8a7eeb0357ad94
+
+<div class="container-fluid">
+  <div class="container content-wrapper">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <h3 class="card-title">Brand Records &amp; View</h3>
+        <!-- Add Brand Button -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#brandFormModal">
+          Add Brand
+        </button>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Brand Name</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in bData %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ i.bname }}</td>
+              <td><img src="../media/{{ i.img }}" alt="Brand Image" width="100" height="100"></td>
+              <td>
+                <a href="/brand-edit/{{ i.id }}" class="fa fa-edit"></a>
+                <a href="/brand-delete/{{ i.id }}" class="fa fa-trash"></a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4">No data available</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<<<<<<< HEAD
+  <div class="modal fade" id="brandForm
+=======
+  <div class="modal fade" id="brandFormModal" tabindex="-1" aria-labelledby="brandFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="brandFormModalLabel">Add Brand</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="bname" class="form-label">Brand Name:</label>
+              <input type="text" class="form-control" id="bname" placeholder="Enter name" name="bname">
+>>>>>>> 3da1090441971ed6cefc88fdd163bc238f8c1da9
             </div>
 
             <!-- Brand Records Table -->
@@ -68,11 +244,15 @@
             </div>
           </div>
         </div>
+>>>>>>> 5b6718680fc47cf8cc94d9333dff95843897a177
       </div>
+      <!-- /.col -->
     </div>
+    <!-- /.row -->
   </div>
 </div>
 
+<<<<<<< HEAD
 <!-- Modal for Adding Brand -->
 <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -122,3 +302,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 {% include "Component/footer.html" %}
+=======
+
+
+
+</div>
+{% include "Component/footer.html" %}
+>>>>>>> 3da1090441971ed6cefc88fdd163bc238f8c1da9
