@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +57,49 @@
                 </div>
             </div>
         </div>
+=======
+<!-- Modal for Adding Brand -->
+<div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addBrandModalLabel">Add Brand</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          <label for="bname" class="form-label">Brand Name:</label>
+          <input type="text" class="form-control" id="bname" name="bname" placeholder="Enter brand name" required>
+        </div>
+      
+        <div class="mb-3">
+          <label for="img" class="form-label">Image:</label>
+          <input type="file" class="form-control" id="img" name="img" required>
+        </div>
+      
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      
+>>>>>>> 1413987068a2ba5cdfba21d1e0291fda9154f8b9
     </div>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+<script>
+  function validateForm() {
+    var bname = document.getElementById("bname").value.trim();
+    var img = document.getElementById("img").files.length;
+
+    if (bname === "") {
+      alert("Brand Name is required.");
+      return false;
+    }
+    return true;
+  }
+</script>
+>>>>>>> 1413987068a2ba5cdfba21d1e0291fda9154f8b9
