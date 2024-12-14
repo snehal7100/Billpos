@@ -1,36 +1,41 @@
-{% include "Component/header.html" %}
-{% include "Component/sidebar.html" %}
-
-<div class="container-fluid">
-  <div class="container content-wrapper">
-    <div class="row justify-content-center">
-      <div class="col-md-4"> <!-- Reduced column width -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Add Brand</h3>
-          </div>
-          <div class="card-body">
-            <form method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="form-group">
-                <label for="bname">Brand Name</label>
-                <input type="text" name="bname" id="bname" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="img">Image</label>
-                <input type="file" name="img" id="img" class="form-control" required>
-              </div>
-              <div class="form-group text-center">
-                
-                <a href="/" class="btn btn-secondary">Cancel</a>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-        </div>
+<!-- Modal for Adding Brand -->
+<div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addBrandModalLabel">Add Brand</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          <label for="bname" class="form-label">Brand Name:</label>
+          <input type="text" class="form-control" id="bname" name="bname" placeholder="Enter brand name" required>
+        </div>
+      
+        <div class="mb-3">
+          <label for="img" class="form-label">Image:</label>
+          <input type="file" class="form-control" id="img" name="img" required>
+        </div>
+      
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      
     </div>
   </div>
 </div>
 
-{% include "Component/footer.html" %}
+<script>
+  function validateForm() {
+    var bname = document.getElementById("bname").value.trim();
+    var img = document.getElementById("img").files.length;
+
+    if (bname === "") {
+      alert("Brand Name is required.");
+      return false;
+    }
+    return true;
+  }
+</script>
