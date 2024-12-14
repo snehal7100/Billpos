@@ -7,7 +7,11 @@ class ProductModel(models.Model):
     category=models.CharField(max_length=255)
     brand=models.CharField(max_length=255)
     tax=models.CharField(max_length=255)
+    taxtype=models.CharField(max_length=255)
     punit=models.CharField(max_length=255)
     aunit=models.CharField(max_length=255)
+    cfactor=models.CharField(max_length=255)
+    uprice=models.CharField(max_length=255)
+
     class Meta:
         db_table = 'tbl_product'
