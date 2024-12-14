@@ -46,6 +46,7 @@
     z-index: 1040;
   }
 </style>
+<<<<<<< HEAD
 
 <div class="container-fluid">
   <div class="container content-wrapper">
@@ -114,6 +115,94 @@
               </div>
             </form>
           </div>
+=======
+
+<div class="container-fluid">
+  <div class="container content-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex align-items-center">
+              <h3 class="card-title">Brand Records &amp; View</h3>
+              <!-- Updated Button -->
+              <button type="button" class="btn btn-primary a" data-bs-toggle="modal" data-bs-target="#brandFormModal">
+                Add Brand
+              </button>
+            </div>
+            <!-- /.card-header -->
+
+            <div class="card-body">
+              <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6"></div>
+                  <div class="col-sm-12 col-md-6"></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Brand Name</th>
+                          <th>Image</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in bData %}
+                        <tr class="odd">
+                          <td class="dtr-control sorting_1" tabindex="0">{{ forloop.counter }}</td>
+                          <td>{{ i.bname }}</td>
+                          <td><img height="100px" width="100px" src="../media/{{ i.img }}"></td>
+                          <td>
+                            <a href="/brand-edit/{{ i.id }}" class="fa fa-edit"></a>
+                            <a href="/brand-delete/{{ i.id }}" class="fa fa-trash"></a>
+                          </td>
+                        </tr>
+                        {% empty %}
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="brandFormModal" tabindex="-1" aria-labelledby="brandFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="brandFormModalLabel">Add Brand</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="bname" class="form-label">Brand Name:</label>
+              <input type="text" class="form-control" id="bname" placeholder="Enter name" name="bname">
+            </div>
+            <div class="mb-3">
+              <label for="img" class="form-label">Image:</label>
+              <input type="file" class="form-control" id="img" name="img">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+>>>>>>> 6ac55931abbcc97c30313a9baa77e0c7a2ce9bba
         </div>
       </div>
     </div>
@@ -125,10 +214,13 @@
     document.querySelector('.overlay').style.display = 'block';
   }
 
+<<<<<<< HEAD
   function closeModal() {
     document.querySelector('.modal').style.display = 'none';
     document.querySelector('.overlay').style.display = 'none';
   }
 </script>
 
+=======
+>>>>>>> 6ac55931abbcc97c30313a9baa77e0c7a2ce9bba
 {% include "Component/footer.html" %}
