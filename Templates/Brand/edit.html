@@ -16,6 +16,7 @@
         <div class="container mt-3">
             <div class="card">
                 <div class="card-header">
+                    
                    
                     <style>
                 
@@ -51,32 +52,3 @@
 </body>
 </html>
 {% include "Component/footer.html" %}
-
-
-<div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addBrandModalLabel">Add Brand</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="/brand-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
-          {% csrf_token %}
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="bname" class="form-label">Brand Name:</label>
-              <input type="text" class="form-control" id="bname" name="bname" placeholder="Enter brand name">
-            </div>
-            <div class="mb-3">
-              <label for="img" class="form-label">Image:</label>
-              <input type="file" class="form-control" id="img" name="img">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
