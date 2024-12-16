@@ -2,7 +2,6 @@
 {% include "Component/sidebar.html" %}
 
 <style>
-  /* General styling for the page */
   body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f7fc;
@@ -17,7 +16,6 @@
     margin-top: 30px;
   }
 
-  /* Modal styling */
   .modal-content {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -47,8 +45,6 @@
   .modal-footer button {
     border-radius: 10px;
   }
-
-  /* Table Styling */
   table {
     border-radius: 10px;
     overflow: hidden;
@@ -77,15 +73,13 @@
   table tbody tr:hover {
     background-color: #f1f1f1;
   }
-
-  /* Button Styling */
   .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
     border-radius: 10px;
-    padding: 12px 25px;  /* Larger padding for better button size */
-    font-size: 16px;  /* Slightly larger font size */
-    font-weight: 600;  /* Bold the text */
+    padding: 12px 25px; 
+    font-size: 16px; 
+    font-weight: 600;  
   }
 
   .btn-primary:hover {
@@ -106,7 +100,6 @@
     background-color: #0056b3;
   }
 
-  /* Image styling */
   td img {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -114,7 +107,6 @@
     height: auto;
   }
 
-  /* Hover effects for icons */
   .fa {
     color: #007bff;
     cursor: pointer;
@@ -126,7 +118,6 @@
     color: #0056b3;
   }
 
-  /* Empty state styling */
   .no-records {
     text-align: center;
     color: #777;
@@ -149,14 +140,26 @@
           <div class="card-body">
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
               <div class="row">
+                <div class="col-sm-12 col-md-6">
+</div>
+
+<div class="col-sm-12 col-md-6">
+</div>
+
+              <div class="row">
                 <div class="col-sm-12">
                   <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Brand Name</th>
-                        <th>Action</th>
+                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                        Id</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Browser: activate to sort column ascending">Image</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Platform(s): activate to sort column ascending">Brand Name</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="CSS grade: activate to sort column ascending">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -233,3 +236,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 {% include "Component/footer.html" %}
+
+
+
+
+
+
+
