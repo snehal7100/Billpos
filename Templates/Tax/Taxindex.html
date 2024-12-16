@@ -119,6 +119,9 @@
     font-size: 16px;
     padding: 20px 0;
   }
+  .content-wrapper {
+    margin-top: 30px;
+  }
 </style>
 
 <div class="container-fluid">
@@ -135,15 +138,29 @@
           <div class="card-body">
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
               <div class="row">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                  </div>
+    
+                  <div class="col-sm-12 col-md-6">
+                  </div>
+    
+
                 <div class="col-sm-12">
                   <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>Serial No</th>
-                        <th>Tax Name</th>
-                        <th>Tax Percentage</th>
-                        <th>Action</th>
+                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                        ID</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Browser: activate to sort column ascending">Serial No</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Platform(s): activate to sort column ascending">Tax Name</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Platform(s): activate to sort column ascending">Tax Percentage</th>
+                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="CSS grade: activate to sort column ascending">Action</th>
                       </tr>
                     </thead>
                     <tbody>
