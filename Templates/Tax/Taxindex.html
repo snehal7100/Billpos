@@ -225,16 +225,16 @@
         {% csrf_token %}
         <div class="modal-body">
             <div class="mb-3">
-                <label for="taxname" class="form-label">Serial No:</label>
-                <input type="text" class="form-control" id="taxname" name="taxname" placeholder="Enter tax name">
+                <label for="taxname" class="form-label">Serial No: <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="taxname" name="taxname" placeholder="Enter tax name" required>
           </div>
           <div class="mb-3">
-            <label for="sr_no" class="form-label">Tax Name:</label>
-            <input type="text" class="form-control" id="sr_no" name="sr_no" placeholder="Enter tax name">
+            <label for="sr_no" class="form-label">Tax Name: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="sr_no" name="sr_no" placeholder="Enter tax name" required>
           </div>
           <div class="mb-3">
-            <label for="taxpercentage" class="form-label">Tax Percentage:</label>
-            <input type="number" class="form-control" id="taxpercentage" name="taxpercentage" placeholder="Enter tax percentage">
+            <label for="taxpercentage" class="form-label">Tax Percentage: <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="taxpercentage" name="taxpercentage" placeholder="Enter tax percentage" required>
           </div>
         </div>
         <div class="modal-footer">
