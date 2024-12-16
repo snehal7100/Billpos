@@ -154,8 +154,8 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Brand Name</th>
                         <th>Image</th>
+                        <th>Brand Name</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -163,8 +163,8 @@
                       {% for i in bData %}
                       <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ i.bname }}</td>
                         <td><img src="../media/{{ i.img }}" alt="Brand Image"></td>
+                        <td>{{ i.bname }}</td>
                         <td>
                           <a href="/brand-edit/{{ i.id }}" class="fa fa-edit"></a>
                           <a href="/brand-delete/{{ i.id }}" class="fa fa-trash"></a>
@@ -195,7 +195,7 @@
         <h5 class="modal-title" id="addBrandModalLabel">Add Brand</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+      <form action="/brand-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="modal-body">
           <div class="mb-3">
