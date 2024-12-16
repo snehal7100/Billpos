@@ -41,32 +41,30 @@ def delete(request,id):
 
 
 
+
 def AddBrand(request):
-    if request.method == "POST":
-       
+    if request.method == "GET":
+        return render(request, "Brand/addform.html")
+    else:
         name = request.POST.get("bname").strip()
         img = request.FILES.get("img")
+       
 
-        print("Brand Name:", name)  # Debugging line
-        print("Image:", img)  # Debugging line
-        
-        # Validate the Brand Name
         if not name:
             messages.error(request, "Brand Name is required.")
-            return render(request, "Brand/addform.html")  # Re-render the form on error
+            return render(request, "Brand/addform.html")
 
-        # Check if the brand name already exists (case-insensitive check)
+
+
         if BrandForm.objects.filter(bname__iexact=name).exists():
             messages.error(request, "Duplicate entry not allowed! Brand name already exists.")
-            return render(request, "Brand/addform.html")  # Re-render the form on error
+            return render(request, "Brand/addform.html")
 
-        # Save the new brand data to the database
         saveData = BrandForm(
             bname=name,
             img=img,
+           
         )
         saveData.save()
-
-        # Show success message and redirect to the brand list or any other page
         messages.success(request, "Brand added successfully!")
-        return redirect(Brands)  # Replace 'brands_list' with the name of your brands listing view
+        return redirect(Brands)
