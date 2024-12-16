@@ -132,25 +132,24 @@
 
 <div class="container-fluid">
   <div class="content-wrapper">
-      <div class="container">
     <div class="row">
       <div class="col-12">
-          <div class="card">
-
-          <div class="card-header">
-            <h3 class="card-title">Category Record &amp;view <a href="/category-add/" class="btn btn-primary a">Add CATEGORY</a></h3>
+        <div class="card">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h3 class="card-title">Category Records &amp; View</h3>
+            <button type="button" class="btn btn-primary a" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+              Add Category
+            </button>
           </div>
-          <!-- /.card-header -->
           <div class="card-body">
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
               <div class="row">
                 <div class="col-sm-12 col-md-6">
-                   
-                </div>
-                <div class="col-sm-12 col-md-6">
-                   
-                </div>
               </div>
+
+              <div class="col-sm-12 col-md-6">
+              </div>
+              
               <div class="row">
                 <div class="col-sm-12">
                   <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
@@ -219,19 +218,23 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addBrandModalLabel">Add Brand</h5>
+        <h5 class="modal-title" id="addBrandModalLabel">Add Category</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="/brand-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+      <form action="/category-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="modal-body">
           <div class="mb-3">
-            <label for="bname" class="form-label">Brand Name:</label>
-            <input type="text" class="form-control" id="bname" name="bname" placeholder="Enter brand name">
+            <label for="c_name" class="form-label">Category Name:</label>
+            <input type="text" class="form-control" id="c_name" name="c_name" placeholder="Enter category name">
           </div>
           <div class="mb-3">
-            <label for="img" class="form-label">Image:</label>
-            <input type="file" class="form-control" id="img" name="img">
+            <label for="c_img" class="form-label">Category Image:</label>
+            <input type="file" class="form-control" id="c_img" name="c_img">
+          </div>
+          <div class="mb-3">
+            <label for="B_img" class="form-label">Banner Image:</label>
+            <input type="file" class="form-control" id="B_img" name="B_img">
           </div>
         </div>
         <div class="modal-footer">
@@ -242,14 +245,14 @@
     </div>
   </div>
 </div>
-
 <script>
   function validateForm() {
-    var bname = document.getElementById("bname").value.trim();
-    var img = document.getElementById("img").files.length;
+    var c_name = document.getElementById("c_name").value.trim();
+    var c_img = document.getElementById("c_img").files.length;
+    var B_img1 = document.getElementById("B_img1").files.length;
 
-    if (bname === "") {
-      alert("Brand Name is required.");
+    if (c_name === "") {
+      alert("Category Name is required.");
       return false;
     }
     return true;
