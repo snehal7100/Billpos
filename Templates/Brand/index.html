@@ -13,7 +13,7 @@
   }
 
   .content-wrapper {
-    margin-top: 30px;
+    margin-top: 80px;
   }
 
   .modal-content {
@@ -45,6 +45,7 @@
   .modal-footer button {
     border-radius: 10px;
   }
+
   table {
     border-radius: 10px;
     overflow: hidden;
@@ -73,6 +74,7 @@
   table tbody tr:hover {
     background-color: #f1f1f1;
   }
+
   .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -107,15 +109,26 @@
     height: auto;
   }
 
-  .fa {
-    color: #007bff;
+  .fa-edit {
+    color: #6a0dad;  /* Dark Violet */
     cursor: pointer;
     padding: 5px;
     transition: color 0.3s ease;
   }
 
-  .fa:hover {
-    color: #0056b3;
+  .fa-edit:hover {
+    color: #4b0082;  /* Darker Violet on hover */
+  }
+
+  .fa-trash {
+    color: red;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+  }
+
+  .fa-trash:hover {
+    color: darkred;
   }
 
   .no-records {
@@ -236,10 +249,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 {% include "Component/footer.html" %}
-
-
-
-
-
-
-
