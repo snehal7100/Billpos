@@ -50,7 +50,7 @@ urlpatterns = [
     path('index/', view.Index), 
 
    
-    # path('brand-view/<id>', brandview.BrandView),
+ 
     
     path('brand-list/', brandview.Brands),
     path('brand-edit/<id>', brandview.editBrand),
@@ -60,6 +60,7 @@ urlpatterns = [
 
     path('tax-list/', Taxview.TaxList),  
     path('tax-view/<id>/', Taxview.TaxView), 
+    
     path('tax-edit/<id>/', Taxview.editTax),  
     path('tax-delete/<id>/', Taxview.deleteTax), 
     path('tax-add/', Taxview.addTax),  

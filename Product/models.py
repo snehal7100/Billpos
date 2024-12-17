@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class ProductModel(models.Model):
+    pid=models.CharField(max_length=255)
     pname=models.CharField(max_length=255)
     hsncode=models.CharField(max_length=255)
     category=models.CharField(max_length=255)
