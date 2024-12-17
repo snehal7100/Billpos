@@ -1,0 +1,127 @@
+{% comment %} {% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Edit Customer Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <div class="container mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Edit Customer Form</h1>
+                    <style>
+                        #h1 {
+                            padding-top: 10px;
+                            font-weight: bold;
+                            font-size: 20px;
+                        }
+
+                        .card-header {
+                            padding-top: 10px;
+                            font-weight: bold;
+                            font-size: 15px;
+                        }
+                    </style>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <!-- Name Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ customer.name }}" placeholder="Enter Name" required>
+                        </div>
+
+                        <!-- Mobile No Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="mobile_no">Mobile No:</label>
+                            <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ customer.mobile_no }}" placeholder="Enter Mobile No" required>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ customer.email }}" placeholder="Enter Email" required>
+                        </div>
+
+                        <!-- GST No Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="gst_no">GST No:</label>
+                            <input type="text" class="form-control" id="gst_no" name="gst_no" value="{{ customer.gst_no }}" placeholder="Enter GST No" required>
+                        </div>
+
+                        <!-- PAN No Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="pan_no">PAN No:</label>
+                            <input type="text" class="form-control" id="pan_no" name="pan_no" value="{{ customer.pan_no }}" placeholder="Enter PAN No" required>
+                        </div>
+
+                        <!-- Opening Balance Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="opening_balance">Opening Balance:</label>
+                            <input type="number" class="form-control" id="opening_balance" name="opening_balance" value="{{ customer.opening_balance }}" placeholder="Enter Opening Balance" step="0.01" required>
+                        </div>
+
+                        <!-- Group Type Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="group_type">Group Type:</label>
+                            <input type="text" class="form-control" id="group_type" name="group_type" value="{{ customer.group_type }}" placeholder="Enter Group Type" required>
+                        </div>
+
+                        <!-- Billing Address Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="billing_address">Billing Address:</label>
+                            <textarea class="form-control" id="billing_address" name="billing_address" rows="3" placeholder="Enter Billing Address" required>{{ customer.billing_address }}</textarea>
+                        </div>
+
+                        <!-- Shipping Address Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="shipping_address">Shipping Address:</label>
+                            <textarea class="form-control" id="shipping_address" name="shipping_address" rows="3" placeholder="Enter Shipping Address" required>{{ customer.shipping_address }}</textarea>
+                        </div>
+
+                        <!-- City Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="city">City:</label>
+                            <input type="text" class="form-control" id="city" name="city" value="{{ customer.city }}" placeholder="Enter City" required>
+                        </div>
+
+                        <!-- Credit Limit Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="credit_limit">Credit Limit:</label>
+                            <input type="number" class="form-control" id="credit_limit" name="credit_limit" value="{{ customer.credit_limit }}" placeholder="Enter Credit Limit" step="0.01" required>
+                        </div>
+
+                        <!-- Credit Period Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="credit_period">Credit Period:</label>
+                            <input type="number" class="form-control" id="credit_period" name="credit_period" value="{{ customer.credit_period }}" placeholder="Enter Credit Period" required>
+                        </div>
+
+                        <!-- Customer Barcode Field -->
+                        <div class="mb-3 mt-3">
+                            <label for="customer_barcode">Customer Barcode:</label>
+                            <input type="text" class="form-control" id="customer_barcode" name="customer_barcode" value="{{ customer.customer_barcode }}" placeholder="Enter Customer Barcode" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% include "Component/footer.html" %} {% endcomment %}

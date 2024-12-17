@@ -1,0 +1,284 @@
+{% comment %} {% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+  }
+
+  .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .content-wrapper {
+    margin-top: 80px;
+  }
+
+  .modal-content {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .modal-body .form-label {
+    font-weight: 600;
+    color: #495057;
+  }
+
+  .modal-body .form-control {
+    border-radius: 10px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  .modal-footer button {
+    border-radius: 10px;
+  }
+
+  table {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+
+  table th, table td {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  table thead {
+    background-color: #343a40;
+    color: white;
+  }
+
+  table tbody tr {
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+  }
+
+  table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 10px;
+    padding: 12px 25px; 
+    font-size: 16px; 
+    font-weight: 600;  
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  .a {
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #007bff;
+    border: none;
+  }
+
+  .a:hover {
+    background-color: #0056b3;
+  }
+
+  .fa {
+    color: #007bff;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+  }
+
+  .fa:hover {
+    color: #0056b3;
+  }
+  .fa-edit {
+    color: #6a0dad;  /* Dark Violet */
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+  }
+
+  .fa-edit:hover {
+    color: #4b0082;  /* Darker Violet on hover */
+  }
+
+  .fa-trash {
+    color: red;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+  }
+
+  .fa-trash:hover {
+    color: darkred;
+  }
+
+  .no-records {
+    text-align: center;
+    color: #777;
+    font-size: 16px;
+    padding: 20px 0;
+  }
+  .content-wrapper {
+    margin-top: 30px;
+  }
+</style>
+
+<div class="container-fluid">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h3 class="card-title">Customer Records</h3>
+            <button type="button" class="btn btn-primary a" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+              Add Customer
+            </button>
+          </div>
+          <div class="card-body">
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Mobile No</th>
+                        <th>Email</th>
+                        <th>GST No</th>
+                        <th>PAN No</th>
+                        <th>Opening Balance</th>
+                        <th>Group Type</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for customer in customerData %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.mobile_no }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.gst_no }}</td>
+                        <td>{{ customer.pan_no }}</td>
+                        <td>{{ customer.opening_balance }}</td>
+                        <td>{{ customer.group_type }}</td>
+                        <td>
+                          <a href="/customer-edit/{{ customer.id }}" class="fa fa-edit"></a>
+                          <a href="/customer-delete/{{ customer.id }}" class="fa fa-trash"></a>
+                        </td>
+                      </tr>
+                      {% empty %}
+                      <tr>
+                        <td colspan="9" class="no-records">No records found.</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Adding Customer -->
+<div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCustomerModalLabel">Add Customer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/customer-add/" method="post" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter customer name" required>
+          </div>
+          <div class="mb-3">
+            <label for="mobile_no" class="form-label">Mobile No: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="mobile_no" name="mobile_no" placeholder="Enter mobile number" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+          </div>
+          <div class="mb-3">
+            <label for="gst_no" class="form-label">GST No:</label>
+            <input type="text" class="form-control" id="gst_no" name="gst_no" placeholder="Enter GST number">
+          </div>
+          <div class="mb-3">
+            <label for="pan_no" class="form-label">PAN No:</label>
+            <input type="text" class="form-control" id="pan_no" name="pan_no" placeholder="Enter PAN number">
+          </div>
+          <div class="mb-3">
+            <label for="opening_balance" class="form-label">Opening Balance:</label>
+            <input type="number" class="form-control" id="opening_balance" name="opening_balance" placeholder="Enter opening balance">
+          </div>
+          <div class="mb-3">
+            <label for="group_type" class="form-label">Group Type:</label>
+            <input type="text" class="form-control" id="group_type" name="group_type" placeholder="Enter group type">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function validateForm() {
+    var name = document.getElementById("name").value.trim();
+    var mobile_no = document.getElementById("mobile_no").value.trim();
+    var email = document.getElementById("email").value.trim();
+
+    if (name === "") {
+      alert("Customer Name is required.");
+      return false;
+    }
+    if (mobile_no === "" || isNaN(mobile_no) || mobile_no.length < 10) {
+      alert("Valid Mobile Number is required.");
+      return false;
+    }
+    if (email === "") {
+      alert("Email is required.");
+      return false;
+    }
+    return true;
+  }
+</script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% include "Component/footer.html" %} {% endcomment %}

@@ -28,6 +28,8 @@ from Billpos import brandview
 
 from Billpos import Taxview
 from Billpos import loginvalid
+
+# from Billpos import customerview
 urlpatterns = [
 
     # path('profile-view/<id>', Adminview.view_profile),
@@ -64,6 +66,14 @@ urlpatterns = [
     path('tax-edit/<id>/', Taxview.editTax),  
     path('tax-delete/<id>/', Taxview.deleteTax), 
     path('tax-add/', Taxview.addTax),  
+
+
+
+    # path('customer-list/', customerview.Customers),  
+    # path('customer-view/<id>/', customerview.editCustomer), 
+    # path('customer-edit/<id>/', customerview.editCustomer),  
+    # path('customer-delete/<id>/', customerview.deleteCustomer), 
+    # path('customer-add/', customerview.AddCustomer),  
 
 
 ]
