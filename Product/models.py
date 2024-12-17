@@ -10,8 +10,8 @@ class ProductModel(models.Model):
     taxtype=models.CharField(max_length=255)
     punit=models.CharField(max_length=255)
     aunit=models.CharField(max_length=255)
-    cfactor=models.CharField(max_length=255)
-    uprice=models.CharField(max_length=255)
+    cfactor = models.CharField(max_length=255, default='1')
+    price=models.CharField(max_length=255, default='1')
 
     class Meta:
         db_table = 'tbl_product'
