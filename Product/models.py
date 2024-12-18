@@ -14,4 +14,9 @@ class ProductModel(models.Model):
     price=models.CharField(max_length=255, default='1')
 
     class Meta:
+<<<<<<< HEAD
         db_table = 'tbl_product'
+
+=======
+        db_table = 'tbl_product'
+>>>>>>> 36f5f774c50b78ac026fe433dcabfec7940bab8c
