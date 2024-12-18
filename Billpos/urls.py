@@ -28,7 +28,7 @@ from Billpos import productview
 
 
 from Billpos import Taxview
-from Billpos import product
+
 from Billpos import loginvalid
 
 from Billpos import customerview
@@ -70,7 +70,14 @@ urlpatterns = [
 
 
 
+<<<<<<< HEAD
 
+    
+
+
+=======
+
+>>>>>>> 36f5f774c50b78ac026fe433dcabfec7940bab8c
 
     path('customer-list/', customerview.Customers),  
     path('customer-view/<id>/', customerview.editCustomer), 
