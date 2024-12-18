@@ -70,7 +70,14 @@ urlpatterns = [
 
 
 
+<<<<<<< HEAD
 
+=======
+
+    
+
+
+>>>>>>> 402f905256171b4ed8e09e5de2a30224d8b18b23
 
     path('customer-list/', customerview.Customers),  
     path('customer-view/<id>/', customerview.editCustomer), 

@@ -1,6 +1,7 @@
 from django.db import models
 
 class ProductModel(models.Model):
+<<<<<<< HEAD
 
     pname = models.CharField(max_length=255)
     hsncode = models.CharField(max_length=255)
@@ -19,6 +20,8 @@ class ProductModel(models.Model):
     def __str__(self):
         return self.pname
 
+=======
+>>>>>>> 402f905256171b4ed8e09e5de2a30224d8b18b23
     pid=models.CharField(max_length=255)
     pname=models.CharField(max_length=255)
     hsncode=models.CharField(max_length=255)
