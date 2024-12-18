@@ -70,10 +70,7 @@ urlpatterns = [
 
 
 
-<<<<<<< HEAD
-    
 
-=======
 
     path('customer-list/', customerview.Customers),  
     path('customer-view/<id>/', customerview.editCustomer), 
@@ -85,7 +82,7 @@ urlpatterns = [
     path('product-edit/<id>', productview.EditProduct),
     path('product-delete/<id>', productview.delete),
     path('product-add/', productview.AddProduct),
->>>>>>> 7fbfb34fefb27d5160b507876288c2de58418e6e
+
 
 ]
 if settings.DEBUG:  

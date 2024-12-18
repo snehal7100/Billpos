@@ -1,7 +1,7 @@
 from django.db import models
 
 class ProductModel(models.Model):
-<<<<<<< HEAD
+
     pname = models.CharField(max_length=255)
     hsncode = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
@@ -18,7 +18,7 @@ class ProductModel(models.Model):
 
     def __str__(self):
         return self.pname
-=======
+
     pid=models.CharField(max_length=255)
     pname=models.CharField(max_length=255)
     hsncode=models.CharField(max_length=255)
@@ -33,4 +33,4 @@ class ProductModel(models.Model):
 
     class Meta:
         db_table = 'tbl_product'
->>>>>>> 7fbfb34fefb27d5160b507876288c2de58418e6e
+
