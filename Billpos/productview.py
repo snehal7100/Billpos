@@ -1,13 +1,26 @@
-
 from django.shortcuts import render,redirect
 from Product.models import ProductModel
+from Brand.models import BrandForm as Brand
 from django.contrib import messages
 def Products(request):
-    pData = ProductModel.objects.all()
-    pData={
-        "pData":pData
+    # Fetch product and brand data
+    product_query = """
+        SELECT * 
+        FROM tbl_product
+        INNER JOIN tbl_brand ON tbl_product.brand = tbl_brand.bid    
+    """
+    pData = ProductModel.objects.raw(product_query)
+
+    # Fetch brand list for dropdown
+    brand_query = "SELECT * FROM tbl_brand"
+    bData = Brand.objects.raw(brand_query)
+
+    context = {
+        "pData": pData,
+        "bData": bData,  # Pass brand data to template
     }
-    return render(request,"Product/index.html",pData)
+    return render(request, "Product/index.html", context)
+
 
 def EditProduct(request,id):
     pData= ProductModel.objects.get(id=int(id))
