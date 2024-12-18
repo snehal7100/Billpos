@@ -31,7 +31,7 @@ from Billpos import Taxview
 from Billpos import product
 from Billpos import loginvalid
 
-# from Billpos import customerview
+from Billpos import customerview
 urlpatterns = [
 
     # path('profile-view/<id>', Adminview.view_profile),
@@ -75,11 +75,11 @@ urlpatterns = [
 
 
 
-    # path('customer-list/', customerview.Customers),  
-    # path('customer-view/<id>/', customerview.editCustomer), 
-    # path('customer-edit/<id>/', customerview.editCustomer),  
-    # path('customer-delete/<id>/', customerview.deleteCustomer), 
-    # path('customer-add/', customerview.AddCustomer),  
+    path('customer-list/', customerview.Customers),  
+    path('customer-view/<id>/', customerview.editCustomer), 
+    path('customer-edit/<id>/', customerview.editCustomer),  
+    path('customer-delete/<id>/', customerview.deleteCustomer), 
+    path('customer-add/', customerview.AddCustomer),  
 
     path('product-list/', productview.Products),
     path('product-edit/<id>', productview.EditProduct),

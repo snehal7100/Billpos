@@ -1,4 +1,3 @@
-
 from django.shortcuts import render,redirect
 from Product.models import ProductModel
 from Brand.models import BrandForm as Brand
