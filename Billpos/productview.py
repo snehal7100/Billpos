@@ -4,7 +4,6 @@ from Product.models import ProductModel
 from Brand.models import BrandForm as Brand
 from django.contrib import messages
 def Products(request):
-    # Fetch product and brand data
     product_query = """
         SELECT * 
         FROM tbl_product
@@ -12,7 +11,6 @@ def Products(request):
     """
     pData = ProductModel.objects.raw(product_query)
 
-    # Fetch brand list for dropdown
     brand_query = "SELECT * FROM tbl_brand"
     bData = Brand.objects.raw(brand_query)
 
@@ -64,7 +62,7 @@ def delete(request,id):
 
 def AddProduct(request):
     if request.method == "GET":
-        return render(request, "product/addform.html")
+        return render(request, "product/index.html")
     else:
         name = request.POST.get("pname").strip()
         hsncode = request.POST.get("hsncode").strip()
@@ -79,11 +77,11 @@ def AddProduct(request):
 
         if not name:
             messages.error(request, "product Name is required.")
-            return render(request, "product/addform.html")
+            return render(request, "product/index.html")
         
         if ProductModel.objects.filter(pname__iexact=name).exists():
             messages.error(request, "Duplicate entry not allowed! Product name already exists.")
-            return render(request, "product/addform.html")
+            return render(request, "product/index.html")
 
         saveData = ProductModel(
             pname=name,
