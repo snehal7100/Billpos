@@ -71,9 +71,6 @@ urlpatterns = [
 
 
 
-    
-
-
 
     path('customer-list/', customerview.Customers),  
     path('customer-view/<id>/', customerview.editCustomer), 
