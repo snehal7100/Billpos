@@ -27,6 +27,7 @@ from Billpos import brandview
 # from Billpos import Adminview
 
 from Billpos import Taxview
+from Billpos import product
 from Billpos import loginvalid
 urlpatterns = [
 
@@ -62,6 +63,10 @@ urlpatterns = [
     path('tax-edit/<id>/', Taxview.editTax),  
     path('tax-delete/<id>/', Taxview.deleteTax), 
     path('tax-add/', Taxview.addTax),  
+
+
+
+    
 
 
 ]
