@@ -24,11 +24,14 @@ from Billpos import view
 from Billpos import categoryview
 
 from Billpos import brandview
-# from Billpos import Adminview
+from Billpos import productview
+
 
 from Billpos import Taxview
 from Billpos import product
 from Billpos import loginvalid
+
+# from Billpos import customerview
 urlpatterns = [
 
     # path('profile-view/<id>', Adminview.view_profile),
@@ -50,24 +53,39 @@ urlpatterns = [
     path('index/', view.Index), 
 
    
+ 
+    
     path('brand-list/', brandview.Brands),
-    # path('brand-view/<id>', brandview.BrandView),
     path('brand-edit/<id>', brandview.editBrand),
     path('brand-delete/<id>', brandview.delete),
     path('brand-add/', brandview.AddBrand),
 
 
-
     path('tax-list/', Taxview.TaxList),  
     path('tax-view/<id>/', Taxview.TaxView), 
+    
     path('tax-edit/<id>/', Taxview.editTax),  
     path('tax-delete/<id>/', Taxview.deleteTax), 
     path('tax-add/', Taxview.addTax),  
 
 
 
+<<<<<<< HEAD
     
 
+=======
+
+    # path('customer-list/', customerview.Customers),  
+    # path('customer-view/<id>/', customerview.editCustomer), 
+    # path('customer-edit/<id>/', customerview.editCustomer),  
+    # path('customer-delete/<id>/', customerview.deleteCustomer), 
+    # path('customer-add/', customerview.AddCustomer),  
+
+    path('product-list/', productview.Products),
+    path('product-edit/<id>', productview.EditProduct),
+    path('product-delete/<id>', productview.delete),
+    path('product-add/', productview.AddProduct),
+>>>>>>> 7fbfb34fefb27d5160b507876288c2de58418e6e
 
 ]
 if settings.DEBUG:  
