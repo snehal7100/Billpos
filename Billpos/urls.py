@@ -28,6 +28,7 @@ from Billpos import productview
 
 
 from Billpos import Taxview
+from Billpos import product
 from Billpos import loginvalid
 
 from Billpos import customerview
@@ -52,7 +53,7 @@ urlpatterns = [
     path('index/', view.Index), 
 
    
-    # path('brand-view/<id>', brandview.BrandView),
+ 
     
     path('brand-list/', brandview.Brands),
     path('brand-edit/<id>', brandview.editBrand),
@@ -62,12 +63,17 @@ urlpatterns = [
 
     path('tax-list/', Taxview.TaxList),  
     path('tax-view/<id>/', Taxview.TaxView), 
+    
     path('tax-edit/<id>/', Taxview.editTax),  
     path('tax-delete/<id>/', Taxview.deleteTax), 
     path('tax-add/', Taxview.addTax),  
 
 
 
+<<<<<<< HEAD
+    
+
+=======
 
     path('customer-list/', customerview.Customers),  
     path('customer-view/<id>/', customerview.editCustomer), 
@@ -79,6 +85,7 @@ urlpatterns = [
     path('product-edit/<id>', productview.EditProduct),
     path('product-delete/<id>', productview.delete),
     path('product-add/', productview.AddProduct),
+>>>>>>> 7fbfb34fefb27d5160b507876288c2de58418e6e
 
 ]
 if settings.DEBUG:  
