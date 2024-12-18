@@ -40,23 +40,25 @@
         <div class="container mt-3">
             <div class="card">
                 <div class="card-header">
-                    <h1>Category Form</h1>
-                    <a href="/category-list/" class="btn btn-primary">View</a>
+                    <div class="card-header d-flex align-items-center">
+                    <h1 class="card-title">Category Form</h1>
+                    <a href="/category-list/" class="btn btn-primary a">View</a>
+                    </div>
                     <style>
-                        #h1 {
-                            padding-top: 10px;
+                       .content-wrapper {
+                            margin-top: 30px; 
+                        }
+                        .a {
                             font-weight: bold;
-                            font-size: 20px;
+                            font-size: 12px;
+                            height: 40px;
+                            width: 100px;
+                            margin-top: 10px;
+                            margin-right: 20px;
                         }
 
-                        .card-header {
-                            padding-top: 10px;
-                            font-weight: bold;
-                            font-size: 15px;
-                        }
-                        .form-group .required .control-label:after {
-                            content:"*";color:red;
-                        }
+                        .card-header .btn {
+                        margin-left: auto; 
                         
                     </style>
                    
@@ -95,4 +97,8 @@
 
 </html>
 
+<<<<<<< HEAD
+{% include "Component/footer.html" %}
+=======
 {% include "Component/Footer.html" %} {% endcomment %}
+>>>>>>> 7fbfb34fefb27d5160b507876288c2de58418e6e
