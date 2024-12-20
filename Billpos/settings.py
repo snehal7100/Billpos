@@ -85,31 +85,25 @@ WSGI_APPLICATION = 'Billpos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-<<<<<<< HEAD
+
         'NAME': 'billerpos',  # Replace with your database name
         'USER': 'root',          # Replace with your username
         'PASSWORD': '',          # Replace with your password (empty for default XAMPP setup)
         'HOST': '127.0.0.1',     # Host where XAMPP MySQL is running
         'PORT': '3306',          # MySQL port (default: 3306)
-=======
-        'NAME': 'billerpos',
-        'USER': 'root',
-        'PASSWORD': '', 
-        'HOST': '127.0.0.1',  # Or 'localhost'
-        'PORT': '3306',       # Default MySQL port
->>>>>>> c5f737ea1a8d434ae9c493fab41c1c2d472b214a
+        
+
     }
 }
 
 
 
-<<<<<<< HEAD
+
 # Password validation 8483085925
 
-=======
 
 # Password validation
->>>>>>> c5f737ea1a8d434ae9c493fab41c1c2d472b214a
+
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [

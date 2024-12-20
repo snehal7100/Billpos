@@ -8,8 +8,5 @@ class Taxs(models.Model):
     taxpercentage = models.CharField(max_length=255)
 
     class Meta:
-<<<<<<< HEAD
+
         db_table = 'tbl_taxes' 
-=======
-        db_table = 'tbl_taxes'
->>>>>>> 4ffc9292d0922e5c37b948ac50fc432c183261fd
