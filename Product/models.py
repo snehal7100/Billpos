@@ -17,6 +17,9 @@ class ProductModel(models.Model):
 
         db_table = 'tbl_product'
 
+<<<<<<< HEAD
 
         
 
+=======
+>>>>>>> 4ffc9292d0922e5c37b948ac50fc432c183261fd

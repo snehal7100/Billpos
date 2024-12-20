@@ -7,7 +7,7 @@ def Products(request):
     product_query = """
         SELECT * 
         FROM tbl_product
-        INNER JOIN tbl_brand ON tbl_product.brand = tbl_brand.bid    
+        INNER JOIN tbl_brand ON tbl_product.brand = tbl_brand.bid
     """
     pData = ProductModel.objects.raw(product_query)
 
