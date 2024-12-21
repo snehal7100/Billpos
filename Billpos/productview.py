@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from Product.models import ProductModel
 from Brand.models import BrandForm as Brand
 from Taxes.models import Taxs as Tax
+from category.models import Category 
 from django.contrib import messages
 def Products(request):
     # Fetch product and brand data
@@ -10,7 +11,7 @@ def Products(request):
         FROM tbl_product
         INNER JOIN tbl_brand ON tbl_product.brand = tbl_brand.bid
         INNER JOIN tbl_taxes ON tbl_product.taxtype = tbl_taxes.tid
-        INNER JOIN tbl_taxes ON tbl_product.taxtype = tbl_taxes.tid
+        INNER JOIN tbl_category ON tbl_product.category = tbl_category.c_name
     """
     pData = ProductModel.objects.raw(product_query)
 
@@ -19,11 +20,14 @@ def Products(request):
     bData = Brand.objects.raw(brand_query)
     taxes_query = "SELECT * FROM tbl_taxes"
     taxData = Tax.objects.raw(taxes_query)
+    category_query = "SELECT * FROM tbl_category"
+    categoryData = Category.objects.raw(category_query)
 
     context = {
     "pData": pData,
     "bData": bData,  # Brand data for dropdown
     "taxData": taxData,  # Tax data for dropdown
+    "categoryData": categoryData,  # Category data for dropdown
     }
     return render(request, "Product/index.html", context)
 
