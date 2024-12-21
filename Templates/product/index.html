@@ -142,7 +142,7 @@
   }
 </style>
 
-<div class="container-fluid">
+<div class="container-fluid mt-5">
   <div class="content-wrapper">
     <div class="row">
       <div class="col-12">
@@ -215,7 +215,7 @@
                       </tr>
                       {% empty %}
                       <tr>
-                        <td colspan="4" class="no-records">No records found.</td>
+                        <td colspan="12" class="no-records">No records found.</td>
                       </tr>
                       {% endfor %}
                     </tbody>
@@ -260,7 +260,7 @@
               <select class="form-control" id="category" name="category">
                 <option value="" disabled selected>Select category</option>
                 {% for category in categoryData %}
-                  <option value="{{ category.c_name }}">{{ category.c_name }}</option>
+                  <option value="{{ category.id }}">{{ category.c_name }}</option>
                 {% endfor %}
               </select>
             </div>
@@ -272,7 +272,7 @@
               <select class="form-control" id="brand" name="brand">
                 <option value="" disabled selected>Select Brand</option>
                 {% for brand in bData %}
-                  <option value="{{ brand.bid }}">{{ brand.bname }}</option>
+                  <option value="{{ brand.id }}">{{ brand.bname }}</option>
                 {% endfor %}
               </select>
             </div>

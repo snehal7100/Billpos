@@ -9,9 +9,9 @@ def Products(request):
     product_query = """
         SELECT * 
         FROM tbl_product
-        INNER JOIN tbl_brand ON tbl_product.brand = tbl_brand.bid
-        INNER JOIN tbl_taxes ON tbl_product.taxtype = tbl_taxes.tid
-        INNER JOIN tbl_category ON tbl_product.category = tbl_category.c_name
+        INNER JOIN tbl_brand ON tbl_product.brand = tbl_brand.id
+        INNER JOIN tbl_taxes ON tbl_product.taxtype = tbl_taxes.id
+        INNER JOIN tbl_category ON tbl_product.category = tbl_category.id
     """
     pData = ProductModel.objects.raw(product_query)
 
@@ -29,7 +29,7 @@ def Products(request):
     "taxData": taxData,  # Tax data for dropdown
     "categoryData": categoryData,  # Category data for dropdown
     }
-    return render(request, "Product/index.html", context)
+    return render(request, "product/index.html", context)
 
 
 def EditProduct(request,id):
@@ -78,7 +78,7 @@ def AddProduct(request):
     else:
         name = request.POST.get("pname").strip()
         hsncode = request.POST.get("hsncode").strip()
-        category = request.POST.get("category")
+        category = request.POST.get("category").strip()
         brand = request.POST.get("brand").strip()
         tax = request.POST.get("tax").strip()
         type = request.POST.get("taxtype").strip()
@@ -87,13 +87,13 @@ def AddProduct(request):
         factor = request.POST.get("cfactor").strip()
         price = request.POST.get("price").strip()
 
-        if not name:
-            messages.error(request, "product Name is required.")
-            return render(request, "product/addform.html")
+        # if not name:
+            # messages.error(request, "product Name is required.")
+            # return render(request, "product/index.html")
         
-        if ProductModel.objects.filter(pname__iexact=name).exists():
-            messages.error(request, "Duplicate entry not allowed! Product name already exists.")
-            return render(request, "product/addform.html")
+        # if ProductModel.objects.filter(pname__iexact=name).exists():
+            # messages.error(request, "Duplicate entry not allowed! Product name already exists.")
+            # return render(request, "product/index.html")
 
         saveData = ProductModel(
             pname=name,
