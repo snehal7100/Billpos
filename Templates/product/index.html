@@ -277,10 +277,13 @@
             </div>
             <div class="col-md-6">
               <label for="taxtype" class="form-label">Tax Type:</label>
-              <input type="text" class="form-control" id="taxtype" name="taxtype">
+              <select class="form-control" id="taxtype" name="taxtype">
+                <option value="" disabled selected>Select Tax Type</option>
+                {% for tax in taxData %}
+                  <option value="{{ tax.tid }}">{{ tax.taxname }}</option>
+                {% endfor %}
+              </select>
             </div>
-          </div>
-
           <!-- Row 4: Two columns -->
           <div class="row mb-3">
             <div class="col-md-6">

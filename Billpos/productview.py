@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from Product.models import ProductModel
 from Brand.models import BrandForm as Brand
+from Taxes.models import Taxs as Tax
 from django.contrib import messages
 def Products(request):
     # Fetch product and brand data
@@ -8,16 +9,21 @@ def Products(request):
         SELECT * 
         FROM tbl_product
         INNER JOIN tbl_brand ON tbl_product.brand = tbl_brand.bid
+        INNER JOIN tbl_taxes ON tbl_product.taxtype = tbl_taxes.tid
+        INNER JOIN tbl_taxes ON tbl_product.taxtype = tbl_taxes.tid
     """
     pData = ProductModel.objects.raw(product_query)
 
     # Fetch brand list for dropdown
     brand_query = "SELECT * FROM tbl_brand"
     bData = Brand.objects.raw(brand_query)
+    taxes_query = "SELECT * FROM tbl_taxes"
+    taxData = Tax.objects.raw(taxes_query)
 
     context = {
-        "pData": pData,
-        "bData": bData,  # Pass brand data to template
+    "pData": pData,
+    "bData": bData,  # Brand data for dropdown
+    "taxData": taxData,  # Tax data for dropdown
     }
     return render(request, "Product/index.html", context)
 
@@ -28,6 +34,7 @@ def EditProduct(request,id):
         pData={
         "pData":pData,
     }
+        
         return render(request,"product/edit.html",pData)
     else:
         name = request.POST.get("pname")
