@@ -147,7 +147,7 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header d-flex align-items-center">
+          <div class="card-header d-flex align-items-center ">
             <h3 class="card-title">product Records &amp; View</h3>
             <button type="button" class="btn btn-primary btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#addBrandModal">
               Add product
@@ -288,7 +288,7 @@
               <select class="form-control" id="taxtype" name="taxtype">
                 <option value="" disabled selected>Select Tax Type</option>
                 {% for tax in taxData %}
-                  <option value="{{ tax.tid }}">{{ tax.taxname }}</option>
+                  <option value="{{ tax.id }}">{{ tax.taxname }}</option>
                 {% endfor %}
               </select>
             </div>

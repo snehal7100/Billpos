@@ -78,7 +78,7 @@ def AddProduct(request):
     else:
         name = request.POST.get("pname").strip()
         hsncode = request.POST.get("hsncode").strip()
-        category = request.POST.get("category").strip()
+        category = request.POST.get("category")
         brand = request.POST.get("brand").strip()
         tax = request.POST.get("tax").strip()
         type = request.POST.get("taxtype").strip()
