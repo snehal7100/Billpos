@@ -254,16 +254,18 @@
           </div>
 
           <!-- Row 2: Two columns -->
-           <div class="row mb-3">
+          <div class="row mb-3">
             <div class="col-md-6">
               <label for="category" class="form-label">Category:</label>
               <select class="form-control" id="category" name="category">
                 <option value="" disabled selected>Select category</option>
                 {% for category in categoryData %}
-                  <option value="{{ category.c_name }}">{{ category.category }}</option>
+                  <option value="{{ category.c_name }}">{{ category.c_name }}</option>
                 {% endfor %}
               </select>
-            </div>  
+            </div>
+          
+          
 
             <div class="col-md-6">
               <label for="brand" class="form-label">Brand:</label>
