@@ -1,0 +1,102 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+
+<div class="container-fluid">
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Customer Details</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <!-- Optional additional content -->
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <!-- Optional additional content -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                                            <thead>
+                                                <tr>
+                                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ID">ID</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Name">Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Mobile No">Mobile No</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Email">Email</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="GST No">GST No</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="PAN No">PAN No</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Opening Balance">Opening Balance</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Group Type">Group Type</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Billing Address">Billing Address</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Shipping Address">Shipping Address</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="City">City</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Credit Limit">Credit Limit</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Credit Period">Credit Period</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Customer Barcode">Customer Barcode</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Action">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="odd">
+                                                    <td class="dtr-control sorting_1" tabindex="0">{{ customer.id }}</td>
+                                                    <td>{{ customer.name }}</td>
+                                                    <td>{{ customer.mobile_no }}</td>
+                                                    <td>{{ customer.email }}</td>
+                                                    <td>{{ customer.gst_no }}</td>
+                                                    <td>{{ customer.pan_no }}</td>
+                                                    <td>{{ customer.opening_balance }}</td>
+                                                    <td>{{ customer.group_type }}</td>
+                                                    <td>{{ customer.billing_address }}</td>
+                                                    <td>{{ customer.shipping_address }}</td>
+                                                    <td>{{ customer.city }}</td>
+                                                    <td>{{ customer.credit_limit }}</td>
+                                                    <td>{{ customer.credit_period }}</td>
+                                                    <td>{{ customer.customer_barcode }}</td>
+                                                    <td>
+                                                        <a href="/customer-list/" class="btn btn-primary">Back</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th rowspan="1" colspan="1">ID</th>
+                                                    <th rowspan="1" colspan="1">Name</th>
+                                                    <th rowspan="1" colspan="1">Mobile No</th>
+                                                    <th rowspan="1" colspan="1">Email</th>
+                                                    <th rowspan="1" colspan="1">GST No</th>
+                                                    <th rowspan="1" colspan="1">PAN No</th>
+                                                    <th rowspan="1" colspan="1">Opening Balance</th>
+                                                    <th rowspan="1" colspan="1">Group Type</th>
+                                                    <th rowspan="1" colspan="1">Billing Address</th>
+                                                    <th rowspan="1" colspan="1">Shipping Address</th>
+                                                    <th rowspan="1" colspan="1">City</th>
+                                                    <th rowspan="1" colspan="1">Credit Limit</th>
+                                                    <th rowspan="1" colspan="1">Credit Period</th>
+                                                    <th rowspan="1" colspan="1">Customer Barcode</th>
+                                                    <th rowspan="1" colspan="1">Action</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </div>
+</div>
+
+{% include "Component/footer.html" %}
