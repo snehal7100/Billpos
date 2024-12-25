@@ -211,7 +211,7 @@
 
 <!-- Modal for Adding Customer -->
 <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addCustomerModalLabel">Create Customer</h5>
@@ -220,57 +220,71 @@
       <form action="/customer-add/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="name" class="form-label">Name: <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="name" name="name" required>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="name" class="form-label">Name: <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="mobile_no" class="form-label">Mobile No: <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="mobile_no" name="mobile_no" required>
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="mobile_no" class="form-label">Mobile No: <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="mobile_no" name="mobile_no" required>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="gst_no" class="form-label">GST No:</label>
+              <input type="text" class="form-control" id="gst_no" name="gst_no">
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
-            <input type="email" class="form-control" id="email" name="email" required>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="pan_no" class="form-label">PAN No:</label>
+              <input type="text" class="form-control" id="pan_no" name="pan_no">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="opening_balance" class="form-label">Opening Balance:</label>
+              <input type="number" class="form-control" id="opening_balance" name="opening_balance">
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="gst_no" class="form-label">GST No:</label>
-            <input type="text" class="form-control" id="gst_no" name="gst_no">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="group_type" class="form-label">Group Type:</label>
+              <input type="text" class="form-control" id="group_type" name="group_type">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="customer_barcode" class="form-label">Customer Barcode:</label>
+              <input type="text" class="form-control" id="customer_barcode" name="customer_barcode">
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="pan_no" class="form-label">PAN No:</label>
-            <input type="text" class="form-control" id="pan_no" name="pan_no">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="billing_address" class="form-label">Billing Address:</label>
+              <input type="text" class="form-control" id="billing_address" name="billing_address">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="shipping_address" class="form-label">Shipping Address:</label>
+              <input type="text" class="form-control" id="shipping_address" name="shipping_address">
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="opening_balance" class="form-label">Opening Balance:</label>
-            <input type="number" class="form-control" id="opening_balance" name="opening_balance">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="city" class="form-label">City:</label>
+              <input type="text" class="form-control" id="city" name="city">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="credit_limit" class="form-label">Credit Limit:</label>
+              <input type="number" class="form-control" id="credit_limit" name="credit_limit">
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="group_type" class="form-label">Group Type:</label>
-            <input type="text" class="form-control" id="group_type" name="group_type">
-          </div>
-          <div class="mb-3">
-            <label for="customer_barcode" class="form-label">Customer Barcode:</label>
-            <input type="text" class="form-control" id="customer_barcode" name="customer_barcode">
-          </div>
-          <div class="mb-3">
-            <label for="billing_address" class="form-label">Billing Address:</label>
-            <input type="text" class="form-control" id="billing_address" name="billing_address">
-          </div>
-          <div class="mb-3">
-            <label for="shipping_address" class="form-label">Shipping Address:</label>
-            <input type="text" class="form-control" id="shipping_address" name="shipping_address">
-          </div>
-          <div class="mb-3">
-            <label for="city" class="form-label">City:</label>
-            <input type="text" class="form-control" id="city" name="city">
-          </div>
-          <div class="mb-3">
-            <label for="credit_limit" class="form-label">Credit Limit:</label>
-            <input type="number" class="form-control" id="credit_limit" name="credit_limit">
-          </div>
-          <div class="mb-3">
-            <label for="credit_period" class="form-label">Credit Period:</label>
-            <input type="text" class="form-control" id="credit_period" name="credit_period">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="credit_period" class="form-label">Credit Period:</label>
+              <input type="text" class="form-control" id="credit_period" name="credit_period">
+            </div>
           </div>
         </div>
         <div class="modal-footer">
