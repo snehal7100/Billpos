@@ -1,3 +1,5 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +10,18 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- AdminLTE Theme Style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+
+  <div class="wrapper">
   <!-- Dashboard Content -->
   <section class="content">
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <!-- Total Products -->
@@ -87,3 +90,4 @@
 
 </body>
 </html>
+{% include "Component/footer.html" %}
