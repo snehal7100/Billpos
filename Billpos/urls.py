@@ -32,6 +32,7 @@ from Billpos import Taxview
 from Billpos import loginvalid
 
 from Billpos import customerview
+from Billpos import Dashboardview
 
 from Billpos import supplierview
 
@@ -43,6 +44,8 @@ urlpatterns = [
 
     # path('profile/edit/', Adminview.edit_profile),
     # path('profile/logout/', Adminview.logout_user),
+
+    path('dashboard/', Dashboardview.dashboard),
 
 
     path('category-list/',categoryview.category),
@@ -86,10 +89,10 @@ urlpatterns = [
     path('product-add/', productview.AddProduct),
 
     path('supplier-list/', supplierview.SuppliersList),  
-path('supplier-view/<id>/', supplierview.editSupplier), 
-path('supplier-edit/<id>/', supplierview.editSupplier),  
-path('supplier-delete/<id>/', supplierview.deleteSupplier), 
-path('supplier-add/', supplierview.AddSupplier),
+    path('supplier-view/<id>/', supplierview.editSupplier), 
+    path('supplier-edit/<id>/', supplierview.editSupplier),  
+    path('supplier-delete/<id>/', supplierview.deleteSupplier), 
+    path('supplier-add/', supplierview.AddSupplier),
 
 
 
