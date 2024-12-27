@@ -5,38 +5,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POS System - CRUD</title>
+  <title>POS System</title>
   <!-- AdminLTE CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    .total-bar {
+    .content-wrapper {
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+    .table th, .table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+    .fixed-summary-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      z-index: 1030;
+      background: #fff;
+      border-top: 1px solid #dee2e6;
       display: flex;
       justify-content: space-around;
-      background-color: #f8f9fa;
-      border-top: 1px solid #dee2e6;
       padding: 10px 0;
       font-weight: bold;
+      z-index: 1050;
     }
-    .total-bar div {
+    .fixed-summary-bar div {
       text-align: center;
       flex: 1;
     }
-    .btn-action {
-      margin-top: 10px;
+    .customer-details, .bill-details {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+    }
+    .bill-details p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+    .total-amount {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff5722;
+      text-align: center;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Main Content -->
-    <div class="content-wrapper p-3">
+    <div class="content-wrapper">
       <div class="container-fluid">
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -46,58 +69,98 @@
             <button class="btn btn-primary">POS Bills List</button>
           </div>
         </div>
-        <!-- Products Table -->
-        <div class="card">
-          <div class="card-body">
-            <div class="form-group">
-              <input type="text" class="form-control" id="product-search" placeholder="Search Products by name or Scan Barcode...">
+
+        <!-- Row for Content -->
+        <div class="row">
+          <!-- Product Section -->
+          <div class="col-md-7">
+            <div class="card">
+              <div class="card-body">
+                <input type="text" class="form-control mb-3" placeholder="Search Products by name or Scan Barcode...">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Item Name</th>
+                      <th>Qty</th>
+                      <th>MRP</th>
+                      <th>Sale Price</th>
+                      <th>Total</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>बारिक खडीसाखर 1 कि.ग्रॅ</td>
+                      <td>
+                        <button class="btn btn-sm btn-secondary">-</button>
+                        5
+                        <button class="btn btn-sm btn-secondary">+</button>
+                      </td>
+                      <td>₹100</td>
+                      <td>₹89</td>
+                      <td>₹445</td>
+                      <td>
+                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>sak</td>
+                      <td>
+                        <button class="btn btn-sm btn-secondary">-</button>
+                        6
+                        <button class="btn btn-sm btn-secondary">+</button>
+                      </td>
+                      <td>₹0</td>
+                      <td>₹100</td>
+                      <td>₹600</td>
+                      <td>
+                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Item Name</th>
-                  <th>Qty</th>
-                  <th>MRP</th>
-                  <th>Sale Price</th>
-                  <th>Total</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="product-list">
-                <!-- Rows will be dynamically added here -->
-              </tbody>
-            </table>
-            <button class="btn btn-success" onclick="addRow()">Add New Item</button>
           </div>
-        </div>
-        <!-- Customer Details -->
-        <div class="card mt-3">
-          <div class="card-body">
-            <h5>Customer Details</h5>
-            <input type="text" class="form-control mb-2" placeholder="Name" id="customer-name">
-            <input type="text" class="form-control mb-2" placeholder="Mobile No" id="customer-mobile">
-            <input type="text" class="form-control mb-2" placeholder="Address" id="customer-address">
-            <input type="text" class="form-control mb-2" placeholder="Credit Amt" id="customer-credit">
-          </div>
-        </div>
-        <!-- Bill Details -->
-        <div class="card mt-3">
-          <div class="card-body">
-            <h5>Bill Details</h5>
-            <p><strong>Total Amount:</strong> ₹<span id="total-amount">0</span></p>
-            <button class="btn btn-primary btn-action" onclick="saveBill()">Save Bill</button>
-            <button class="btn btn-danger btn-action" onclick="clearBill()">Clear</button>
+
+          <!-- Customer Details Section -->
+          <div class="col-md-5">
+            <div class="customer-details">
+              <h5>Customer Details</h5>
+              <input type="text" class="form-control mb-2" placeholder="Name">
+              <input type="text" class="form-control mb-2" placeholder="Mobile No">
+              <input type="text" class="form-control mb-2" placeholder="Address">
+              <input type="text" class="form-control mb-2" placeholder="Credit Amt">
+              <select class="form-control mb-2">
+                <option>Cash</option>
+                <option>Credit</option>
+              </select>
+              <p>Rs. <strong>1045</strong></p>
+              <button class="btn btn-primary btn-block">Save Bill</button>
+              <button class="btn btn-danger btn-block">Clear</button>
+            </div>
+            <div class="bill-details">
+              <h5>Bill Details</h5>
+              <p><strong>Bill Date:</strong> 27/12/2024</p>
+              <p><strong>Payment Details:</strong> Credit</p>
+              <div class="total-amount">₹1045</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Footer Total Bar -->
-    <div class="total-bar">
-      <div>Total Qty: <span id="total-qty">0</span></div>
-      <div>Total MRP: ₹<span id="total-mrp">0.00</span></div>
-      <div>Total Discount: ₹<span id="total-discount">0.00</span></div>
-      <div>Total Bill: ₹<span id="total-bill">0</span></div>
+    <div class="fixed-summary-bar">
+      <div>Total Qty: <span>11</span></div>
+      <div>Total MRP: ₹<span>500.00</span></div>
+      <div>Total Discount: ₹<span>-545.00</span></div>
+      <div>Total Bill: ₹<span>1045</span></div>
     </div>
   </div>
 
@@ -105,7 +168,6 @@
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  
 </body>
 </html>
 {% include "Component/Footer.html" %}
