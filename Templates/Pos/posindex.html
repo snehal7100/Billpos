@@ -1,0 +1,111 @@
+{% include "Component/Header.html" %}
+{% include "Component/Sidebar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POS System - CRUD</title>
+  <!-- AdminLTE CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .total-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1030;
+      display: flex;
+      justify-content: space-around;
+      background-color: #f8f9fa;
+      border-top: 1px solid #dee2e6;
+      padding: 10px 0;
+      font-weight: bold;
+    }
+    .total-bar div {
+      text-align: center;
+      flex: 1;
+    }
+    .btn-action {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Main Content -->
+    <div class="content-wrapper p-3">
+      <div class="container-fluid">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>POS System</h3>
+          <div>
+            <button class="btn btn-danger">Dashboard</button>
+            <button class="btn btn-primary">POS Bills List</button>
+          </div>
+        </div>
+        <!-- Products Table -->
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group">
+              <input type="text" class="form-control" id="product-search" placeholder="Search Products by name or Scan Barcode...">
+            </div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Item Name</th>
+                  <th>Qty</th>
+                  <th>MRP</th>
+                  <th>Sale Price</th>
+                  <th>Total</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="product-list">
+                <!-- Rows will be dynamically added here -->
+              </tbody>
+            </table>
+            <button class="btn btn-success" onclick="addRow()">Add New Item</button>
+          </div>
+        </div>
+        <!-- Customer Details -->
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5>Customer Details</h5>
+            <input type="text" class="form-control mb-2" placeholder="Name" id="customer-name">
+            <input type="text" class="form-control mb-2" placeholder="Mobile No" id="customer-mobile">
+            <input type="text" class="form-control mb-2" placeholder="Address" id="customer-address">
+            <input type="text" class="form-control mb-2" placeholder="Credit Amt" id="customer-credit">
+          </div>
+        </div>
+        <!-- Bill Details -->
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5>Bill Details</h5>
+            <p><strong>Total Amount:</strong> ₹<span id="total-amount">0</span></p>
+            <button class="btn btn-primary btn-action" onclick="saveBill()">Save Bill</button>
+            <button class="btn btn-danger btn-action" onclick="clearBill()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer Total Bar -->
+    <div class="total-bar">
+      <div>Total Qty: <span id="total-qty">0</span></div>
+      <div>Total MRP: ₹<span id="total-mrp">0.00</span></div>
+      <div>Total Discount: ₹<span id="total-discount">0.00</span></div>
+      <div>Total Bill: ₹<span id="total-bill">0</span></div>
+    </div>
+  </div>
+
+  <!-- AdminLTE JS -->
+  <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  
+</body>
+</html>
+{% include "Component/Footer.html" %}
