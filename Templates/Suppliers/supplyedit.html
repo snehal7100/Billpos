@@ -29,92 +29,102 @@
                             padding-top: 10px;
                             font-weight: bold;
                             font-size: 15px;
+                            margin-top: 40px;
+                        }
+                        .btn-primary{
+                            margin-right: 10px;
                         }
                     </style>
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
                         {% csrf_token %}
-
+                        <div class="row g-3">
+                            <!-- Row 1 -->
+                           
                         <!-- Name Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="name">Name:</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ sData.name }}" placeholder="Enter Name" required>
                         </div>
 
                         <!-- Mobile No Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="mobile_no">Mobile No:</label>
                             <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ sData.mobile_no }}" placeholder="Enter Mobile No" required>
                         </div>
 
                         <!-- Email Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{ sData.email }}" placeholder="Enter Email" required>
                         </div>
 
                         <!-- GST No Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="gst_no">GST No:</label>
                             <input type="text" class="form-control" id="gst_no" name="gst_no" value="{{ sData.gst_no }}" placeholder="Enter GST No" required>
                         </div>
 
                         <!-- PAN No Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="pan_no">PAN No:</label>
                             <input type="text" class="form-control" id="pan_no" name="pan_no" value="{{ sData.pan_no }}" placeholder="Enter PAN No" required>
                         </div>
 
                         <!-- Opening Balance Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="opening_balance">Opening Balance:</label>
                             <input type="number" class="form-control" id="opening_balance" name="opening_balance" value="{{ sData.opening_balance }}" placeholder="Enter Opening Balance" step="0.01" required>
                         </div>
 
                         <!-- Group Type Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="group_type">Group Type:</label>
                             <input type="text" class="form-control" id="group_type" name="group_type" value="{{ sData.group_type }}" placeholder="Enter Group Type" required>
                         </div>
 
                         <!-- Billing Address Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="billing_address">Billing Address:</label>
                             <textarea class="form-control" id="billing_address" name="billing_address" rows="3" required>{{ sData.billing_address }}</textarea>
                         </div>
 
                         <!-- Shipping Address Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="shipping_address">Shipping Address:</label>
                             <textarea class="form-control" id="shipping_address" name="shipping_address" rows="3" required>{{ sData.shipping_address }}</textarea>
                         </div>
 
                         <!-- City Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="city">City:</label>
                             <input type="text" class="form-control" id="city" name="city" value="{{ sData.city }}" required>
                         </div>
 
                         <!-- Credit Limit Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="credit_limit">Credit Limit:</label>
                             <input type="number" class="form-control" id="credit_limit" name="credit_limit" value="{{ sData.credit_limit }}" step="0.01" required>
                         </div>
 
                         <!-- Credit Period Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="credit_period">Credit Period:</label>
                             <input type="number" class="form-control" id="credit_period" name="credit_period" value="{{ sData.credit_period }}" required>
                         </div>
 
                         <!-- Supplier Barcode Field -->
-                        <div class="mb-3 mt-3">
+                        <div class="col-md-4">
                             <label for="supplier_barcode">Supplier Barcode:</label>
                             <input type="text" class="form-control" id="supplier_barcode" name="supplier_barcode" value="{{ sData.supplier_barcode }}" required>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
+        
+                        <div class="modal-footer">
+                            
+                            <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                        
                     </form>
                 </div>
             </div>
