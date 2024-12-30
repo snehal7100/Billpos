@@ -10,7 +10,51 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <style>
+    .content-wrapper {
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+    .table th, .table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+    .fixed-summary-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid #dee2e6;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      font-weight: bold;
+      z-index: 1050;
+    }
+    .fixed-summary-bar div {
+      text-align: center;
+      flex: 1;
+    }
+    .customer-details, .bill-details {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+    }
+    .bill-details p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+    .total-amount {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff5722;
+      text-align: center;
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
