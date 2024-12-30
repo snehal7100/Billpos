@@ -50,6 +50,7 @@ urlpatterns = [
     path('dashboard/', Dashboardview.dashboard),
 
     path('pos/', posview.posdashboard),
+    
 
 
     path('category-list/',categoryview.category),

@@ -140,8 +140,17 @@
           <!-- Customer Details Section -->
           <div class="col-md-5">
             <div class="card customer-details">
-              <h5>Customer Details</h5>
-              <input type="text" class="form-control mb-2" placeholder="Name">
+              <label for="customer" class="form-label">Customer:</label>
+<select class="form-control mb-2" id="customer" name="customer">
+  <option value="" disabled selected>Select customer</option>
+  {% for customer in customerData %}
+    <option value="{{ customer.id }}" >
+      {{ customer.name }}
+    </option>
+  {% endfor %}
+</select>
+
+
               <p><strong>Mobile No:</strong> 1234567898</p>
               <p><strong>Address:</strong> Baramati</p>
               <p><strong>Credit Amt:</strong> 0</p>
