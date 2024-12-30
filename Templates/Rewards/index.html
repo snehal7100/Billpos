@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BillerPOS - Rewards Points</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: #202040;
+      color: white;
+      height: 100vh;
+      padding: 20px;
+    }
+    .sidebar h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin: 10px 0;
+    }
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .sidebar ul li a:hover {
+      background: #5050a0;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      background: #f4f4f9;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .header h2 {
+      margin: 0;
+    }
+    .header .greeting {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .points-container {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .points-container h3 {
+      margin-top: 0;
+    }
+    .points-container input {
+      padding: 10px;
+      margin: 5px;
+      width: 100px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .points-container button {
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .points-container button:hover {
+      background: #218838;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    table th {
+      background: #f8f9fa;
+    }
+    table .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    table .action-buttons button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .edit-btn {
+      background: #007bff;
+      color: white;
+    }
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1>BillerPOS</h1>
+    <ul>
+      <li><a href="#">Purchase</a></li>
+      <li><a href="#">Sale</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Barcode Print</a></li>
+      <li><a href="#">Customers</a></li>
+      <li><a href="#">Suppliers</a></li>
+      <li><a href="#">Stock</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Rewards Points</a></li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <div class="header">
+      <h2>Rewards Points</h2>
+      <div class="greeting">Hello, Good Morning 😊 Welcome Back!</div>
+    </div>
+    <div class="points-container">
+      <h3>Add Points</h3>
+      <input type="number" placeholder="Min Range">
+      <input type="number" placeholder="Max Range">
+      <input type="number" placeholder="Points">
+      <button>Add to List</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Min Range</th>
+            <th>Max Range</th>
+            <th>Points</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>500</td>
+            <td>300</td>
+            <td class="action-buttons">
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>1001</td>
+            <td>1010</td>
+            <td>122</td>
+            <td class="action-buttons">
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

@@ -35,6 +35,8 @@ from Billpos import customerview
 from Billpos import Dashboardview
 
 from Billpos import supplierview
+from Billpos import posview
+
 
 
 
@@ -46,6 +48,8 @@ urlpatterns = [
     # path('profile/logout/', Adminview.logout_user),
 
     path('dashboard/', Dashboardview.dashboard),
+
+    path('pos/', posview.posdashboard),
 
 
     path('category-list/',categoryview.category),

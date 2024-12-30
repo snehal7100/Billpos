@@ -29,6 +29,7 @@
                             padding-top: 10px;
                             font-weight: bold;
                             font-size: 15px;
+                            margin-top:40px;
                         }
                     </style>
                 </div>
@@ -36,11 +37,7 @@
                     <form action="" method="post">
                         {% csrf_token %}
 
-                        <!-- SR No Field -->
-                        <div class="mb-3 mt-3">
-                            <label for="sr_no">Sr No:</label>
-                            <input type="text" class="form-control" id="sr_no" name="sr_no" value="{{ taxData.sr_no }}" placeholder="Enter SR No" required>
-                        </div>
+                        
 
                         <!-- Tax Name Field -->
                         <div class="mb-3 mt-3">
