@@ -36,6 +36,7 @@ from Billpos import Dashboardview
 
 from Billpos import supplierview
 from Billpos import posview
+from Billpos import rewardsview
 
 
 
@@ -98,9 +99,10 @@ urlpatterns = [
     path('supplier-delete/<id>/', supplierview.deleteSupplier), 
     path('supplier-add/', supplierview.AddSupplier),
 
-
-
-
+    path('rewards-list/', rewardsview.Rewards),
+    path('rewards-add/', rewardsview.AddRewards),
+    path('rewards-edit/<id>/', rewardsview.editRewards),  
+    path('rewards-delete/<id>', rewardsview.delete),
 ]
 if settings.DEBUG:  
         urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)  

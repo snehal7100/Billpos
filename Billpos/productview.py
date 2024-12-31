@@ -22,7 +22,7 @@ def Products(request):
     taxData = Tax.objects.raw(taxes_query)
     category_query = "SELECT * FROM tbl_category"
     categoryData = Category.objects.raw(category_query)
-
+    
     context = {
     "pData": pData,
     "bData": bData,  # Brand data for dropdown

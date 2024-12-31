@@ -1,0 +1,62 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Reward Edit Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <div class="container mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Edit Rewards Form</h1>
+                   
+                    <style>
+                        .card-header {
+                            padding-top: 10px;
+                            font-weight: bold;
+                            font-size: 15px;
+                        }
+                        .content-wrapper {
+                            margin-top: 50px;
+                          }
+                        
+                    </style>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                      
+                        <div class="col-md-4">
+                            <label for="name">Min Range:</label>
+                            <input type="text" class="form-control" value="{{rData.minrange}}" id="minrange" placeholder="Enter minrange" name="minrange">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="range">Max Range:</label>
+                            <input type="text" class="form-control" value="{{rData.maxrange}}" id="maxrange" placeholder="Enter maxrange" name="maxrange">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="name">Points:</label>
+                            <input type="text" class="form-control" value="{{rData.points}}" id="points" placeholder="Enter Points" name="points">
+                        </div>
+                       
+
+                        <div class="form-check mb-3">
+                            <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                    </label>
+                        </div>
+                        <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary">save</button>
+                        </div>
+                </form>
+        </div>
+</body>
+</html>
+{% include "Component/footer.html" %}
