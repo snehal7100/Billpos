@@ -1,5 +1,6 @@
 {% include "Component/header.html" %}
 {% include "Component/sidebar.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Range and Points Form</title>
     <style>
+       
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -84,57 +86,106 @@
           background-color: #0056b3;
           border-color: #0056b3;
         }
+
+        /* Styles for messages */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+  
     </style>
 </head>
 <body>
-  
-   
+
 <div class="container-fluid mt-5">
-  <div class="content-wrapper">
+    <div class="content-wrapper">
         <h2>Set Ranges and Points</h2>
-        <form action="/rewards-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
-          {% csrf_token %}
-          <div class="form-group">
-            
-              <input type="number" placeholder="Set Min Range" id="min-range" name="minrange" required>
-              <input type="number" placeholder="Set Max Range" id="max-range" name="maxrange" required>
-              <input type="number" placeholder="Points" id="points" name="points" required>
-              <button type="submit" class="btn btn-primary">ADD</button>
-          </div>
-      </form>
-      
-        
-      <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>MIN RANGE</th>
-                <th>MAX RANGE</th>
-                <th>POINTS</th>
-                <th>ACTION</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in rData %}
-            <tr>
-              <td>{{ forloop.counter }}</td>
-                <td>{{ i.minrange }}</td>
-                <td>{{ i.maxrange }}</td>
-                <td>{{ i.points }}</td>
-                <td class="action-icons">
-                    <a href="/rewards-edit/{{ i.id }}" class="fa fa-edit"></a>
-                    <a href="/rewards-delete/{{ i.id }}" class="fa fa-trash delete"></a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5">No records found.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
+
+        <!-- Display success or error messages using Django's message framework -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p id="message" data-message="{{ message }}" data-tag="{{ message.tags }}"></p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form action="/rewards-add/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="number" placeholder="Set Min Range" id="min-range" name="minrange" required>
+                <input type="number" placeholder="Set Max Range" id="max-range" name="maxrange" required>
+                <input type="number" placeholder="Points" id="points" name="points" required>
+                <button type="submit" class="btn btn-primary">ADD</button>
+            </div>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MIN RANGE</th>
+                    <th>MAX RANGE</th>
+                    <th>POINTS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in rData %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.minrange }}</td>
+                    <td>{{ i.maxrange }}</td>
+                    <td>{{ i.points }}</td>
+                    <td class="action-icons">
+                        <a href="/rewards-edit/{{ i.id }}" class="fa fa-edit"></a>
+                        <a href="/rewards-delete/{{ i.id }}" class="fa fa-trash delete"></a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
+
+<script>
+// Check if the message exists
+window.onload = function() {
+    var message = document.getElementById('message');
+    if (message) {
+        var msgContent = message.getAttribute('data-message');
+        var msgTag = message.getAttribute('data-tag');
+        
+        // Display alert based on the message type
+        if (msgTag == 'error') {
+            alert("Error: " + msgContent);
+        } else {
+            alert("Success: " + msgContent);
+        }
+    }
+}
+</script>
+
 </body>
 </html>
+
 {% include "Component/footer.html" %}
