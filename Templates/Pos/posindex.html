@@ -85,7 +85,14 @@
           <div class="col-md-7">
             <div class="card">
               <div class="card-body">
-                <input type="text" class="form-control mb-3" placeholder="Search Products by name or Scan Barcode...">
+                <div class="input-group mb-3">
+                  <input id="search-bar" type="text" class="form-control" placeholder="Search Products by name or Scan Barcode...">
+                  <div class="input-group-append">
+                    <button id="search-btn" class="btn btn-primary">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -98,30 +105,10 @@
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {% for product in productData %}
-                    <tr>
-                      <td>{{forloop.counter}}</td>
-                      <!-- <td>{{ product.pid }}</td>  -->
-                      <td>{{ product.pname }}</td> <!-- Product Name displayed as "Item Name" -->
-                      <td>
-                        <button class="btn btn-sm btn-secondary">-</button>
-                        <span class="quantity">1</span>
-                        <button class="btn btn-sm btn-secondary">+</button>
-                      </td>
-                      <td>{{ product.price }}</td> <!-- Unit Price displayed as "Mrp" -->
-                      <td>₹0</td>
-                      <td>₹0</td>
-                      <td>
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                      </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
+                  <tbody id="product-table">
+                    <tr id="empty-row">
                       <td colspan="7">No products available</td>
                     </tr>
-                    {% endfor %}
                   </tbody>
                 </table>
               </div>
@@ -214,6 +201,90 @@
         }
       });
     });
+    document.addEventListener('DOMContentLoaded', () => {
+  // Sample product data (You can replace this with dynamic data from your backend)
+  const products = [
+    { pid: 1, pname: 'Product A', price: 100 },
+    { pid: 2, pname: 'Product B', price: 200 },
+    { pid: 3, pname: 'Product C', price: 300 },
+  ];
+
+  const productTable = document.getElementById('product-table');
+  const searchBar = document.getElementById('search-bar');
+  const searchBtn = document.getElementById('search-btn');
+
+  // Handle search button click
+  searchBtn.addEventListener('click', () => {
+    const query = searchBar.value.toLowerCase().trim();
+
+    // Find product by name
+    const product = products.find(p => p.pname.toLowerCase().includes(query));
+
+    if (product) {
+      // Check if product already exists in the table
+      if (!document.getElementById(`product-${product.pid}`)) {
+        // Remove "No products available" row
+        const emptyRow = document.getElementById('empty-row');
+        if (emptyRow) emptyRow.remove();
+
+        // Add product to table
+        const row = document.createElement('tr');
+        row.id = `product-${product.pid}`;
+        row.innerHTML = `
+          <td>${product.pid}</td>
+          <td>${product.pname}</td>
+          <td>
+            <button class="btn btn-sm btn-secondary decrement">-</button>
+            <span class="quantity">1</span>
+            <button class="btn btn-sm btn-secondary increment">+</button>
+          </td>
+          <td>${product.price}</td>
+          <td>${product.price}</td>
+          <td>${product.price}</td>
+          <td>
+            <button class="btn btn-sm btn-danger remove">Remove</button>
+          </td>
+        `;
+        productTable.appendChild(row);
+
+        // Add event listeners for increment, decrement, and remove
+        row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
+        row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+        row.querySelector('.remove').addEventListener('click', () => removeProduct(row));
+      } else {
+        alert('Product already in the list!');
+      }
+    } else {
+      alert('Product not found!');
+    }
+
+    // Clear search bar
+    searchBar.value = '';
+  });
+
+  // Update quantity function
+  function updateQuantity(row, delta) {
+    const quantitySpan = row.querySelector('.quantity');
+    let quantity = parseInt(quantitySpan.textContent, 10);
+
+    quantity = Math.max(1, quantity + delta); // Prevent quantity < 1
+    quantitySpan.textContent = quantity;
+
+    // Update totals
+    const price = parseFloat(row.children[3].textContent);
+    row.children[5].textContent = (quantity * price).toFixed(2);
+  }
+
+  // Remove product from the table
+  function removeProduct(row) {
+    row.remove();
+
+    // Check if the table is empty
+    if (!productTable.querySelector('tr')) {
+      const emptyRow = document.createElement('tr');
+      emptyRow.id = 'empty-row';
+      emptyRow.innerHTML = '<td colspan="7">No products available
+
   </script>
 
 
@@ -224,3 +295,6 @@
 </body>
 </html>
 {% include "Component/Footer.html" %}
+
+first change the search bar  code add button in front of search bar with + icon then working i want is if i search the perticular product it appear
+and then in the table and if i click + sign button it can only show the added product in the table list 
