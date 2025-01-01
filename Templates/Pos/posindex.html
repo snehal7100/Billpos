@@ -92,77 +92,66 @@
                       <th>No.</th>
                       <th>Item Name</th>
                       <th>Qty</th>
-                      <th>MRP</th>
+                      <th>Mrp</th>
                       <th>Sale Price</th>
                       <th>Total</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                    {% for product in productData %}
                     <tr>
-                      <td>1</td>
-                      <td>बारिक खडीसाखर 1 कि.ग्रॅ</td>
+                      <td>{{ product.pid }}</td> <!-- Product ID displayed as "No." -->
+                      <td>{{ product.pname }}</td> <!-- Product Name displayed as "Item Name" -->
                       <td>
                         <button class="btn btn-sm btn-secondary">-</button>
-                        5
+                        1
                         <button class="btn btn-sm btn-secondary">+</button>
                       </td>
-                      <td>₹100</td>
-                      <td>₹89</td>
-                      <td>₹445</td>
-                      <td>
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>sak</td>
-                      <td>
-                        <button class="btn btn-sm btn-secondary">-</button>
-                        6
-                        <button class="btn btn-sm btn-secondary">+</button>
-                      </td>
+                      <td>{{ product.price }}</td> <!-- Unit Price displayed as "Mrp" -->
                       <td>₹0</td>
-                      <td>₹100</td>
-                      <td>₹600</td>
+                      <td>₹0</td>
                       <td>
                         <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
                         <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                       </td>
                     </tr>
+                    {% empty %}
+                    <tr>
+                      <td colspan="7">No products available</td>
+                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-
+          
           <!-- Customer Details Section -->
           <div class="col-md-5">
             <div class="card customer-details">
               <label for="customer" class="form-label">Customer:</label>
-<select class="form-control mb-2" id="customer" name="customer">
-  <option value="" disabled selected>Select customer</option>
-  {% for customer in customerData %}
-    <option value="{{ customer.id }}" >
-      {{ customer.name }}
-    </option>
-  {% endfor %}
-</select>
-
-
-              <p><strong>Mobile No:</strong> 1234567898</p>
-              <p><strong>Address:</strong> Baramati</p>
+              <select class="form-control mb-2" id="customer" name="customer">
+                <option value="" disabled selected>Select customer</option>
+                {% for customer in customerData %}
+                  <option value="{{ customer.id }}" data-mobile="{{ customer.mobile_no }}" data-address="{{ customer.billing_address }}">
+                    {{ customer.name }}
+                  </option>
+                {% endfor %}
+              </select>
+              <p><strong>Mobile No:</strong> <span id="mobile-no">N/A</span></p>
+              <p><strong>Address:</strong> <span id="address">N/A</span></p>
               <p><strong>Credit Amt:</strong> 0</p>
-              <p><strong>Payment Term:</strong> Cash</p>
+              <p><strong>Payment Term:</strong>
+              <select class="form-control mb-2">
+                <option>Cash</option>
+                <option>Credit</option>
+              </select></p>
               <p><strong>Total:</strong> ₹1045</p>
               <p><strong>Remaining Amt:</strong> ₹0</p>
               <p><strong>Bill Date:</strong> <input type="date" class="form-control" value="2024-12-27"></p>
               
-              <select class="form-control mb-2">
-                <option>Cash</option>
-                <option>Credit</option>
-              </select>
+              
             </div>
 
             <div class="card bill-details">
@@ -194,7 +183,20 @@
       <div>Total Discount: ₹-545.00</div>
       <div>Total Bill: ₹1045</div>
     </div>
+
   </div>
+
+  <script>
+    // Update customer details dynamically
+    document.getElementById('customer').addEventListener('change', function () {
+      const selectedOption = this.options[this.selectedIndex];
+      const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
+      const address = selectedOption.getAttribute('data-address') || 'N/A';
+  
+      document.getElementById('mobile-no').textContent = mobileNo;
+      document.getElementById('address').textContent = address;
+    });
+  </script>
 
   <!-- AdminLTE JS -->
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
