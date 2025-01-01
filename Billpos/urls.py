@@ -37,9 +37,7 @@ from Billpos import Dashboardview
 from Billpos import supplierview
 from Billpos import posview
 from Billpos import rewardsview
-
-
-
+from Billpos import barcodeview
 
 urlpatterns = [
 
@@ -51,6 +49,8 @@ urlpatterns = [
     path('dashboard/', Dashboardview.dashboard),
 
     path('pos/', posview.posdashboard),
+
+    path('barcode-print/',barcodeview.BarcodePrint),
     
 
 

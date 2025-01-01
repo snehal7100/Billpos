@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'Product',
     'Customer',
     'Supplier',
-    'Pos',
     'Reward',
 ]
 
@@ -93,7 +92,6 @@ DATABASES = {
         'HOST': '127.0.0.1',     # Host where XAMPP MySQL is running
         'PORT': '3306',          # MySQL port (default: 3306)
         
-
     }
 }
 
