@@ -45,14 +45,10 @@ INSTALLED_APPS = [
     'Product',
     'Customer',
     'Supplier',
-<<<<<<< HEAD
     'Pos',
     'Employee',
-
-
-=======
     'Reward',
->>>>>>> c7cb4351304b51f66a8450615a3617e42910d862
+
 ]
 
 MIDDLEWARE = [
