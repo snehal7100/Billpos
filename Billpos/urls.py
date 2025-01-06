@@ -36,6 +36,7 @@ from Billpos import Dashboardview
 
 from Billpos import supplierview
 from Billpos import posview
+from Billpos import employee
 
 
 
@@ -74,17 +75,17 @@ urlpatterns = [
 
 
     path('tax-list/', Taxview.TaxList),  
-    path('tax-view/<id>/', Taxview.TaxView), 
+    path('tax-view/<id>', Taxview.TaxView), 
     
-    path('tax-edit/<id>/', Taxview.editTax),  
-    path('tax-delete/<id>/', Taxview.deleteTax), 
+    path('tax-edit/<id>', Taxview.editTax),  
+    path('tax-delete/<id>', Taxview.deleteTax), 
     path('tax-add/', Taxview.addTax),  
 
 
     path('customer-list/', customerview.Customers),  
-    path('customer-view/<id>/', customerview.editCustomer), 
-    path('customer-edit/<id>/', customerview.editCustomer),  
-    path('customer-delete/<id>/', customerview.deleteCustomer), 
+    path('customer-view/<id>', customerview.editCustomer), 
+    path('customer-edit/<id>', customerview.editCustomer),  
+    path('customer-delete/<id>', customerview.deleteCustomer), 
     path('customer-add/', customerview.AddCustomer),  
 
     path('product-list/', productview.Products),
@@ -97,6 +98,13 @@ urlpatterns = [
     path('supplier-edit/<id>/', supplierview.editSupplier),  
     path('supplier-delete/<id>/', supplierview.deleteSupplier), 
     path('supplier-add/', supplierview.AddSupplier),
+
+
+    path('Employee-list/', employee.emp),  
+    path('Employee-view/<id>', employee.employeeview), 
+    path('Employee-edit/<id>', employee.editemployee),  
+    path('Employee-delete/<id>', employee.deleteemployee), 
+    path('Employee-add/', employee.Addemployee),  
 
 
 
