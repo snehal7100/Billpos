@@ -33,6 +33,27 @@
     .btn-block {
       width: 100%;
     }
+
+
+    td > .btn-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    td > .btn-group .btn {
+      margin: 0 2px; /* Optional for slight spacing */
+      flex: 0 0 auto;
+    }
+    
+    .quantity {
+      margin: 0 5px;
+      display: inline-block;
+      min-width: 20px; /* Ensures number stays aligned */
+      text-align: center;
+    }
+    
+
     .fixed-summary-bar {
       position: fixed;
       bottom: 0;
@@ -149,7 +170,8 @@
                   <option>Credit</option>
                 </select>
               </p>
-              <p><strong>Total:</strong> ₹1045</p>
+              <p><strong>Total:</strong> ₹<span id="bill-total">1045</span></p>
+
               <p><strong>Remaining Amt:</strong> ₹0</p>
               <p><strong>Bill Date:</strong> <input type="date" class="form-control" value="2024-12-27"></p>
             </div>
@@ -179,68 +201,7 @@
   </div>
   <script>
     // Update customer details dynamically
-    document.getElementById('search-btn').addEventListener('click', function () {
-      const searchBar = document.getElementById('search-bar');
-      const productTable = document.getElementById('product-table');
-      const emptyRow = document.getElementById('empty-row');
-    
-      const query = searchBar.value.toLowerCase().trim();
-      const productOption = Array.from(document.querySelectorAll('#product-list option')).find(
-        (option) => option.value.toLowerCase() === query
-      );
-    
-      if (productOption) {
-        const pid = productOption.getAttribute('data-pid');
-        const pname = productOption.value;
-        const price = parseFloat(productOption.getAttribute('data-price'));
-    
-        // Get the current number of rows to create the number for this product
-        const currentRowCount = productTable.querySelectorAll('tr').length;
-    
-        // Ensure that each product gets its own row with a dynamic number
-        let row = document.createElement('tr');
-        row.id = `product-${pid}`;
-        row.innerHTML = `
-          <td>${currentRowCount}</td> <!-- Dynamic numbering -->
-          <td>${pname}</td>
-          <td>
-            <button class="btn btn-sm btn-secondary decrement">-</button>
-            <span class="quantity">1</span>
-            <button class="btn btn-sm btn-secondary increment">+</button>
-          </td>
-          <td>₹${price.toFixed(2)}</td>
-          <td>₹${price.toFixed(2)}</td>
-          <td>₹${price.toFixed(2)}</td>
-          <td><button class="btn btn-sm btn-danger remove">Remove</button></td>
-        `;
-        productTable.appendChild(row);
-    
-        // Add event listeners for increment, decrement, and remove buttons
-        row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
-        row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
-        row.querySelector('.remove').addEventListener('click', () => row.remove());
-        
-        // If there's no empty row, remove the placeholder
-        if (emptyRow) emptyRow.remove();
-    
-      } else {
-        alert('Product not found!');
-      }
-    
-      searchBar.value = '';
-    });
-    
-    function updateQuantity(row, delta) {
-      const quantitySpan = row.querySelector('.quantity');
-      let quantity = parseInt(quantitySpan.textContent, 10);
-      quantity = Math.max(1, quantity + delta);
-      quantitySpan.textContent = quantity;
-    
-      const price = parseFloat(row.children[3].textContent.replace('₹', ''));
-      row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
-    }
-    
-document.getElementById('customer').addEventListener('change', function () {
+    document.getElementById('customer').addEventListener('change', function () {
       const selectedOption = this.options[this.selectedIndex];
       const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
       const address = selectedOption.getAttribute('data-address') || 'N/A';
@@ -248,8 +209,119 @@ document.getElementById('customer').addEventListener('change', function () {
       document.getElementById('mobile-no').textContent = mobileNo;
       document.getElementById('address').textContent = address;
     });
-    
-      </script>
+  
+    // Function to calculate totals
+    function calculateTotals() {
+      const productRows = document.querySelectorAll('#product-table tr');
+      let total = 0;
+  
+      productRows.forEach((row) => {
+        const totalCell = row.children[5]; // Column where total price is displayed
+        if (totalCell) {
+          total += parseFloat(totalCell.textContent.replace('₹', '')) || 0;
+        }
+      });
+  
+      // Update the total amount fields
+      document.querySelector('.total-amount').textContent = `₹${total.toFixed(2)}`;
+      document.querySelectorAll('.fixed-summary-bar div')[4].textContent = `Total Bill: ₹${total.toFixed(2)}`;
+  
+      // Update the "Total" in the customer card
+      const customerTotalField = document.querySelector('.customer-details p:nth-child(6) strong:nth-child(2)');
+      if (customerTotalField) {
+        customerTotalField.textContent = `₹${total.toFixed(2)}`;
+      }
+  
+      // Update the "Total" in the bill details section
+      document.getElementById('bill-total').textContent = total.toFixed(2);
+    }
+  
+    // Add product row logic with dynamic total update
+    document.getElementById('search-btn').addEventListener('click', function () {
+      const searchBar = document.getElementById('search-bar');
+      const productTable = document.getElementById('product-table');
+      const emptyRow = document.getElementById('empty-row');
+  
+      const query = searchBar.value.toLowerCase().trim();
+      const productOption = Array.from(document.querySelectorAll('#product-list option')).find(
+        (option) => option.value.toLowerCase() === query
+      );
+  
+      if (productOption) {
+        const pid = productOption.getAttribute('data-pid');
+        const pname = productOption.value;
+        const price = parseFloat(productOption.getAttribute('data-price'));
+  
+        // Check if the product already exists and has the same name
+        let existingRow = Array.from(productTable.children).find(
+          (row) => row.id === `product-${pid}` && row.querySelector('td:nth-child(2)').textContent === pname
+        );
+  
+        if (existingRow) {
+          // If the product exists, update its quantity
+          updateQuantity(existingRow, 1);
+        } else {
+          // Add a new row if the product doesn't exist
+          const currentRowCount = productTable.querySelectorAll('tr').length;
+          let row = document.createElement('tr');
+          row.id = `product-${pid}`;
+          row.innerHTML = `
+            <td>${currentRowCount}</td>
+            <td>${pname}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-secondary decrement">-</button>
+                <span class="quantity">1</span>
+                <button class="btn btn-sm btn-secondary increment">+</button>
+              </div>
+            </td>
+            <td>₹${price.toFixed(2)}</td>
+            <td>₹${price.toFixed(2)}</td>
+            <td>₹${price.toFixed(2)}</td>
+            <td>
+              <button class="btn btn-sm btn-danger remove">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          `;
+          productTable.appendChild(row);
+  
+          // Add event listeners
+          row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
+          row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+          row.querySelector('.remove').addEventListener('click', () => {
+            row.remove();
+            calculateTotals();
+          });
+  
+          if (emptyRow) emptyRow.remove();
+        }
+  
+        calculateTotals(); // Recalculate totals
+      } else {
+        alert('Product not found!');
+      }
+  
+      searchBar.value = '';
+    });
+  
+    // Function to update quantity
+    function updateQuantity(row, delta) {
+      const quantitySpan = row.querySelector('.quantity');
+      let quantity = parseInt(quantitySpan.textContent, 10);
+      quantity = Math.max(1, quantity + delta);
+      quantitySpan.textContent = quantity;
+  
+      const price = parseFloat(row.children[3].textContent.replace('₹', ''));
+      row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
+  
+      calculateTotals(); // Recalculate totals
+    }
+  
+    // Recalculate totals on page load (if needed)
+    calculateTotals();
+  </script>
+       
   <!-- AdminLTE JS -->
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
   <!-- jQuery -->
