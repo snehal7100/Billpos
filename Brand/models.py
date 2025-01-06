@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class BrandForm(models.Model):
     bid=models.CharField(max_length=255,default='1')
     bname=models.CharField(max_length=255)
