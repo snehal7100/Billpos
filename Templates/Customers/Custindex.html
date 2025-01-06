@@ -148,7 +148,7 @@
         <div class="card">
           <div class="card-header d-flex align-items-center">
             <h3 class="card-title">Customer Records &amp; View</h3>
-            <button type="button" class="btn btn-primary btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+            <button id="createBtn" type="button" class="btn btn-primary btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
               Add Customer
             </button>
           </div>
@@ -310,9 +310,20 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+
+
+  {% comment %} document.addEventListener('keydown', function(event) {
+    event.preventDefault();
+    if (event.altkey === 'Alt' && (event.key == "a" || event.key == "A")) {
+        alert('Alt key is released');
+      }else{
+      alert('Alt key is released');
+    }
+}); {% endcomment %}
+
   function confirmDelete(customerId) {
     if (confirm("Are you sure you want to delete this customer?")) {
-      window.location.href = /customer-delete/${customerId};
+      window.location.href = "/customer-delete/" + customerId;
     }
   }
 </script>

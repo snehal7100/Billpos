@@ -36,10 +36,15 @@ from Billpos import Dashboardview
 
 from Billpos import supplierview
 from Billpos import posview
+<<<<<<< HEAD
 from Billpos import employee
 
 
 
+=======
+from Billpos import rewardsview
+from Billpos import barcodeview
+>>>>>>> c7cb4351304b51f66a8450615a3617e42910d862
 
 urlpatterns = [
 
@@ -51,6 +56,9 @@ urlpatterns = [
     path('dashboard/', Dashboardview.dashboard),
 
     path('pos/', posview.posdashboard),
+
+    path('barcode-print/',barcodeview.BarcodePrint),
+    
 
 
     path('category-list/',categoryview.category),
@@ -99,6 +107,7 @@ urlpatterns = [
     path('supplier-delete/<id>/', supplierview.deleteSupplier), 
     path('supplier-add/', supplierview.AddSupplier),
 
+<<<<<<< HEAD
 
     path('Employee-list/', employee.emp),  
     path('Employee-view/<id>', employee.employeeview), 
@@ -109,6 +118,12 @@ urlpatterns = [
 
 
 
+=======
+    path('rewards-list/', rewardsview.Rewards),
+    path('rewards-add/', rewardsview.AddRewards),
+    path('rewards-edit/<id>/', rewardsview.editRewards),  
+    path('rewards-delete/<id>', rewardsview.delete),
+>>>>>>> c7cb4351304b51f66a8450615a3617e42910d862
 ]
 if settings.DEBUG:  
         urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)  

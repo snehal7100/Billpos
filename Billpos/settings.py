@@ -45,10 +45,14 @@ INSTALLED_APPS = [
     'Product',
     'Customer',
     'Supplier',
+<<<<<<< HEAD
     'Pos',
     'Employee',
 
 
+=======
+    'Reward',
+>>>>>>> c7cb4351304b51f66a8450615a3617e42910d862
 ]
 
 MIDDLEWARE = [
@@ -95,7 +99,6 @@ DATABASES = {
         'HOST': '127.0.0.1',     # Host where XAMPP MySQL is running
         'PORT': '3306',          # MySQL port (default: 3306)
         
-
     }
 }
 

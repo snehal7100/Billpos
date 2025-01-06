@@ -1,185 +1,191 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BillerPOS - Rewards Points</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-    }
-    /* Sidebar */
-    .sidebar {
-      width: 250px;
-      background-color: #202040;
-      color: white;
-      height: 100vh;
-      padding: 20px;
-    }
-    .sidebar h1 {
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-    .sidebar ul li {
-      margin: 10px 0;
-    }
-    .sidebar ul li a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      padding: 10px;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .sidebar ul li a:hover {
-      background: #5050a0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Range and Points Form</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .form-group input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group button {
+            background-color:rgb(40, 110, 167);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color:rgb(58, 136, 210);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        table th {
+            background-color: #f1f1f1;
+        }
+        .action-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .action-icons a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .action-icons a.delete {
+            color: #dc3545;
+        }
+        .btn-primary {
+          background-color: #007bff;
+          border-color: #007bff;
+          border-radius: 10px;
+          padding: 12px 25px; 
+          font-size: 16px; 
+          font-weight: 600;  
+        }
+      
+        .btn-primary:hover {
+          background-color: #0056b3;
+          border-color: #0056b3;
+        }
 
-    /* Main Content */
-    .main-content {
-      flex: 1;
-      padding: 20px;
-      background: #f4f4f9;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .header h2 {
-      margin: 0;
-    }
-    .header .greeting {
-      font-size: 16px;
-      color: #666;
-    }
+        /* Styles for messages */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 16px;
+        }
 
-    .points-container {
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .points-container h3 {
-      margin-top: 0;
-    }
-    .points-container input {
-      padding: 10px;
-      margin: 5px;
-      width: 100px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-    .points-container button {
-      padding: 10px 20px;
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .points-container button:hover {
-      background: #218838;
-    }
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    table th, table td {
-      padding: 10px;
-      text-align: left;
-      border: 1px solid #ddd;
-    }
-    table th {
-      background: #f8f9fa;
-    }
-    table .action-buttons {
-      display: flex;
-      gap: 10px;
-    }
-    table .action-buttons button {
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .edit-btn {
-      background: #007bff;
-      color: white;
-    }
-    .delete-btn {
-      background: #dc3545;
-      color: white;
-    }
-  </style>
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+  
+    </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h1>BillerPOS</h1>
-    <ul>
-      <li><a href="#">Purchase</a></li>
-      <li><a href="#">Sale</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">Barcode Print</a></li>
-      <li><a href="#">Customers</a></li>
-      <li><a href="#">Suppliers</a></li>
-      <li><a href="#">Stock</a></li>
-      <li><a href="#">Settings</a></li>
-      <li><a href="#">Rewards Points</a></li>
-    </ul>
-  </div>
-  <div class="main-content">
-    <div class="header">
-      <h2>Rewards Points</h2>
-      <div class="greeting">Hello, Good Morning 😊 Welcome Back!</div>
-    </div>
-    <div class="points-container">
-      <h3>Add Points</h3>
-      <input type="number" placeholder="Min Range">
-      <input type="number" placeholder="Max Range">
-      <input type="number" placeholder="Points">
-      <button>Add to List</button>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Min Range</th>
-            <th>Max Range</th>
-            <th>Points</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>500</td>
-            <td>300</td>
-            <td class="action-buttons">
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>1001</td>
-            <td>1010</td>
-            <td>122</td>
-            <td class="action-buttons">
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container-fluid mt-5">
+    <div class="content-wrapper">
+        <h2>Set Ranges and Points</h2>
+
+        <!-- Display success or error messages using Django's message framework -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p id="message" data-message="{{ message }}" data-tag="{{ message.tags }}"></p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form action="/rewards-add/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="number" placeholder="Set Min Range" id="min-range" name="minrange" required>
+                <input type="number" placeholder="Set Max Range" id="max-range" name="maxrange" required>
+                <input type="number" placeholder="Points" id="points" name="points" required>
+                <button type="submit" class="btn btn-primary">ADD</button>
+            </div>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>MIN RANGE</th>
+                    <th>MAX RANGE</th>
+                    <th>POINTS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in rData %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.minrange }}</td>
+                    <td>{{ i.maxrange }}</td>
+                    <td>{{ i.points }}</td>
+                    <td class="action-icons">
+                        <a href="/rewards-edit/{{ i.id }}" class="fa fa-edit"></a>
+                        <a href="/rewards-delete/{{ i.id }}" class="fa fa-trash delete"></a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-  </div>
+</div>
+
+<script>
+// Check if the message exists
+window.onload = function() {
+    var message = document.getElementById('message');
+    if (message) {
+        var msgContent = message.getAttribute('data-message');
+        var msgTag = message.getAttribute('data-tag');
+        
+        // Display alert based on the message type
+        if (msgTag == 'error') {
+            alert("Error: " + msgContent);
+        } else {
+            alert("Success: " + msgContent);
+        }
+    }
+}
+</script>
+
 </body>
 </html>
+
+{% include "Component/footer.html" %}

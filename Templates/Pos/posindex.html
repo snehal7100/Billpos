@@ -12,13 +12,39 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .content-wrapper {
-      background-color: #f4f6f9;
+      background-color: #f8f9fa;
       padding: 20px;
     }
-    .table th, .table td {
-      text-align: center;
-      vertical-align: middle;
+    .card {
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
     }
+    .customer-details h5, .bill-details h5 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .total-amount {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ff5722;
+      text-align: center;
+      margin: 15px 0;
+    }
+    .btn-block {
+      width: 100%;
+    }
+    
+      
+      .row .col-6 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+    
     .fixed-summary-bar {
       position: fixed;
       bottom: 0;
@@ -27,8 +53,8 @@
       background: #fff;
       border-top: 1px solid #dee2e6;
       display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
+      justify-content: space-between;
+      padding: 10px 20px;
       font-weight: bold;
       z-index: 1050;
     }
@@ -36,24 +62,7 @@
       text-align: center;
       flex: 1;
     }
-    .customer-details, .bill-details {
-      margin-top: 20px;
-      padding: 15px;
-      background: #fff;
-      border: 1px solid #dee2e6;
-      border-radius: 8px;
-    }
-    .bill-details p {
-      font-size: 1.2rem;
-      margin: 10px 0;
-    }
-    .total-amount {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #ff5722;
-      text-align: center;
-      margin: 20px 0;
-    }
+    
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -65,7 +74,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h3>POS System</h3>
           <div>
-            <a href="/dashboard/"><button class="btn btn-danger">Dashboard</button></a>
+            <button class="btn btn-danger">Dashboard</button>
             <button class="btn btn-primary">POS Bills List</button>
           </div>
         </div>
@@ -76,79 +85,76 @@
           <div class="col-md-7">
             <div class="card">
               <div class="card-body">
-                <input type="text" class="form-control mb-3" placeholder="Search Products by name or Scan Barcode...">
+                <div class="input-group mb-3">
+                  <input type="text" id="search-bar" class="form-control mb-3" placeholder="Search Products by name or Scan Barcode...">
+                  <button id="search-btn" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                </div>
+                
+                
                 <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th>No.</th>
                       <th>Item Name</th>
                       <th>Qty</th>
-                      <th>MRP</th>
+                      <th>Mrp</th>
                       <th>Sale Price</th>
                       <th>Total</th>
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>बारिक खडीसाखर 1 कि.ग्रॅ</td>
-                      <td>
-                        <button class="btn btn-sm btn-secondary">-</button>
-                        5
-                        <button class="btn btn-sm btn-secondary">+</button>
-                      </td>
-                      <td>₹100</td>
-                      <td>₹89</td>
-                      <td>₹445</td>
-                      <td>
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>sak</td>
-                      <td>
-                        <button class="btn btn-sm btn-secondary">-</button>
-                        6
-                        <button class="btn btn-sm btn-secondary">+</button>
-                      </td>
-                      <td>₹0</td>
-                      <td>₹100</td>
-                      <td>₹600</td>
-                      <td>
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                      </td>
+                  <tbody id="product-table">
+                    <tr id="empty-row">
+                      <td colspan="7">No products available</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-
+          
           <!-- Customer Details Section -->
           <div class="col-md-5">
-            <div class="customer-details">
-              <h5>Customer Details</h5>
-              <input type="text" class="form-control mb-2" placeholder="Name">
-              <input type="text" class="form-control mb-2" placeholder="Mobile No">
-              <input type="text" class="form-control mb-2" placeholder="Address">
-              <input type="text" class="form-control mb-2" placeholder="Credit Amt">
+            <div class="card customer-details">
+              <label for="customer" class="form-label">Customer:</label>
+              <select class="form-control mb-2" id="customer" name="customer">
+                <option value="" disabled selected>Select customer</option>
+                {% for customer in customerData %}
+                  <option value="{{ customer.id }}" data-mobile="{{ customer.mobile_no }}" data-address="{{ customer.billing_address }}">
+                    {{ customer.name }}
+                  </option>
+                {% endfor %}
+              </select>
+              <p><strong>Mobile No:</strong> <span id="mobile-no">N/A</span></p>
+              <p><strong>Address:</strong> <span id="address">N/A</span></p>
+              <p><strong>Credit Amt:</strong> 0</p>
+              <p><strong>Payment Term:</strong>
               <select class="form-control mb-2">
                 <option>Cash</option>
                 <option>Credit</option>
-              </select>
-              <p>Rs. <strong>1045</strong></p>
-              <button class="btn btn-primary btn-block">Save Bill</button>
-              <button class="btn btn-danger btn-block">Clear</button>
+              </select></p>
+              <p><strong>Total:</strong> ₹1045</p>
+              <p><strong>Remaining Amt:</strong> ₹0</p>
+              <p><strong>Bill Date:</strong> <input type="date" class="form-control" value="2024-12-27"></p>
+              
+              
             </div>
-            <div class="bill-details">
+
+            <div class="card bill-details">
               <h5>Bill Details</h5>
-              <p><strong>Bill Date:</strong> 27/12/2024</p>
-              <p><strong>Payment Details:</strong> Credit</p>
               <div class="total-amount">₹1045</div>
+              <div class="row">
+                <div class="col-6 px-1">
+                  <button class="btn btn-primary btn-block">Save Bill</button>
+                </div>
+                <div class="col-6 px-1">
+                  <button class="btn btn-secondary btn-block">Clear</button>
+                </div>
+              </div>
+            </div>
+            
+            
+            
             </div>
           </div>
         </div>
@@ -157,12 +163,114 @@
 
     <!-- Footer Total Bar -->
     <div class="fixed-summary-bar">
+      <div>Last Bill: 5 | Amt: ₹89</div>
       <div>Total Qty: <span>11</span></div>
-      <div>Total MRP: ₹<span>500.00</span></div>
-      <div>Total Discount: ₹<span>-545.00</span></div>
-      <div>Total Bill: ₹<span>1045</span></div>
+      <div>Total MRP: ₹500.00</div>
+      <div>Total Discount: ₹-545.00</div>
+      <div>Total Bill: ₹1045</div>
     </div>
+
   </div>
+
+  <script>
+    // Update customer details dynamically
+    document.getElementById('customer').addEventListener('change', function () {
+      const selectedOption = this.options[this.selectedIndex];
+      const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
+      const address = selectedOption.getAttribute('data-address') || 'N/A';
+  
+      document.getElementById('mobile-no').textContent = mobileNo;
+      document.getElementById('address').textContent = address;
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+  // Example product data (replace this with actual data from your backend or API)
+  const products = [
+    { pid: 1, pname: 'Panda', price: 120 },
+    { pid: 2, pname: 'Laptop', price: 55000 },
+    { pid: 3, pname: 'Phone', price: 15000 },
+  ];
+
+  const productTable = document.getElementById('product-table');
+  const searchBar = document.getElementById('search-bar');
+  const searchBtn = document.getElementById('search-btn');
+
+  // Handle search button click
+  searchBtn.addEventListener('click', () => {
+    const query = searchBar.value.toLowerCase().trim();
+
+    // Find the product by name
+    const product = products.find((p) => p.pname.toLowerCase() === query);
+
+    if (product) {
+      // Remove "No products available" row if present
+      const emptyRow = document.getElementById('empty-row');
+      if (emptyRow) emptyRow.remove();
+
+      // Check if the product already exists in the table
+      if (!document.getElementById(`product-${product.pid}`)) {
+        // Add product to the table
+        const row = document.createElement('tr');
+        row.id = `product-${product.pid}`;
+        row.innerHTML = `
+          <td>${product.pid}</td>
+          <td>${product.pname}</td>
+          <td>
+            <button class="btn btn-sm btn-secondary decrement">-</button>
+            <span class="quantity">1</span>
+            <button class="btn btn-sm btn-secondary increment">+</button>
+          </td>
+          <td>₹${product.price.toFixed(2)}</td>
+          <td>₹${product.price.toFixed(2)}</td>
+          <td>₹${product.price.toFixed(2)}</td>
+          <td>
+            <button class="btn btn-sm btn-danger remove">Remove</button>
+          </td>
+        `;
+        productTable.appendChild(row);
+
+        // Add event listeners for increment, decrement, and remove
+        row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
+        row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+        row.querySelector('.remove').addEventListener('click', () => removeProduct(row));
+      } else {
+        alert('Product already in the table!');
+      }
+    } else {
+      alert('Product not found!');
+    }
+
+    // Clear the search bar
+    searchBar.value = '';
+  });
+
+  // Function to update quantity and totals
+  function updateQuantity(row, delta) {
+    const quantitySpan = row.querySelector('.quantity');
+    let quantity = parseInt(quantitySpan.textContent, 10);
+    quantity = Math.max(1, quantity + delta); // Prevent quantity < 1
+    quantitySpan.textContent = quantity;
+
+    // Update totals
+    const price = parseFloat(row.children[3].textContent.replace('₹', ''));
+    row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
+  }
+
+  // Function to remove product from the table
+  function removeProduct(row) {
+    row.remove();
+
+    // Check if the table is empty
+    if (!productTable.querySelector('tr')) {
+      const emptyRow = document.createElement('tr');
+      emptyRow.id = 'empty-row';
+      emptyRow.innerHTML = '<td colspan="7">No products available</td>';
+      productTable.appendChild(emptyRow);
+    }
+  }
+});
+
+  </script>
+
 
   <!-- AdminLTE JS -->
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
@@ -171,3 +279,6 @@
 </body>
 </html>
 {% include "Component/Footer.html" %}
+
+first change the search bar  code add button in front of search bar with + icon then working i want is if i search the perticular product it appear
+and then in the table and if i click + sign button it can only show the added product in the table list
