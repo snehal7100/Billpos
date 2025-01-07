@@ -3,147 +3,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POS System</title>
-  <!-- AdminLTE CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    .content-wrapper {
-      background-color: #f8f9fa;
-      padding: 20px;
-    }
-    .card {
-      background-color: #fff;
-      border: 1px solid #dee2e6;
-      border-radius: 8px;
-      padding: 15px;
-    }
-    .customer-details h5, .bill-details h5 {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-    .total-amount {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #ff5722;
-      text-align: center;
-      margin: 15px 0;
-    }
-    .btn-block {
-      width: 100%;
-    }
-    .row .col-6 {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .fixed-summary-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #fff;
-      border-top: 1px solid #dee2e6;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 20px;
-      font-weight: bold;
-      z-index: 1050;
-    }
-    .fixed-summary-bar div {
-      text-align: center;
-      flex: 1;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Generator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="hold-transition sidebar-mini">
-  <div class="wrapper">
-    <!-- Main Content -->
-    <div class="content-wrapper">
-      <div class="container-fluid">
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h3>POS System</h3>
-        </div>
+<body>
+    <div class="container">
+        <h1>Barcode Generator</h1>
 
-        <!-- Row for Content -->
-        <div class="row">
-          <!-- Product Section -->
-          <div class="col-md-7">
-            <div class="card">
-              <div class="card-body">
-                <input type="text" class="form-control mb-3" placeholder="Search Products by name or Scan Barcode...">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>Item Name</th>
-                      <th>Qty</th>
-                      <th>Mrp</th>
-                      <th>Sale Price</th>
-                      <th>Total</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for product in productData %}
-                    <tr>
-                      <td>{{forloop.counter}}</td>
-                      <td>{{ product.pname }}</td>
-                      <td>
-                        <button class="btn btn-sm btn-secondary">-</button>
-                        <span class="quantity">1</span>
-                        <button class="btn btn-sm btn-secondary">+</button>
-                      </td>
-                      <td>{{ product.price }}</td>
-                      <td>₹0</td>
-                      <td>₹0</td>
-                      <td>
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                      </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                      <td colspan="7">No products available</td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <!-- Symbology Selection -->
+        <label for="symbology">Choose Barcode Symbology:</label>
+        <select id="symbology">
+            <option value="CODE128">Code 128</option>
+            <option value="QR">QR Code</option>
+        </select>
+
+        <!-- Data Input -->
+        <label for="data">Enter Data to Encode:</label>
+        <input type="text" id="data" placeholder="Enter data here">
+
+        <!-- Size Selection -->
+        <label for="size">Choose Barcode Size:</label>
+        <select id="size">
+            <option value="1">100%</option>
+            <option value="2">200%</option>
+            <option value="3">300%</option>
+        </select>
+
+        <!-- Barcode Display -->
+        <div id="barcode"></div>
     </div>
-  </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('table tbody').addEventListener('click', (event) => {
-        if (event.target.classList.contains('btn-secondary')) {
-          const isIncrement = event.target.textContent.trim() === '+';
-          const quantitySpan = event.target.closest('td').querySelector('.quantity');
-          let quantity = parseInt(quantitySpan.textContent, 10);
-          if (isIncrement) {
-            quantity++;
-          } else if (quantity > 1) {
-            quantity--;
-          }
-          quantitySpan.textContent = quantity;
-        }
-      });
-    });
-  </script>
-
-  <!-- AdminLTE JS -->
-  <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- Script Includes -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
+
 {% include "Component/Footer.html" %}

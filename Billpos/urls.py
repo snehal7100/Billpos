@@ -58,6 +58,7 @@ urlpatterns = [
     path('pos/', posview.posdashboard),
 
     path('barcode-print/',barcodeview.BarcodePrint),
+    # path('barcode-add/',barcodeview.BarcodeAdd),
     
 
 
