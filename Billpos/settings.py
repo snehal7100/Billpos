@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'Product',
     'Customer',
     'Supplier',
+    'Pos',
+    'Employee',
     'Reward',
+
 ]
 
 MIDDLEWARE = [

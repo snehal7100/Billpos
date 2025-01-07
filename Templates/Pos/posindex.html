@@ -1,3 +1,5 @@
+
+
 {% include "Component/Header.html" %}
 {% include "Component/Sidebar.html" %}
 <!DOCTYPE html>
@@ -21,11 +23,6 @@
       border-radius: 8px;
       padding: 15px;
     }
-    .customer-details h5, .bill-details h5 {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
     .total-amount {
       font-size: 2.5rem;
       font-weight: bold;
@@ -36,15 +33,27 @@
     .btn-block {
       width: 100%;
     }
+
+
+    td > .btn-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     
-      
-      .row .col-6 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+    td > .btn-group .btn {
+      margin: 0 2px; /* Optional for slight spacing */
+      flex: 0 0 auto;
+    }
     
+    .quantity {
+      margin: 0 5px;
+      display: inline-block;
+      min-width: 20px; /* Ensures number stays aligned */
+      text-align: center;
+    }
     
+
     .fixed-summary-bar {
       position: fixed;
       bottom: 0;
@@ -62,35 +71,65 @@
       text-align: center;
       flex: 1;
     }
-    
+    .input-group {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+    #search-bar {
+      flex: 1;
+      border: 1px solid #dee2e6;
+      border-radius: 4px 0 0 4px;
+      height: calc(2.375rem + 2px);
+      padding: 0.5rem;
+    }
+    #search-btn {
+      border: 1px solid #dee2e6;
+      border-left: none;
+      border-radius: 0 4px 4px 0;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(2.375rem + 2px);
+    }
+    #search-btn:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
-    <!-- Main Content -->
     <div class="content-wrapper">
       <div class="container-fluid">
-        <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h3>POS System</h3>
           <div>
-            <button class="btn btn-danger">Dashboard</button>
+            <button class="btn btn-danger" onclick="window.location.href='/dashboard/'">Dashboard</button>
+
             <button class="btn btn-primary">POS Bills List</button>
           </div>
         </div>
-
-        <!-- Row for Content -->
         <div class="row">
-          <!-- Product Section -->
           <div class="col-md-7">
             <div class="card">
               <div class="card-body">
                 <div class="input-group mb-3">
-                  <input type="text" id="search-bar" class="form-control mb-3" placeholder="Search Products by name or Scan Barcode...">
+                  <input type="text" id="search-bar" class="form-control mb-3" placeholder="Search Products by name or Scan Barcode..." list="product-list">
+                  <datalist id="product-list">
+                    {% for product in productData %}
+                      <option value="{{ product.pname }}" data-pid="{{ product.pid }}" data-price="{{ product.price }}">
+                        {{ product.pname }} (₹{{ product.price }})
+                      </option>
+                    {% endfor %}
+                  </datalist>
                   <button id="search-btn" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                 </div>
-                
-                
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -112,8 +151,6 @@
               </div>
             </div>
           </div>
-          
-          <!-- Customer Details Section -->
           <div class="col-md-5">
             <div class="card customer-details">
               <label for="customer" class="form-label">Customer:</label>
@@ -129,17 +166,16 @@
               <p><strong>Address:</strong> <span id="address">N/A</span></p>
               <p><strong>Credit Amt:</strong> 0</p>
               <p><strong>Payment Term:</strong>
-              <select class="form-control mb-2">
-                <option>Cash</option>
-                <option>Credit</option>
-              </select></p>
-              <p><strong>Total:</strong> ₹1045</p>
+                <select class="form-control mb-2">
+                  <option>Cash</option>
+                  <option>Credit</option>
+                </select>
+              </p>
+              <p><strong>Total:</strong> ₹<span id="bill-total">1045</span></p>
+
               <p><strong>Remaining Amt:</strong> ₹0</p>
               <p><strong>Bill Date:</strong> <input type="date" class="form-control" value="2024-12-27"></p>
-              
-              
             </div>
-
             <div class="card bill-details">
               <h5>Bill Details</h5>
               <div class="total-amount">₹1045</div>
@@ -152,16 +188,10 @@
                 </div>
               </div>
             </div>
-            
-            
-            
-            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Footer Total Bar -->
     <div class="fixed-summary-bar">
       <div>Last Bill: 5 | Amt: ₹89</div>
       <div>Total Qty: <span>11</span></div>
@@ -169,9 +199,7 @@
       <div>Total Discount: ₹-545.00</div>
       <div>Total Bill: ₹1045</div>
     </div>
-
   </div>
-
   <script>
     // Update customer details dynamically
     document.getElementById('customer').addEventListener('change', function () {
@@ -182,96 +210,119 @@
       document.getElementById('mobile-no').textContent = mobileNo;
       document.getElementById('address').textContent = address;
     });
-    document.addEventListener('DOMContentLoaded', () => {
-  // Example product data (replace this with actual data from your backend or API)
-  const products = [
-    { pid: 1, pname: 'Panda', price: 120 },
-    { pid: 2, pname: 'Laptop', price: 55000 },
-    { pid: 3, pname: 'Phone', price: 15000 },
-  ];
-
-  const productTable = document.getElementById('product-table');
-  const searchBar = document.getElementById('search-bar');
-  const searchBtn = document.getElementById('search-btn');
-
-  // Handle search button click
-  searchBtn.addEventListener('click', () => {
-    const query = searchBar.value.toLowerCase().trim();
-
-    // Find the product by name
-    const product = products.find((p) => p.pname.toLowerCase() === query);
-
-    if (product) {
-      // Remove "No products available" row if present
-      const emptyRow = document.getElementById('empty-row');
-      if (emptyRow) emptyRow.remove();
-
-      // Check if the product already exists in the table
-      if (!document.getElementById(`product-${product.pid}`)) {
-        // Add product to the table
-        const row = document.createElement('tr');
-        row.id = `product-${product.pid}`;
-        row.innerHTML = `
-          <td>${product.pid}</td>
-          <td>${product.pname}</td>
-          <td>
-            <button class="btn btn-sm btn-secondary decrement">-</button>
-            <span class="quantity">1</span>
-            <button class="btn btn-sm btn-secondary increment">+</button>
-          </td>
-          <td>₹${product.price.toFixed(2)}</td>
-          <td>₹${product.price.toFixed(2)}</td>
-          <td>₹${product.price.toFixed(2)}</td>
-          <td>
-            <button class="btn btn-sm btn-danger remove">Remove</button>
-          </td>
-        `;
-        productTable.appendChild(row);
-
-        // Add event listeners for increment, decrement, and remove
-        row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
-        row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
-        row.querySelector('.remove').addEventListener('click', () => removeProduct(row));
-      } else {
-        alert('Product already in the table!');
+  
+    // Function to calculate totals
+    function calculateTotals() {
+      const productRows = document.querySelectorAll('#product-table tr');
+      let total = 0;
+  
+      productRows.forEach((row) => {
+        const totalCell = row.children[5]; // Column where total price is displayed
+        if (totalCell) {
+          total += parseFloat(totalCell.textContent.replace('₹', '')) || 0;
+        }
+      });
+  
+      // Update the total amount fields
+      document.querySelector('.total-amount').textContent = `₹${total.toFixed(2)}`;
+      document.querySelectorAll('.fixed-summary-bar div')[4].textContent = `Total Bill: ₹${total.toFixed(2)}`;
+  
+      // Update the "Total" in the customer card
+      const customerTotalField = document.querySelector('.customer-details p:nth-child(6) strong:nth-child(2)');
+      if (customerTotalField) {
+        customerTotalField.textContent = `₹${total.toFixed(2)}`;
       }
-    } else {
-      alert('Product not found!');
+  
+      // Update the "Total" in the bill details section
+      document.getElementById('bill-total').textContent = total.toFixed(2);
     }
-
-    // Clear the search bar
-    searchBar.value = '';
-  });
-
-  // Function to update quantity and totals
-  function updateQuantity(row, delta) {
-    const quantitySpan = row.querySelector('.quantity');
-    let quantity = parseInt(quantitySpan.textContent, 10);
-    quantity = Math.max(1, quantity + delta); // Prevent quantity < 1
-    quantitySpan.textContent = quantity;
-
-    // Update totals
-    const price = parseFloat(row.children[3].textContent.replace('₹', ''));
-    row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
-  }
-
-  // Function to remove product from the table
-  function removeProduct(row) {
-    row.remove();
-
-    // Check if the table is empty
-    if (!productTable.querySelector('tr')) {
-      const emptyRow = document.createElement('tr');
-      emptyRow.id = 'empty-row';
-      emptyRow.innerHTML = '<td colspan="7">No products available</td>';
-      productTable.appendChild(emptyRow);
+  
+    // Add product row logic with dynamic total update
+    document.getElementById('search-btn').addEventListener('click', function () {
+      const searchBar = document.getElementById('search-bar');
+      const productTable = document.getElementById('product-table');
+      const emptyRow = document.getElementById('empty-row');
+  
+      const query = searchBar.value.toLowerCase().trim();
+      const productOption = Array.from(document.querySelectorAll('#product-list option')).find(
+        (option) => option.value.toLowerCase() === query
+      );
+  
+      if (productOption) {
+        const pid = productOption.getAttribute('data-pid');
+        const pname = productOption.value;
+        const price = parseFloat(productOption.getAttribute('data-price'));
+  
+        // Check if the product already exists and has the same name
+        let existingRow = Array.from(productTable.children).find(
+          (row) => row.id === `product-${pid}` && row.querySelector('td:nth-child(2)').textContent === pname
+        );
+  
+        if (existingRow) {
+          // If the product exists, update its quantity
+          updateQuantity(existingRow, 1);
+        } else {
+          // Add a new row if the product doesn't exist
+          const currentRowCount = productTable.querySelectorAll('tr').length;
+          let row = document.createElement('tr');
+          row.id = `product-${pid}`;
+          row.innerHTML = `
+            <td>${currentRowCount}</td>
+            <td>${pname}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-secondary decrement">-</button>
+                <span class="quantity">1</span>
+                <button class="btn btn-sm btn-secondary increment">+</button>
+              </div>
+            </td>
+            <td>₹${price.toFixed(2)}</td>
+            <td>₹${price.toFixed(2)}</td>
+            <td>₹${price.toFixed(2)}</td>
+            <td>
+              <button class="btn btn-sm btn-danger remove">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          `;
+          productTable.appendChild(row);
+  
+          // Add event listeners
+          row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
+          row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+          row.querySelector('.remove').addEventListener('click', () => {
+            row.remove();
+            calculateTotals();
+          });
+  
+          if (emptyRow) emptyRow.remove();
+        }
+  
+        calculateTotals(); // Recalculate totals
+      } else {
+        alert('Product not found!');
+      }
+  
+      searchBar.value = '';
+    });
+  
+    // Function to update quantity
+    function updateQuantity(row, delta) {
+      const quantitySpan = row.querySelector('.quantity');
+      let quantity = parseInt(quantitySpan.textContent, 10);
+      quantity = Math.max(1, quantity + delta);
+      quantitySpan.textContent = quantity;
+  
+      const price = parseFloat(row.children[3].textContent.replace('₹', ''));
+      row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
+  
+      calculateTotals(); // Recalculate totals
     }
-  }
-});
-
+  
+    // Recalculate totals on page load (if needed)
+    calculateTotals();
   </script>
-
-
+       
   <!-- AdminLTE JS -->
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
   <!-- jQuery -->
@@ -280,5 +331,3 @@
 </html>
 {% include "Component/Footer.html" %}
 
-first change the search bar  code add button in front of search bar with + icon then working i want is if i search the perticular product it appear
-and then in the table and if i click + sign button it can only show the added product in the table list
