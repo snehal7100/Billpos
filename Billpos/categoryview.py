@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from category.models import Category
 from django.contrib import messages
+
 
 
 def category(request):
@@ -48,10 +49,11 @@ def editcategory(request, id):
 
 
 def delete(request, id):
-    categoryData = Category.objects.get(id=int(id))
+    categoryData = get_object_or_404(Category, id=id)
     categoryData.delete()
     messages.success(request, "Category deleted successfully!")
-    return redirect(category)
+    
+    return redirect('category')
 
 
 def addcategory(request):
