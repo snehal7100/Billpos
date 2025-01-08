@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'Pos',
     'Employee',
     'Reward',
-    'Bill',
+    
 
 ]
 

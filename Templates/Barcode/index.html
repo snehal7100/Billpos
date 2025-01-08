@@ -120,6 +120,7 @@
               <div class="card-body">
                 <div class="input-group mb-3">
                   <input type="text" id="search-bar" class="form-control mb-3" placeholder="Search Products by name or Scan Barcode..." list="product-list">
+                   
                   <datalist id="product-list">
                     {% for product in productData %}
                       <option value="{{ product.pname }}" data-pid="{{ product.pid }}" data-price="{{ product.price }}">
@@ -127,7 +128,12 @@
                       </option>
                     {% endfor %}
                   </datalist>
-                  <button id="search-btn" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                  
+                  <button id="search-btn" class="btn btn-primary"><i class="fa fa-plus"></i></button> <br>
+                  <button id="search-btn" class="btn btn-primary btn-sm ms-5"> Add</button>
+
+                  <button id="search-btn" class="btn btn-primary btn-sm ms-2"> Reset</button>
+
                 </div>
                 <table class="table table-bordered">
                   <thead>
@@ -163,8 +169,6 @@
     </div>
   </div>
   <script>
-
-    // Function to save data to localStorage
     function saveToLocalStorage() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
       const products = Array.from(productRows).map((row) => {
@@ -177,7 +181,7 @@
       });
       localStorage.setItem('products', JSON.stringify(products));
     }
-// Function to load data from localStorage
+
 function loadFromLocalStorage() {
   const productData = JSON.parse(localStorage.getItem('products')) || [];
   const productTable = document.getElementById('product-table');
