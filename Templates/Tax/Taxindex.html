@@ -192,7 +192,7 @@
                         <td>{{ tax.taxpercentage }}</td>
                         <td>
                           <a href="/tax-edit/{{ tax.id }}" class="fa fa-edit"></a>
-                          <a href="/tax-delete/{{ tax.id }}" class="fa fa-trash"></a>
+                          <a href="javascript:void(0);" class="fa fa-trash" onclick="confirmDelete('{{ tax.id }}')"></a>
                         </td>
                       </tr>
                       {% empty %}
@@ -259,6 +259,15 @@
       return false;
     }
     return true;
+  }
+
+
+
+
+  function confirmDelete(TaxID) {
+    if (confirm("Are you sure you want to delete this Tax?")) {
+      window.location.href = `/tax-delete/${TaxID}`;
+    }
   }
 </script>
 
