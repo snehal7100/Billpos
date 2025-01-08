@@ -1,7 +1,8 @@
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from Brand.models import BrandForm
 from django.contrib import messages
+
 def Brands(request):
     bData = BrandForm.objects.all()
     bdata={
@@ -34,11 +35,11 @@ def editBrand(request,id):
         bData.save()
         return redirect(Brands)
     
-def delete(request,id):
-    bData= BrandForm.objects.get(id=int(id))
-    bData.delete() 
-    return redirect(Brands)
-
+def delete(request, id):
+    bData = get_object_or_404(BrandForm, id=id)
+    bData.delete()
+    messages.success(request, "brand record deleted successfully.")
+    return redirect(Brands) 
 
 
 

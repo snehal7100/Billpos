@@ -218,7 +218,7 @@
                           <td><img height="100px" width="100px" src="../media/{{ i.B_img }}"></td>
                           <td>
                             <a href="/category-edit/{{i.id}}" class="fa fa-edit"></a>
-                            <a href="/category-delete/{{i.id}}" class="fa fa-trash"></a>
+                            <a href="javascript:void(0);" class="fa fa-trash" onclick="confirmDelete('{{ i.id }}')"></a>
                           </td>
                         </tr>
                         {% empty %}
@@ -282,6 +282,13 @@
       return false;
     }
     return true;
+  }
+
+
+  function confirmDelete(categoryID) {
+    if (confirm("Are you sure you want to delete this category?")) {
+      window.location.href = /category-delete/${categoryID};
+    }
   }
 </script>
 

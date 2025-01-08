@@ -98,3 +98,7 @@ def deleteSupplier(request, id):
     sData.delete()
     messages.success(request, "Supplier deleted successfully!")
     return redirect(SuppliersList)
+
+
+
+

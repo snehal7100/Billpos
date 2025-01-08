@@ -1,5 +1,4 @@
 
-
 {% include "Component/Header.html" %}
 {% include "Component/Sidebar.html" %}
 <!DOCTYPE html>
@@ -280,6 +279,7 @@
       localStorage.setItem('products', JSON.stringify(products));
     }
   
+<<<<<<< HEAD
     function loadFromLocalStorage() {
       const productData = JSON.parse(localStorage.getItem('products')) || [];
       const productTable = document.getElementById('product-table');
@@ -322,6 +322,60 @@
   
       calculateTotals(); // Recalculate totals after loading
     }
+=======
+    // Function to load data from localStorage
+    // Function to load data from localStorage
+function loadFromLocalStorage() {
+  const productData = JSON.parse(localStorage.getItem('products')) || [];
+  const productTable = document.getElementById('product-table');
+  const emptyRow = document.getElementById('empty-row');
+
+  productData.forEach((product, index) => {
+    const row = document.createElement('tr');
+    row.id = `product-${product.id}`;
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${product.name}</td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-secondary decrement">-</button>
+          <span class="quantity">${product.quantity}</span>
+          <button class="btn btn-sm btn-secondary increment">+</button>
+        </div>
+      </td>
+      <td>₹${product.price.toFixed(2)}</td>
+      <td>₹${product.price.toFixed(2)}</td>
+      <td>₹${(product.quantity * product.price).toFixed(2)}</td>
+      <td>
+        <button class="btn btn-sm btn-danger remove">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    `;
+    productTable.appendChild(row);
+
+    // Add event listeners
+    row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
+    row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+
+    // Add the event listener for the delete button after the row is added
+    row.querySelector('.remove').addEventListener('click', () => {
+      // Show confirmation dialog
+      const confirmDelete = confirm("Are you sure you want to delete this product?");
+      if (confirmDelete) {
+        row.remove(); // Remove the product row
+        saveToLocalStorage(); // Save updated data to localStorage
+        calculateTotals(); // Recalculate totals
+      }
+    });
+
+    if (emptyRow) emptyRow.remove();
+  });
+
+  calculateTotals(); // Recalculate totals after loading
+}
+
+>>>>>>> 78ffe16f4a9096ea8db1da84398c34386b30a50f
   
     function calculateTotals() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
