@@ -255,9 +255,9 @@
   </div>
   </div>
   <script>
-<<<<<<< HEAD
+
     // Function to save data to localStorage
-=======
+
     document.getElementById('customer').addEventListener('change', function () {
       const selectedOption = this.options[this.selectedIndex];
       const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
@@ -269,7 +269,7 @@
       document.getElementById('credit_limit').textContent = creditLimit;
     });
   
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+
     function saveToLocalStorage() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
       const products = Array.from(productRows).map((row) => {
@@ -282,11 +282,7 @@
       });
       localStorage.setItem('products', JSON.stringify(products));
     }
-<<<<<<< HEAD
 
-=======
-  
-<<<<<<< HEAD
     function loadFromLocalStorage() {
       const productData = JSON.parse(localStorage.getItem('products')) || [];
       const productTable = document.getElementById('product-table');
@@ -329,8 +325,7 @@
   
       calculateTotals(); // Recalculate totals after loading
     }
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+
     // Function to load data from localStorage
     function loadFromLocalStorage() {
       const productData = JSON.parse(localStorage.getItem('products')) || [];
@@ -380,7 +375,7 @@
       calculateTotals(); // Recalculate totals after loading
     }
 
-<<<<<<< HEAD
+
     // Function to calculate totals
     function calculateTotals() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
@@ -388,8 +383,7 @@
 
       productRows.forEach((row) => {
         const totalCell = row.children[5];
-=======
->>>>>>> 78ffe16f4a9096ea8db1da84398c34386b30a50f
+
   
     function calculateTotals() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
@@ -400,7 +394,7 @@
         const totalCell = row.children[5]; // Total price column
         const quantityCell = row.querySelector('.quantity'); // Quantity column
   
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+
         if (totalCell) {
           total += parseFloat(totalCell.textContent.replace('₹', '')) || 0;
         }
@@ -412,24 +406,16 @@
       document.querySelector('.total-amount').textContent = `₹${total.toFixed(2)}`;
       document.querySelectorAll('.fixed-summary-bar div')[4].textContent = `Total Bill: ₹${total.toFixed(2)}`;
       document.getElementById('bill-total').textContent = total.toFixed(2);
-<<<<<<< HEAD
 
-=======
-  
       // Update the total quantity field
       document.getElementById('total-quantity').textContent = totalQty;
   
       // Save updated totals to localStorage
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+
       localStorage.setItem('total', total.toFixed(2));
       localStorage.setItem('totalQty', totalQty);
     }
-<<<<<<< HEAD
 
-    // Event listener for adding products to the table
-=======
-  
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
     document.getElementById('search-btn').addEventListener('click', function () {
       const searchBar = document.getElementById('search-bar');
       const query = searchBar.value.toLowerCase().trim();
@@ -491,12 +477,7 @@
 
       searchBar.value = ''; // Clear the search bar
     });
-<<<<<<< HEAD
 
-    // Update quantity logic
-=======
-  
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
     function updateQuantity(row, delta) {
       const quantitySpan = row.querySelector('.quantity');
       let quantity = parseInt(quantitySpan.textContent, 10);
@@ -509,7 +490,7 @@
       saveToLocalStorage();
       calculateTotals();
     }
-<<<<<<< HEAD
+
 
     // Load data from localStorage when the page loads
     document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
@@ -521,10 +502,10 @@
         document.getElementById('search-btn').click();
       }
     });
-=======
+
   
     document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+
   </script>
    
        
@@ -535,4 +516,3 @@
 </body>
 </html>
 {% include "Component/Footer.html" %}
-
