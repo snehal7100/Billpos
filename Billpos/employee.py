@@ -21,35 +21,38 @@ def employeeview(request, id):
 
 
 def editemployee(request, id):
-    EmployeeData = Employee.objects.get(id=int(id))  # Get customer data by ID
+    # Fetch the employee record
+    EmployeeData = Employee.objects.get(id=int(id))
+
     if request.method == "GET":
-        context = {
-            "EmployeeData": EmployeeData
-        }
+        context = {"EmployeeData": EmployeeData}
         return render(request, "Employee/edit.html", context)
     else:
-        # Collecting updated data from form
-        membername = request.POST.get("membername").strip()
-        mobno = request.POST.get("mobno").strip()
-        emobno = request.POST.get("emobno").strip()
-        emaileadd = request.POST.get("emaileadd").strip()
-        password = request.POST.get("password").strip()
-        salary = request.POST.get("salary").strip()
-        datejoining = request.POST.get("datejoining")
-        department = request.POST.get("department")
-        role = request.POST.get("role")
-        lastexperience = request.POST.get("lastexperience")
-        lastworkcom = request.POST.get("lastworkcom")
-        lastcomsalary = request.POST.get("lastcomsalary")
-        adharnum = request.POST.get("adharnum")
-        pannum = request.POST.get("pannum")
-        userupi = request.POST.get("userupi")
-        address = request.POST.get("address")
-        adharimg = request.POST.get("adharimg")
+        # Collect updated data from the form
+        membername = request.POST.get("membername", "").strip()
+        mobno = request.POST.get("mobno", "").strip()
+        emobno = request.POST.get("emobno", "").strip()
+        emaileadd = request.POST.get("emaileadd", "").strip()
+        password = request.POST.get("password", "").strip()
+        salary = request.POST.get("salary", "").strip()
+        datejoining = request.POST.get("datejoining", "").strip()
+        department = request.POST.get("department", "").strip()
+        role = request.POST.get("role", "").strip()
+        lastexperience = request.POST.get("lastexperience", "").strip()
+        lastworkcom = request.POST.get("lastworkcom", "").strip()
+        lastcomsalary = request.POST.get("lastcomsalary", "").strip()
+        adharnum = request.POST.get("adharnum", "").strip()
+        pannum = request.POST.get("pannum", "").strip()
+        userupi = request.POST.get("userupi", "").strip()
+        address = request.POST.get("address", "").strip()
+
+        # Handle file uploads using request.FILES.get()
+        adharimg = request.FILES.get("adharimg")
         panimg = request.FILES.get("panimg")
         proimg = request.FILES.get("proimg")
         qrimg = request.FILES.get("qrimg")
 
+        # Update fields
         EmployeeData.membername = membername
         EmployeeData.mobno = mobno
         EmployeeData.emobno = emobno
@@ -66,15 +69,23 @@ def editemployee(request, id):
         EmployeeData.pannum = pannum
         EmployeeData.userupi = userupi
         EmployeeData.address = address
-        EmployeeData.adharimg = adharimg
-        EmployeeData.panimg = panimg
-        EmployeeData.proimg = proimg
-        EmployeeData.qrimg = qrimg
 
+        # Only update file fields if new files are uploaded
+        if adharimg:
+            EmployeeData.adharimg = adharimg
+        if panimg:
+            EmployeeData.panimg = panimg
+        if proimg:
+            EmployeeData.proimg = proimg
+        if qrimg:
+            EmployeeData.qrimg = qrimg
+
+        # Save the employee data
         EmployeeData.save()
-        messages.success(request, "Employee details updated successfully!")
-        return redirect(emp)
 
+        # Show success message and redirect
+        messages.success(request, "Employee details updated successfully!")
+        return redirect(emp)  # Replace with the correct view name for your employee list
 
 def deleteemployee(request, id):
     EmployeeData = Employee.objects.get(id=int(id))
@@ -101,7 +112,7 @@ def Addemployee(request):
         pannum = request.POST.get("pannum")
         userupi = request.POST.get("userupi")
         address = request.POST.get("address")
-        adharimg = request.POST.get("adharimg")
+        adharimg = request.FILES.get("adharimg")
         panimg = request.FILES.get("panimg")
         proimg = request.FILES.get("proimg")
         qrimg = request.FILES.get("qrimg")

@@ -90,11 +90,10 @@ urlpatterns = [
     path('tax-delete/<id>', Taxview.deleteTax), 
     path('tax-add/', Taxview.addTax),  
 
-
-    path('customer-list/', customerview.Customers),  
-    path('customer-view/<id>', customerview.editCustomer), 
-    path('customer-edit/<id>', customerview.editCustomer),  
-    path('customer-delete/<id>', customerview.deleteCustomer), 
+path('customer-list/', customerview.Customers),
+    path('customer-view/<int:id>', customerview.editCustomer),
+    path('customer-edit/<int:id>', customerview.editCustomer),
+    path('customer-delete/<int:id>', customerview.deleteCustomer),  # Correctly capture integer ID
     path('customer-add/', customerview.AddCustomer),  
 
     path('product-list/', productview.Products),
@@ -111,9 +110,9 @@ urlpatterns = [
 
 
     path('Employee-list/', employee.emp),  
-    path('Employee-view/<id>', employee.employeeview), 
-    path('Employee-edit/<id>', employee.editemployee),  
-    path('Employee-delete/<id>', employee.deleteemployee), 
+    path('Employee-view/<id>/', employee.employeeview), 
+    path('Employee-edit/<id>/', employee.editemployee),  
+    path('Employee-delete/<id>/', employee.deleteemployee), 
     path('Employee-add/', employee.Addemployee),  
 
 
