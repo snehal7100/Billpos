@@ -175,43 +175,21 @@
                             aria-label="Browser: activate to sort column ascending">Name</th>
                           <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Platform(s): activate to sort column ascending">Mobile No</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Emergency MobNo</th>
+                          
                           <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Platform(s): activate to sort column ascending">Email</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Password</th>
+                          
                           <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Platform(s): activate to sort column ascending">Salary</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Joining Date</th>
+                          
                           <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Platform(s): activate to sort column ascending">Department</th>
                           <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Platform(s): activate to sort column ascending">Role</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Experience</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Last Working</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Last Salary</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Aadhar Num</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">PAN Num</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">User UPI</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Address</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Aadhar Image</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">PAN Image</th>
+                          
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Platform(s): activate to sort column ascending">Profile Image</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">QR Code</th>
-
+                            
                           <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="CSS grade: activate to sort column ascending">Action</th>
                         </tr>
@@ -223,27 +201,20 @@
                         <td>{{ forloop.counter }}</td>
                         <td>{{ Employee.membername }}</td>
                         <td>{{ Employee.mobno }}</td>
-                        <td>{{ Employee.emobno }}</td>
+                        
                         <td>{{ Employee.emaileadd }}</td>
-                        <td>{{ Employee.password }}</td>
+                        
                         <td>{{ Employee.salary }}</td>
-                        <td>{{ Employee.datejoining }}</td>
+                        
                         <td>{{ Employee.department }}</td>
                         <td>{{ Employee.role }}</td>
-                        <td>{{ Employee.lastexperience }}</td>
-                        <td>{{ Employee.lastworkcom }}</td>
-                        <td>{{ Employee.lastcomsalary }}</td>
-                        <td>{{ Employee.adharnum }}</td>
-                        <td>{{ Employee.pannum }}</td>
-                        <td>{{ Employee.userupi }}</td>
-                        <td>{{ Employee.address }}</td>
-                        <td><img src="../media/{{ Employee.adharimg }}" alt="Adhar Image"></td>
-                        <td><img src="../media/{{ Employee.panimg }}" alt="Pan Image"></td>
+                        
                         <td><img src="../media/{{ Employee.proimg }}" alt="Profile Image"></td>
-                        <td><img src="../media/{{ Employee.qrimg }}" alt="Qr Image"></td>
+                        
                         <td>
-                          <a href="Employee-edit/{{ Employee.id }}" class="fa fa-edit"></a>
-                          <a href="javascript:void(0);" class="fa fa-trash" onclick="confirmDelete('{{ Employee.id }}')"></a>
+                          <a href="/Employee-edit/{{ Employee.id }}" class="fa fa-edit"></a>
+
+                          <a href="/Employee-delete/{{ Employee.id }}" class="fa fa-trash" onclick="confirmDelete('{{ Employee.id }}')"></a>
                         </td>
                       </tr>
       

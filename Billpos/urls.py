@@ -110,9 +110,9 @@ path('customer-list/', customerview.Customers),
 
 
     path('Employee-list/', employee.emp),  
-    path('Employee-view/<id>', employee.employeeview), 
-    path('Employee-edit/<id>', employee.editemployee),  
-    path('Employee-delete/<id>', employee.deleteemployee), 
+    path('Employee-view/<id>/', employee.employeeview), 
+    path('Employee-edit/<id>/', employee.editemployee),  
+    path('Employee-delete/<id>/', employee.deleteemployee), 
     path('Employee-add/', employee.Addemployee),  
 
 
