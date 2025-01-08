@@ -41,25 +41,18 @@ from Billpos import employee
 
 
 
-
 from Billpos import rewardsview
 from Billpos import barcodeview
 
 
+
 urlpatterns = [
-
-    # path('profile-view/<id>', Adminview.view_profile),
-
-    # path('profile/edit/', Adminview.edit_profile),
-    # path('profile/logout/', Adminview.logout_user),
 
     path('dashboard/', Dashboardview.dashboard),
 
     path('pos/', posview.posdashboard),
 
-    path('barcode-print/',barcodeview.BarcodePrint),
-    # path('barcode-add/',barcodeview.BarcodeAdd),
-    
+    path('barcode-print/',barcodeview.Barcodes),
 
 
     path('category-list/',categoryview.category),
@@ -90,7 +83,7 @@ urlpatterns = [
     path('tax-delete/<id>', Taxview.deleteTax), 
     path('tax-add/', Taxview.addTax),  
 
-path('customer-list/', customerview.Customers),
+    path('customer-list/', customerview.Customers),
     path('customer-view/<int:id>', customerview.editCustomer),
     path('customer-edit/<int:id>', customerview.editCustomer),
     path('customer-delete/<int:id>', customerview.deleteCustomer),  # Correctly capture integer ID
@@ -123,6 +116,12 @@ path('customer-list/', customerview.Customers),
     path('rewards-add/', rewardsview.AddRewards),
     path('rewards-edit/<id>/', rewardsview.editRewards),  
     path('rewards-delete/<id>', rewardsview.delete),
+
+
+
+    
+    
+
 
 ]
 if settings.DEBUG:  
