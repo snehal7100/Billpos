@@ -164,7 +164,7 @@
               </select>
               <p><strong>Mobile No:</strong> <span id="mobile-no">N/A</span></p>
               <p><strong>Address:</strong> <span id="address">N/A</span></p>
-              <p><strong>Credit Amt:</strong> 0</p>
+              <p><strong>Credit Amt:</strong> <span id="credit_limit">N/A</span></p>
               <p><strong>Payment Term:</strong>
                 <select class="form-control mb-2">
                   <option>Cash</option>
@@ -206,10 +206,13 @@
       const selectedOption = this.options[this.selectedIndex];
       const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
       const address = selectedOption.getAttribute('data-address') || 'N/A';
-  
+      const creditLimit = selectedOption.getAttribute('data-credit_limit') || 'N/A';
+      
       document.getElementById('mobile-no').textContent = mobileNo;
       document.getElementById('address').textContent = address;
+      document.getElementById('credit_limit').textContent = creditLimit;
     });
+    
   
     // Function to calculate totals
     function calculateTotals() {

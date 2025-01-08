@@ -90,7 +90,10 @@ def editCustomer(request, id):
         return redirect(Customers)
 
 def deleteCustomer(request, id):
-    cData = Customer.objects.get(id=int(id))
-    cData.delete()
-    messages.success(request, "Customer deleted successfully!")
-    return redirect(Customers)
+    try:
+        cData = Customer.objects.get(id=int(id))  # Fetch customer by ID
+        cData.delete()  # Delete the customer
+        messages.success(request, "Customer deleted successfully!")
+    except Customer.DoesNotExist:
+        messages.error(request, "Customer not found.")
+    return redirect(Customers)  # Redirect to customer list
