@@ -204,7 +204,25 @@
     </div>
   </div>
   <script>
+<<<<<<< HEAD
     // Function to save data to localStorage
+=======
+<<<<<<< HEAD
+    // Function to save data to localStorage
+=======
+    document.getElementById('customer').addEventListener('change', function () {
+      const selectedOption = this.options[this.selectedIndex];
+      const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
+      const address = selectedOption.getAttribute('data-address') || 'N/A';
+      const creditLimit = selectedOption.getAttribute('data-credit_limit') || 'N/A';
+  
+      document.getElementById('mobile-no').textContent = mobileNo;
+      document.getElementById('address').textContent = address;
+      document.getElementById('credit_limit').textContent = creditLimit;
+    });
+  
+>>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
     function saveToLocalStorage() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
       const products = Array.from(productRows).map((row) => {
@@ -217,8 +235,16 @@
       });
       localStorage.setItem('products', JSON.stringify(products));
     }
+<<<<<<< HEAD
 
     // Function to load data from localStorage
+=======
+<<<<<<< HEAD
+
+=======
+  
+<<<<<<< HEAD
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
     function loadFromLocalStorage() {
       const productData = JSON.parse(localStorage.getItem('products')) || [];
       const productTable = document.getElementById('product-table');
@@ -266,7 +292,62 @@
 
       calculateTotals(); // Recalculate totals after loading
     }
+<<<<<<< HEAD
 
+    // Function to calculate totals
+=======
+=======
+>>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+    // Function to load data from localStorage
+    function loadFromLocalStorage() {
+      const productData = JSON.parse(localStorage.getItem('products')) || [];
+      const productTable = document.getElementById('product-table');
+      const emptyRow = document.getElementById('empty-row');
+
+      productData.forEach((product, index) => {
+        const row = document.createElement('tr');
+        row.id = `product-${product.id}`;
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${product.name}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-secondary decrement">-</button>
+              <span class="quantity">${product.quantity}</span>
+              <button class="btn btn-sm btn-secondary increment">+</button>
+            </div>
+          </td>
+          <td>₹${product.price.toFixed(2)}</td>
+          <td>₹${product.price.toFixed(2)}</td>
+          <td>₹${(product.quantity * product.price).toFixed(2)}</td>
+          <td>
+            <button class="btn btn-sm btn-danger remove">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        `;
+        productTable.appendChild(row);
+
+        // Add event listeners
+        row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
+        row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+
+        row.querySelector('.remove').addEventListener('click', () => {
+          const confirmDelete = confirm("Are you sure you want to delete this product?");
+          if (confirmDelete) {
+            row.remove();
+            saveToLocalStorage();
+            calculateTotals();
+          }
+        });
+
+        if (emptyRow) emptyRow.remove();
+      });
+
+      calculateTotals(); // Recalculate totals after loading
+    }
+
+<<<<<<< HEAD
     // Function to calculate totals
     function calculateTotals() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
@@ -274,19 +355,60 @@
 
       productRows.forEach((row) => {
         const totalCell = row.children[5];
+=======
+>>>>>>> 78ffe16f4a9096ea8db1da84398c34386b30a50f
+  
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
+    function calculateTotals() {
+      const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
+      let total = 0;
+
+      productRows.forEach((row) => {
+<<<<<<< HEAD
+        const totalCell = row.children[5];
+=======
+        const totalCell = row.children[5]; // Total price column
+        const quantityCell = row.querySelector('.quantity'); // Quantity column
+  
+>>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
         if (totalCell) {
           total += parseFloat(totalCell.textContent.replace('₹', '')) || 0;
         }
       });
 
+<<<<<<< HEAD
       document.querySelector('.total-amount').textContent = ₹${total.toFixed(2)};
       document.querySelectorAll('.fixed-summary-bar div')[4].textContent = Total Bill: ₹${total.toFixed(2)};
       document.getElementById('bill-total').textContent = total.toFixed(2);
 
+=======
+      document.querySelector('.total-amount').textContent = `₹${total.toFixed(2)}`;
+      document.querySelectorAll('.fixed-summary-bar div')[4].textContent = `Total Bill: ₹${total.toFixed(2)}`;
+      document.getElementById('bill-total').textContent = total.toFixed(2);
+<<<<<<< HEAD
+
+=======
+  
+      // Update the total quantity field
+      document.getElementById('total-quantity').textContent = totalQty;
+  
+      // Save updated totals to localStorage
+>>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
       localStorage.setItem('total', total.toFixed(2));
     }
+<<<<<<< HEAD
 
     // Event listener for adding products to the table
+=======
+<<<<<<< HEAD
+
+    // Event listener for adding products to the table
+=======
+  
+>>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
     document.getElementById('search-btn').addEventListener('click', function () {
       const searchBar = document.getElementById('search-bar');
       const query = searchBar.value.toLowerCase().trim();
@@ -348,8 +470,17 @@
 
       searchBar.value = ''; // Clear the search bar
     });
+<<<<<<< HEAD
 
     // Update quantity logic
+=======
+<<<<<<< HEAD
+
+    // Update quantity logic
+=======
+  
+>>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
     function updateQuantity(row, delta) {
       const quantitySpan = row.querySelector('.quantity');
       let quantity = parseInt(quantitySpan.textContent, 10);
@@ -357,11 +488,16 @@
       quantitySpan.textContent = quantity;
 
       const price = parseFloat(row.children[3].textContent.replace('₹', ''));
+<<<<<<< HEAD
       row.children[5].textContent = ₹${(quantity * price).toFixed(2)};
+=======
+      row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
 
       saveToLocalStorage();
       calculateTotals();
     }
+<<<<<<< HEAD
 
     // Load data from localStorage when the page loads
     document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
@@ -375,6 +511,26 @@
     });
   </script>
   
+=======
+<<<<<<< HEAD
+
+    // Load data from localStorage when the page loads
+    document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
+
+    // Event listener for 'Enter' key
+    document.getElementById('search-bar').addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById('search-btn').click();
+      }
+    });
+=======
+  
+    document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
+>>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
+  </script>
+   
+>>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
        
   <!-- AdminLTE JS -->
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
