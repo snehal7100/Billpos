@@ -184,11 +184,12 @@
               <div class="total-amount">₹1045</div>
               <div class="row">
                 <div class="col-6 px-1">
-                  <button class="btn btn-primary btn-block">Save Bill</button>
+                  <button id="save-bill-btn" class="btn btn-primary btn-block">Save Bill</button>
                 </div>
                 <div class="col-6 px-1">
-                  <button class="btn btn-secondary btn-block">Clear</button>
+                  <button id="clear-btn" class="btn btn-secondary btn-block">Clear</button>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -377,6 +378,76 @@
         }
       });
     });
+
+
+    document.getElementById('save-bill-btn').addEventListener('click', function () {
+      // Get customer name
+      const customerSelect = document.getElementById('customer');
+      const customerName = customerSelect.options[customerSelect.selectedIndex].text;
+      
+      // Get the list of products added to the cart
+      const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
+      const products = Array.from(productRows).map(row => {
+        const name = row.children[1].textContent;
+        const quantity = row.querySelector('.quantity').textContent;
+        const price = row.children[3].textContent;
+        const total = row.children[5].textContent;
+        return {
+          name,
+          quantity,
+          price,
+          total
+        };
+      });
+    
+      // Calculate total bill
+      let totalAmount = 0;
+      products.forEach(product => {
+        totalAmount += parseFloat(product.total.replace('₹', ''));
+      });
+    
+      // Create printable content
+      const printContent = `
+        <h3>Bill Receipt</h3>
+        <p><strong>Customer:</strong> ${customerName}</p>
+        <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Item Name</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${products.map((product, index) => `
+              <tr>
+                <td>${index + 1}</td>
+                <td>${product.name}</td>
+                <td>${product.quantity}</td>
+                <td>${product.price}</td>
+                <td>${product.total}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <p><strong>Total Amount:</strong> ₹${totalAmount.toFixed(2)}</p>
+      `;
+    
+      // Create a new window to display the printable content
+      const printWindow = window.open('', '', 'height=600,width=800');
+      printWindow.document.write('<html><head><title>Bill Receipt</title></head><body>');
+      printWindow.document.write(printContent);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      
+      // Trigger the print dialog
+      printWindow.print();
+    });
+    
+
+
   </script>
   
    
@@ -394,5 +465,5 @@
 
 {% include "Component/Footer.html" %}
 
-{% include "Component/Footer.html" %}
+
 
