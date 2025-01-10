@@ -206,14 +206,8 @@
   <script>
 
     // Function to save data to localStorage
-<<<<<<< HEAD
 
-=======
-=======
-<<<<<<< HEAD
     // Function to save data to localStorage
-=======
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
     document.getElementById('customer').addEventListener('change', function () {
       const selectedOption = this.options[this.selectedIndex];
       const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
@@ -225,12 +219,6 @@
       document.getElementById('credit_limit').textContent = creditLimit;
     });
   
-<<<<<<< HEAD
-
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
     function saveToLocalStorage() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
       const products = Array.from(productRows).map((row) => {
@@ -244,17 +232,7 @@
       localStorage.setItem('products', JSON.stringify(products));
     }
 
-<<<<<<< HEAD
-=======
     // Function to load data from localStorage
-=======
-<<<<<<< HEAD
-
-=======
-  
-<<<<<<< HEAD
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
     function loadFromLocalStorage() {
       const productData = JSON.parse(localStorage.getItem('products')) || [];
       const productTable = document.getElementById('product-table');
@@ -302,16 +280,8 @@
 
       calculateTotals(); // Recalculate totals after loading
     }
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-    // Function to calculate totals
-=======
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
+    // Function to calculate total
     // Function to load data from localStorage
     function loadFromLocalStorage() {
       const productData = JSON.parse(localStorage.getItem('products')) || [];
@@ -371,35 +341,28 @@
         const totalCell = row.children[5];
 
   
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
+
     function calculateTotals() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
       let total = 0;
 
       productRows.forEach((row) => {
-<<<<<<< HEAD
+
         const totalCell = row.children[5];
-=======
         const totalCell = row.children[5]; // Total price column
         const quantityCell = row.querySelector('.quantity'); // Quantity column
-  
-<<<<<<< HEAD
 
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
         if (totalCell) {
           total += parseFloat(totalCell.textContent.replace('₹', '')) || 0;
         }
       });
 
-<<<<<<< HEAD
+
       document.querySelector('.total-amount').textContent = ₹${total.toFixed(2)};
       document.querySelectorAll('.fixed-summary-bar div')[4].textContent = Total Bill: ₹${total.toFixed(2)};
       document.getElementById('bill-total').textContent = total.toFixed(2);
 
-=======
+
       document.querySelector('.total-amount').textContent = `₹${total.toFixed(2)}`;
       document.querySelectorAll('.fixed-summary-bar div')[4].textContent = `Total Bill: ₹${total.toFixed(2)}`;
       document.getElementById('bill-total').textContent = total.toFixed(2);
@@ -408,27 +371,15 @@
       document.getElementById('total-quantity').textContent = totalQty;
   
       // Save updated totals to localStorage
-<<<<<<< HEAD
 
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
       localStorage.setItem('total', total.toFixed(2));
     }
 
-<<<<<<< HEAD
-=======
     // Event listener for adding products to the table
-=======
-<<<<<<< HEAD
 
     // Event listener for adding products to the table
-=======
-  
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
+
+
     document.getElementById('search-btn').addEventListener('click', function () {
       const searchBar = document.getElementById('search-bar');
       const query = searchBar.value.toLowerCase().trim();
@@ -491,18 +442,12 @@
       searchBar.value = ''; // Clear the search bar
     });
 
-<<<<<<< HEAD
-=======
-    // Update quantity logic
-=======
-<<<<<<< HEAD
 
     // Update quantity logic
-=======
-  
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
+
+
+    // Update quantity logic
+
     function updateQuantity(row, delta) {
       const quantitySpan = row.querySelector('.quantity');
       let quantity = parseInt(quantitySpan.textContent, 10);
@@ -510,11 +455,11 @@
       quantitySpan.textContent = quantity;
 
       const price = parseFloat(row.children[3].textContent.replace('₹', ''));
-<<<<<<< HEAD
+
       row.children[5].textContent = ₹${(quantity * price).toFixed(2)};
-=======
+
       row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
+
 
       saveToLocalStorage();
       calculateTotals();
@@ -533,26 +478,8 @@
     });
   </script>
   
-=======
-<<<<<<< HEAD
 
-    // Load data from localStorage when the page loads
-    document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
-
-    // Event listener for 'Enter' key
-    document.getElementById('search-bar').addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        document.getElementById('search-btn').click();
-      }
-    });
-
-  
-    document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
-
-  </script>
    
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
        
   <!-- AdminLTE JS -->
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
@@ -563,8 +490,4 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<<<<<<< HEAD
 {% include "Component/Footer.html" %}
-=======
-{% include "Component/Footer.html" %}
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
