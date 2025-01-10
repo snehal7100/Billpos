@@ -38,6 +38,7 @@ from Billpos import supplierview
 from Billpos import posview
 
 from Billpos import employee
+from Billpos import Paymentview
 
 
 
@@ -117,6 +118,13 @@ urlpatterns = [
     path('rewards-edit/<id>/', rewardsview.editRewards),  
     path('rewards-delete/<id>', rewardsview.delete),
 
+
+
+
+    path('Payment-list/', Paymentview.payments),
+    path('Payment-edit/<id>', Paymentview.editpayment),
+    path('Payment-delete/<id>', Paymentview.delete),
+    path('Payment-add/', Paymentview.AddPayment),
 
 
     

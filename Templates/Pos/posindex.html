@@ -169,11 +169,15 @@
               <p><strong>Address:</strong> <span id="address">N/A</span></p>
               <p><strong>Credit Amt:</strong> <span id="credit_limit">N/A</span></p>
               <p><strong>Payment Term:</strong>
-                <select class="form-control mb-2">
-                  <option>Cash</option>
-                  <option>Credit</option>
+                <select class="form-control mb-2" id="payment-term">
+                  {% for payment in paymentData %}
+                    <option value="{{ payment.id }}">{{ payment.pname }}</option>
+                  {% endfor %}
                 </select>
               </p>
+              
+            
+            
               <p><strong>Total:</strong> ₹<span id="bill-total">1045</span></p>
 
               <!-- <p><strong>Remaining Amt:</strong> ₹0</p> -->
@@ -379,13 +383,16 @@
       });
     });
 
-
     document.getElementById('save-bill-btn').addEventListener('click', function () {
-      // Get customer name and address
+      // Get customer name, address, and payment term
       const customerSelect = document.getElementById('customer');
       const customerName = customerSelect.options[customerSelect.selectedIndex].text;
       const customerAddress = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-address') || 'N/A';
       
+      const paymentTermSelect = document.getElementById('payment-term');
+      const paymentTermId = paymentTermSelect.value;
+      const paymentTermText = paymentTermSelect.options[paymentTermSelect.selectedIndex].text;
+    
       // Get the list of products added to the cart
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
       const products = Array.from(productRows).map(row => {
@@ -400,18 +407,19 @@
           total
         };
       });
-    
+      
       // Calculate total bill
       let totalAmount = 0;
       products.forEach(product => {
         totalAmount += parseFloat(product.total.replace('₹', ''));
       });
-    
-      // Create printable content with customer address
+      
+      // Create printable content with customer address and payment term
       const printContent = `
         <h3>Bill Receipt</h3>
         <p><strong>Customer:</strong> ${customerName}</p>
         <p><strong>Address:</strong> ${customerAddress}</p>
+        <p><strong>Payment Term:</strong> ${paymentTermText}</p>
         <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr>
@@ -436,7 +444,7 @@
         </table>
         <p><strong>Total Amount:</strong> ₹${totalAmount.toFixed(2)}</p>
       `;
-    
+      
       // Create a new window to display the printable content
       const printWindow = window.open('', '', 'height=600,width=800');
       printWindow.document.write('<html><head><title>Bill Receipt</title></head><body>');
@@ -448,9 +456,6 @@
       printWindow.print();
     });
     
-    
-
-
   </script>
   
    
