@@ -184,11 +184,12 @@
               <div class="total-amount">₹1045</div>
               <div class="row">
                 <div class="col-6 px-1">
-                  <button class="btn btn-primary btn-block">Save Bill</button>
+                  <button id="save-bill-btn" class="btn btn-primary btn-block">Save Bill</button>
                 </div>
                 <div class="col-6 px-1">
-                  <button class="btn btn-secondary btn-block">Clear</button>
+                  <button id="clear-btn" class="btn btn-secondary btn-block">Clear</button>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -204,16 +205,6 @@
     </div>
   </div>
   <script>
-
-    // Function to save data to localStorage
-<<<<<<< HEAD
-
-=======
-=======
-<<<<<<< HEAD
-    // Function to save data to localStorage
-=======
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
     document.getElementById('customer').addEventListener('change', function () {
       const selectedOption = this.options[this.selectedIndex];
       const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
@@ -225,12 +216,6 @@
       document.getElementById('credit_limit').textContent = creditLimit;
     });
   
-<<<<<<< HEAD
-
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
     function saveToLocalStorage() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
       const products = Array.from(productRows).map((row) => {
@@ -243,81 +228,12 @@
       });
       localStorage.setItem('products', JSON.stringify(products));
     }
-
-<<<<<<< HEAD
-=======
-    // Function to load data from localStorage
-=======
-<<<<<<< HEAD
-
-=======
   
-<<<<<<< HEAD
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
     function loadFromLocalStorage() {
       const productData = JSON.parse(localStorage.getItem('products')) || [];
       const productTable = document.getElementById('product-table');
       const emptyRow = document.getElementById('empty-row');
-
-      productData.forEach((product, index) => {
-        const row = document.createElement('tr');
-        row.id = product-${product.id};
-        row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${product.name}</td>
-          <td>
-            <div class="btn-group">
-              <button class="btn btn-sm btn-secondary decrement">-</button>
-              <span class="quantity">${product.quantity}</span>
-              <button class="btn btn-sm btn-secondary increment">+</button>
-            </div>
-          </td>
-          <td>₹${product.price.toFixed(2)}</td>
-          <td>₹${product.price.toFixed(2)}</td>
-          <td>₹${(product.quantity * product.price).toFixed(2)}</td>
-          <td>
-            <button class="btn btn-sm btn-danger remove">
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        `;
-        productTable.appendChild(row);
-
-        // Add event listeners
-        row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
-        row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
-
-        row.querySelector('.remove').addEventListener('click', () => {
-          const confirmDelete = confirm("Are you sure you want to delete this product?");
-          if (confirmDelete) {
-            row.remove();
-            saveToLocalStorage();
-            calculateTotals();
-          }
-        });
-
-        if (emptyRow) emptyRow.remove();
-      });
-
-      calculateTotals(); // Recalculate totals after loading
-    }
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-    // Function to calculate totals
-=======
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
-    // Function to load data from localStorage
-    function loadFromLocalStorage() {
-      const productData = JSON.parse(localStorage.getItem('products')) || [];
-      const productTable = document.getElementById('product-table');
-      const emptyRow = document.getElementById('empty-row');
-
+  
       productData.forEach((product, index) => {
         const row = document.createElement('tr');
         row.id = `product-${product.id}`;
@@ -341,11 +257,9 @@
           </td>
         `;
         productTable.appendChild(row);
-
-        // Add event listeners
+  
         row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
         row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
-
         row.querySelector('.remove').addEventListener('click', () => {
           const confirmDelete = confirm("Are you sure you want to delete this product?");
           if (confirmDelete) {
@@ -354,104 +268,54 @@
             calculateTotals();
           }
         });
-
+  
         if (emptyRow) emptyRow.remove();
       });
-
+  
       calculateTotals(); // Recalculate totals after loading
     }
-
-
-    // Function to calculate totals
+  
     function calculateTotals() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
       let total = 0;
-
+  
       productRows.forEach((row) => {
         const totalCell = row.children[5];
-
-  
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
-    function calculateTotals() {
-      const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
-      let total = 0;
-
-      productRows.forEach((row) => {
-<<<<<<< HEAD
-        const totalCell = row.children[5];
-=======
-        const totalCell = row.children[5]; // Total price column
-        const quantityCell = row.querySelector('.quantity'); // Quantity column
-  
-<<<<<<< HEAD
-
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
         if (totalCell) {
           total += parseFloat(totalCell.textContent.replace('₹', '')) || 0;
         }
       });
-
-<<<<<<< HEAD
-      document.querySelector('.total-amount').textContent = ₹${total.toFixed(2)};
-      document.querySelectorAll('.fixed-summary-bar div')[4].textContent = Total Bill: ₹${total.toFixed(2)};
-      document.getElementById('bill-total').textContent = total.toFixed(2);
-
-=======
+  
       document.querySelector('.total-amount').textContent = `₹${total.toFixed(2)}`;
       document.querySelectorAll('.fixed-summary-bar div')[4].textContent = `Total Bill: ₹${total.toFixed(2)}`;
       document.getElementById('bill-total').textContent = total.toFixed(2);
-
-      // Update the total quantity field
-      document.getElementById('total-quantity').textContent = totalQty;
   
-      // Save updated totals to localStorage
-<<<<<<< HEAD
-
-=======
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
       localStorage.setItem('total', total.toFixed(2));
     }
-
-<<<<<<< HEAD
-=======
-    // Event listener for adding products to the table
-=======
-<<<<<<< HEAD
-
-    // Event listener for adding products to the table
-=======
   
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
     document.getElementById('search-btn').addEventListener('click', function () {
       const searchBar = document.getElementById('search-bar');
       const query = searchBar.value.toLowerCase().trim();
       const productOption = Array.from(document.querySelectorAll('#product-list option')).find(
         (option) => option.value.toLowerCase() === query
       );
-
+  
       if (productOption) {
         const pid = productOption.getAttribute('data-pid');
         const pname = productOption.value;
         const price = parseFloat(productOption.getAttribute('data-price'));
         const productTable = document.getElementById('product-table');
-
+  
         let existingRow = Array.from(productTable.children).find(
-          (row) => row.id === product-${pid} && row.querySelector('td:nth-child(2)').textContent === pname
+          (row) => row.id === `product-${pid}` && row.querySelector('td:nth-child(2)').textContent === pname
         );
-
+  
         if (existingRow) {
           updateQuantity(existingRow, 1);
         } else {
           const currentRowCount = productTable.querySelectorAll('tr').length;
           let row = document.createElement('tr');
-          row.id = product-${pid};
+          row.id = `product-${pid}`;
           row.innerHTML = `
             <td>${currentRowCount}</td>
             <td>${pname}</td>
@@ -472,7 +336,7 @@
             </td>
           `;
           productTable.appendChild(row);
-
+  
           row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
           row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
           row.querySelector('.remove').addEventListener('click', () => {
@@ -481,78 +345,116 @@
             calculateTotals();
           });
         }
-
+  
         saveToLocalStorage();
         calculateTotals();
       } else {
         alert('Product not found!');
       }
-
+  
       searchBar.value = ''; // Clear the search bar
     });
-
-<<<<<<< HEAD
-=======
-    // Update quantity logic
-=======
-<<<<<<< HEAD
-
-    // Update quantity logic
-=======
   
->>>>>>> 119c66d54f2b90449446c981f0b2c066fcbd08a6
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
     function updateQuantity(row, delta) {
       const quantitySpan = row.querySelector('.quantity');
       let quantity = parseInt(quantitySpan.textContent, 10);
       quantity = Math.max(1, quantity + delta);
       quantitySpan.textContent = quantity;
-
+  
       const price = parseFloat(row.children[3].textContent.replace('₹', ''));
-<<<<<<< HEAD
-      row.children[5].textContent = ₹${(quantity * price).toFixed(2)};
-=======
       row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
-
+  
       saveToLocalStorage();
       calculateTotals();
     }
-
-
-    // Load data from localStorage when the page loads
-    document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
-
-    // Event listener for 'Enter' key
-    document.getElementById('search-bar').addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        document.getElementById('search-btn').click();
-      }
-    });
-  </script>
   
-=======
-<<<<<<< HEAD
-
-    // Load data from localStorage when the page loads
-    document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
-
-    // Event listener for 'Enter' key
-    document.getElementById('search-bar').addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        document.getElementById('search-btn').click();
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFromLocalStorage();
+  
+      document.getElementById('search-bar').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          document.getElementById('search-btn').click();
+        }
+      });
     });
 
-  
-    document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
+
+    document.getElementById('save-bill-btn').addEventListener('click', function () {
+      // Get customer name and address
+      const customerSelect = document.getElementById('customer');
+      const customerName = customerSelect.options[customerSelect.selectedIndex].text;
+      const customerAddress = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-address') || 'N/A';
+      
+      // Get the list of products added to the cart
+      const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
+      const products = Array.from(productRows).map(row => {
+        const name = row.children[1].textContent;
+        const quantity = row.querySelector('.quantity').textContent;
+        const price = row.children[3].textContent;
+        const total = row.children[5].textContent;
+        return {
+          name,
+          quantity,
+          price,
+          total
+        };
+      });
+    
+      // Calculate total bill
+      let totalAmount = 0;
+      products.forEach(product => {
+        totalAmount += parseFloat(product.total.replace('₹', ''));
+      });
+    
+      // Create printable content with customer address
+      const printContent = `
+        <h3>Bill Receipt</h3>
+        <p><strong>Customer:</strong> ${customerName}</p>
+        <p><strong>Address:</strong> ${customerAddress}</p>
+        <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Item Name</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${products.map((product, index) => `
+              <tr>
+                <td>${index + 1}</td>
+                <td>${product.name}</td>
+                <td>${product.quantity}</td>
+                <td>${product.price}</td>
+                <td>${product.total}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <p><strong>Total Amount:</strong> ₹${totalAmount.toFixed(2)}</p>
+      `;
+    
+      // Create a new window to display the printable content
+      const printWindow = window.open('', '', 'height=600,width=800');
+      printWindow.document.write('<html><head><title>Bill Receipt</title></head><body>');
+      printWindow.document.write(printContent);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      
+      // Trigger the print dialog
+      printWindow.print();
+    });
+    
+    
+
 
   </script>
+  
    
->>>>>>> 7daba6ca002b0f549a459b4ed5ce7b9ce45a6673
+
        
   <!-- AdminLTE JS -->
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
@@ -563,8 +465,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<<<<<<< HEAD
+
 {% include "Component/Footer.html" %}
-=======
-{% include "Component/Footer.html" %}
->>>>>>> 8891c1ebcad1f8fb08bc4abdbd5f0f98140645be
+
+
+
