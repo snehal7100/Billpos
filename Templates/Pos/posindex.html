@@ -381,9 +381,10 @@
 
 
     document.getElementById('save-bill-btn').addEventListener('click', function () {
-      // Get customer name
+      // Get customer name and address
       const customerSelect = document.getElementById('customer');
       const customerName = customerSelect.options[customerSelect.selectedIndex].text;
+      const customerAddress = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-address') || 'N/A';
       
       // Get the list of products added to the cart
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
@@ -406,10 +407,11 @@
         totalAmount += parseFloat(product.total.replace('₹', ''));
       });
     
-      // Create printable content
+      // Create printable content with customer address
       const printContent = `
         <h3>Bill Receipt</h3>
         <p><strong>Customer:</strong> ${customerName}</p>
+        <p><strong>Address:</strong> ${customerAddress}</p>
         <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr>
@@ -445,6 +447,7 @@
       // Trigger the print dialog
       printWindow.print();
     });
+    
     
 
 
