@@ -12,6 +12,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Your existing styles remain unchanged */
+    @media print {
+      #search-bar, 
+      #search-btn, 
+      .add-button, 
+      .reset-button, 
+      .print-button, 
+      th:first-child,
+      td:first-child,
+      th:last-child, 
+      td:last-child,
+      .decrement,
+      .increment{
+        display: none !important;
+      }
+      .quantity {
+        display: inline-block;
+      }
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -20,6 +38,8 @@
       <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h3>Barcode Print</h3>
+          <!-- Current Date and Time Display -->
+          <div id="current-date-time"></div>
         </div>
         <div class="row">
           <div class="col">
@@ -36,7 +56,6 @@
                   </datalist>
                   <button id="search-btn" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                 </div>
-
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -57,9 +76,11 @@
                 </table>
 
                 <div class="button-container d-flex justify-content-center mb-3">
-                  <button class="btn btn-primary mx-2">Add</button>
-                  <button class="btn btn-primary mx-2">Reset</button>
+                  <button class="btn btn-primary add-button mx-2">Add</button>
+                  <button class="btn btn-primary reset-button mx-2">Reset</button>
+                  <button id="print-btn" class="btn btn-primary print-button mx-2">Print</button>
                 </div>
+
               </div>
             </div>
           </div>
@@ -77,6 +98,25 @@
   </div>
 
   <script>
+    // Function to display current date and time
+    function displayCurrentDateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      const formattedDateTime = now.toLocaleString('en-IN', options);
+      document.getElementById('current-date-time').textContent = formattedDateTime;
+    }
+
+    // Call the function to display date and time on page load
+    displayCurrentDateTime();
+
+    // Update the date and time every second
+    setInterval(displayCurrentDateTime, 1000);
+
+    // Print button functionality
+    document.getElementById('print-btn').addEventListener('click', function () {
+      window.print();
+    });
+
     // Function to save data to localStorage
     function saveToLocalStorage() {
       const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
@@ -84,7 +124,7 @@
         return {
           id: row.id.replace('product-', ''),
           name: row.children[1].textContent,
-          quantity: parseInt(row.querySelector('.quantity').textContent, 10),
+          quantity: parseInt(row.querySelector('.quantity').value, 10),
           price: parseFloat(row.children[3].textContent.replace('₹', '')),
         };
       });
@@ -103,13 +143,7 @@
         row.innerHTML = `
           <td>${index + 1}</td>
           <td>${product.name}</td>
-          <td>
-            <div class="btn-group">
-              <button class="btn btn-sm btn-secondary decrement">-</button>
-              <span class="quantity">${product.quantity}</span>
-              <button class="btn btn-sm btn-secondary increment">+</button>
-            </div>
-          </td>
+          <td><input type="number" class="form-control quantity" value="${product.quantity}" min="1"></td>
           <td>₹${product.price.toFixed(2)}</td>
           <td>₹${product.price.toFixed(2)}</td>
           <td>₹${(product.quantity * product.price).toFixed(2)}</td>
@@ -121,9 +155,12 @@
         `;
         productTable.appendChild(row);
 
-        // Add event listeners
-        row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
-        row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+        // Add event listener for quantity change
+        row.querySelector('.quantity').addEventListener('input', function () {
+          updateTotal(row);
+          saveToLocalStorage();
+          calculateTotals();
+        });
 
         row.querySelector('.remove').addEventListener('click', () => {
           const confirmDelete = confirm("Are you sure you want to delete this product?");
@@ -138,6 +175,13 @@
       });
 
       calculateTotals(); // Recalculate totals after loading
+    }
+
+    // Function to update the total for a product row
+    function updateTotal(row) {
+      const quantity = parseInt(row.querySelector('.quantity').value, 10) || 1;
+      const price = parseFloat(row.children[3].textContent.replace('₹', ''));
+      row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
     }
 
     // Function to calculate totals
@@ -178,7 +222,9 @@
         );
 
         if (existingRow) {
-          updateQuantity(existingRow, 1);
+          const quantityInput = existingRow.querySelector('.quantity');
+          quantityInput.value = parseInt(quantityInput.value, 10) + 1;
+          updateTotal(existingRow);
         } else {
           const currentRowCount = productTable.querySelectorAll('tr').length;
           let row = document.createElement('tr');
@@ -186,13 +232,7 @@
           row.innerHTML = `
             <td>${currentRowCount}</td>
             <td>${pname}</td>
-            <td>
-              <div class="btn-group">
-                <button class="btn btn-sm btn-secondary decrement">-</button>
-                <span class="quantity">1</span>
-                <button class="btn btn-sm btn-secondary increment">+</button>
-              </div>
-            </td>
+            <td><input type="number" class="form-control quantity" value="1" min="1"></td>
             <td>₹${price.toFixed(2)}</td>
             <td>₹${price.toFixed(2)}</td>
             <td>₹${price.toFixed(2)}</td>
@@ -204,8 +244,13 @@
           `;
           productTable.appendChild(row);
 
-          row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
-          row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+          // Add event listener for quantity change
+          row.querySelector('.quantity').addEventListener('input', function () {
+            updateTotal(row);
+            saveToLocalStorage();
+            calculateTotals();
+          });
+
           row.querySelector('.remove').addEventListener('click', () => {
             row.remove();
             saveToLocalStorage();
@@ -221,20 +266,6 @@
 
       searchBar.value = ''; // Clear the search bar
     });
-
-    // Update quantity logic
-    function updateQuantity(row, delta) {
-      const quantitySpan = row.querySelector('.quantity');
-      let quantity = parseInt(quantitySpan.textContent, 10);
-      quantity = Math.max(1, quantity + delta);
-      quantitySpan.textContent = quantity;
-
-      const price = parseFloat(row.children[3].textContent.replace('₹', ''));
-      row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
-
-      saveToLocalStorage();
-      calculateTotals();
-    }
 
     // Load data from localStorage when the page loads
     document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
