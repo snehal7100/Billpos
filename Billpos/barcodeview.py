@@ -16,7 +16,6 @@ def Barcodes(request):
         "productData": pData,
         "categoryData": categoryData,
         "bData": bData,  
-        "taxData": taxData, 
-
+        "taxData": taxData,
     }
     return render(request, "Barcode/index.html", context)
