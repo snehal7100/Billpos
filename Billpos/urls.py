@@ -50,6 +50,8 @@ from Billpos import barcodeview
 urlpatterns = [
 
 
+
+
     path('dashboard/', Dashboardview.dashboard),
 
     path('pos/', posview.posdashboard),
