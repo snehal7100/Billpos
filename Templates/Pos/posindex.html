@@ -127,6 +127,8 @@
                     {% endfor %}
                   </datalist>
                   <button id="search-btn" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+  
+
                 </div>
                 <table class="table table-bordered">
                   <thead>
@@ -146,6 +148,8 @@
                     </tr>
                   </tbody>
                 </table>
+                <button id="delete-all-btn" class="btn btn-danger btn-sm mx-auto d-block" style="margin-top: 20px;">Delete All</button>
+
               </div>
             </div>
           </div>
@@ -461,20 +465,23 @@
 
 
 
+//event listner for delete all records
+    document.getElementById('delete-all-btn').addEventListener('click', function () {
+    const confirmDeleteAll = confirm("Are you sure you want to delete all products?");
+    if (confirmDeleteAll) {
+      const productTable = document.getElementById('product-table');
+      productTable.innerHTML = ''; // Remove all rows
+      localStorage.removeItem('products'); // Clear products from localStorage
+      calculateTotals(); // Update totals
+      
+      // Add the empty row back
+      const emptyRow = document.createElement('tr');
+      emptyRow.id = 'empty-row';
+      emptyRow.innerHTML = `<td colspan="7">No products available</td>`;
+      productTable.appendChild(emptyRow);
+    }
+  });
 
-
-
-// Event listener for "Delete All" button
-document.getElementById('delete-all-btn').addEventListener('click', function () {
-  const confirmDeleteAll = confirm("Are you sure you want to delete all products?");
-  if (confirmDeleteAll) {
-    const productTable = document.getElementById('product-table');
-    productTable.innerHTML = '<tr id="empty-row"><td colspan="7">No products available</td></tr>';
-    localStorage.removeItem('products');
-    localStorage.removeItem('total');
-    calculateTotals(); // Recalculate totals to update the UI
-  }
-});
     
   </script>
   
