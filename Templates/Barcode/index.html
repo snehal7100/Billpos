@@ -37,7 +37,10 @@
                       </option>
                     {% endfor %}
                   </datalist>
-                  <button id="search-btn" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                  <!-- <button type="button" class="btn btn-primary btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+                    Add product
+                  </button> -->
+                  <button id="search-btn" class="btn btn-primary btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#addBrandModal"><i class="fa fa-plus"></i></button>
                 </div>
                 <table class="table table-bordered">
                   <thead>
@@ -59,10 +62,9 @@
                 </table>
 
                 <div class="button-container d-flex justify-content-center mb-3">
-                  <button class="btn btn-primary add-button mx-2">Add</button>
-                  <button class="btn btn-primary reset-button mx-2">Reset</button>
-                  <button id="delete-all-btn" class="btn btn-primary mx-2">Delete All</button>
-
+                  <button class="btn btn-primary add-button mx-2" style="margin-top: 20px;">Add</button>
+                  <button class="btn btn-primary reset-button mx-2" style="margin-top: 20px;">Reset</button>
+                  <button id="delete-all-btn" class="btn btn-danger mx-2" style="margin-top: 20px;">Delete All</button>
                   <!-- <button id="print-btn" class="btn btn-primary print-button mx-2">Print</button> -->
                 </div>
 
@@ -72,6 +74,101 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="max-width: 800px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addBrandModalLabel">Add Product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="/product-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="modal-body">
+              <!-- Row 1: Three columns -->
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <label for="pname" class="form-label">Product Name:</label>
+                  <input type="text" class="form-control" id="pname" name="pname">
+                </div>
+                <div class="col-md-4">
+                  <label for="hsncode" class="form-label">HSN Code:</label>
+                  <input type="text" class="form-control" id="hsncode" name="hsncode">
+                </div>
+                <div class="col-md-4">
+                  <label for="category" class="form-label">Category:</label>
+                  <select class="form-control" id="category" name="category">
+                    <option value="" disabled selected>Select category</option>
+                    {% for category in categoryData %}
+                    <option value="{{ category.id }}">{{ category.c_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+          
+              <!-- Row 2: Three columns -->
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <label for="brand" class="form-label">Brand:</label>
+                  <select class="form-control" id="brand" name="brand">
+                    <option value="" disabled selected>Select Brand</option>
+                    {% for brand in bData %}
+                    <option value="{{ brand.id }}">{{ brand.bname }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="tax" class="form-label">Tax:</label>
+                  <input type="text" class="form-control" id="tax" name="tax">
+                </div>
+                <div class="col-md-4">
+                  <label for="taxtype" class="form-label">Tax Type:</label>
+                  <select class="form-control" id="taxtype" name="taxtype">
+                    <option value="" disabled selected>Select Tax Type</option>
+                    {% for tax in taxData %}
+                    <option value="{{ tax.id }}">{{ tax.taxname }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+          
+              <!-- Row 3: Three columns -->
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <label for="punit" class="form-label">Primary Unit:</label>
+                  <input type="text" class="form-control" id="punit" name="punit">
+                </div>
+                <div class="col-md-4">
+                  <label for="aunit" class="form-label">Alternate Unit:</label>
+                  <input type="text" class="form-control" id="aunit" name="aunit">
+                </div>
+                <div class="col-md-4">
+                  <label for="cfactor" class="form-label">Conversion Factor:</label>
+                  <input type="text" class="form-control" id="cfactor" name="cfactor">
+                </div>
+              </div>
+          
+              <!-- Row 4: Two columns -->
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="price" class="form-label">Unit Price Per:</label>
+                  <input type="text" class="form-control" id="price" name="price">
+                </div>
+              </div>
+            </div>
+          
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+
+
+    
 
     <!-- <div class="fixed-summary-bar">
       <div>Last Bill: 5 | Amt: ₹89</div>
@@ -246,7 +343,7 @@
         saveToLocalStorage();
         calculateTotals();
       } else {
-        alert('Product not found!');
+        
       }
 
       searchBar.value = ''; // Clear the search bar
@@ -281,6 +378,10 @@ document.getElementById('delete-all-btn').addEventListener('click', function () 
 
 
 
+
+// document.getElementById('search-btn').addEventListener('click', function () {
+//     window.location.href = 'addproduct'; // Change 'addproduct' to the actual URL or route if necessary
+//   });
   </script>
 
   <!-- AdminLTE JS -->
