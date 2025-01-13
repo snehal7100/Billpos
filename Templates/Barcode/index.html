@@ -12,24 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Your existing styles remain unchanged */
-    @media print {
-      #search-bar, 
-      #search-btn, 
-      .add-button, 
-      .reset-button, 
-      .print-button, 
-      th:first-child,
-      td:first-child,
-      th:last-child, 
-      td:last-child,
-      .decrement,
-      .increment{
-        display: none !important;
-      }
-      .quantity {
-        display: inline-block;
-      }
-    }
+   
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -78,7 +61,9 @@
                 <div class="button-container d-flex justify-content-center mb-3">
                   <button class="btn btn-primary add-button mx-2">Add</button>
                   <button class="btn btn-primary reset-button mx-2">Reset</button>
-                  <button id="print-btn" class="btn btn-primary print-button mx-2">Print</button>
+                  <button id="delete-all-btn" class="btn btn-primary mx-2">Delete All</button>
+
+                  <!-- <button id="print-btn" class="btn btn-primary print-button mx-2">Print</button> -->
                 </div>
 
               </div>
@@ -88,14 +73,14 @@
       </div>
     </div>
 
-    <div class="fixed-summary-bar">
+    <!-- <div class="fixed-summary-bar">
       <div>Last Bill: 5 | Amt: ₹89</div>
       <div>Total Qty: <span>11</span></div>
       <div>Total MRP: ₹500.00</div>
       <div>Total Discount: ₹-545.00</div>
       <div>Total Bill: ₹1045</div>
     </div>
-  </div>
+  </div> -->
 
   <script>
     // Function to display current date and time
@@ -113,9 +98,9 @@
     setInterval(displayCurrentDateTime, 1000);
 
     // Print button functionality
-    document.getElementById('print-btn').addEventListener('click', function () {
-      window.print();
-    });
+    //document.getElementById('print-btn').addEventListener('click', function () {
+      //window.print();
+    //});
 
     // Function to save data to localStorage
     function saveToLocalStorage() {
@@ -277,6 +262,30 @@
         document.getElementById('search-btn').click();
       }
     });
+
+
+
+
+
+    // Event listener for "Delete All" button
+document.getElementById('delete-all-btn').addEventListener('click', function () {
+  const confirmDeleteAll = confirm("Are you sure you want to delete all products?");
+  if (confirmDeleteAll) {
+    const productTable = document.getElementById('product-table');
+    productTable.innerHTML = '<tr id="empty-row"><td colspan="7">No products available</td></tr>';
+    localStorage.removeItem('products');
+    localStorage.removeItem('total');
+    calculateTotals(); // Recalculate totals to update the UI
+  }
+});
+
+
+
+
+document.getElementById('search-btn').addEventListener('click', function () {
+    window.location.href = 'product-list'; 
+  });
+
   </script>
 
   <!-- AdminLTE JS -->

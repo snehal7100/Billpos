@@ -209,6 +209,9 @@
     </div>
   </div>
   <script>
+    
+
+
     document.getElementById('customer').addEventListener('change', function () {
       const selectedOption = this.options[this.selectedIndex];
       const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
@@ -455,6 +458,23 @@
       // Trigger the print dialog
       printWindow.print();
     });
+
+
+
+
+
+
+// Event listener for "Delete All" button
+document.getElementById('delete-all-btn').addEventListener('click', function () {
+  const confirmDeleteAll = confirm("Are you sure you want to delete all products?");
+  if (confirmDeleteAll) {
+    const productTable = document.getElementById('product-table');
+    productTable.innerHTML = '<tr id="empty-row"><td colspan="7">No products available</td></tr>';
+    localStorage.removeItem('products');
+    localStorage.removeItem('total');
+    calculateTotals(); // Recalculate totals to update the UI
+  }
+});
     
   </script>
   
