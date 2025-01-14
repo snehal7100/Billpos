@@ -1,31 +1,27 @@
 from django.shortcuts import render
 from Customer.models import Customer
 from Product.models import ProductModel
-from payment.models import Payment 
-# from Brand.models import BrandForm as Brand
-# from Taxes.models import Taxs as Tax
-# from category.models import Category  
+from payment.models import Payment  # Import the Payment model
+from category.models import Category
+from Brand.models import BrandForm
+from Taxes.models import Taxs  # Import your models for category, brand, and taxes
 
 def posdashboard(request):
-    # Fetch customer, product, and payment data
+    # Fetch data for customers, products, and payment terms
     cData = Customer.objects.all()  # Fetch all customer records
     pData = ProductModel.objects.all()  # Fetch all product records
-    paymentData = Payment.objects.all()
-    # brand_query = "SELECT * FROM tbl_brand"
-    # bData = Brand.objects.raw(brand_query)
-    # taxes_query = "SELECT * FROM tbl_taxes"
-    # taxData = Tax.objects.raw(taxes_query)
-    # category_query = "SELECT * FROM tbl_category"
-    # categoryData = Category.objects.raw(category_query)
-    
-      # Fetch all payment terms
+    paymentData = Payment.objects.all()  # Fetch all payment terms
+
+    # Fetch data for the modal
+    categoryData = Category.objects.all()  # Fetch all categories
+    brandData = BrandForm.objects.all()  # Fetch all brands
+    taxData = Taxs.objects.all()  # Fetch all tax types
 
     return render(request, "Pos/posindex.html", {
         "customerData": cData,
         "productData": pData,
-        "paymentData": paymentData,
-        # "bData": bData,  # Brand data for dropdown
-        # "taxData": taxData,  # Tax data for dropdown
-        # "categoryData": categoryData,  # Category data for dropdown
-
+        "paymentData": paymentData,  # Pass payment terms to the template
+        "categoryData": categoryData,  # Pass category data to the template
+        "brandData": brandData,  # Pass brand data to the template
+        "taxData": taxData  # Pass tax data to the template
     })

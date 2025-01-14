@@ -212,9 +212,107 @@
       <div>Total Bill: ₹1045</div>
     </div>
   </div>
+
+<!-- Modal -->
+<div class="modal fade" id="productAddModal" tabindex="-1" aria-labelledby="productAddModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productAddModalLabel">Add Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="post" action="product-add/"> <!-- Update action URL as needed -->
+        {% csrf_token %}
+        <div class="modal-body">
+          <!-- Row 1: Three columns -->
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="pname" class="form-label">Product Name:</label>
+              <input type="text" class="form-control" id="pname" name="pname" required>
+            </div>
+            <div class="col-md-4">
+              <label for="hsncode" class="form-label">HSN Code:</label>
+              <input type="text" class="form-control" id="hsncode" name="hsncode" required>
+            </div>
+            <div class="col-md-4">
+              <label for="category" class="form-label">Category:</label>
+              <select class="form-control" id="category" name="category" required>
+                <option value="" disabled selected>Select category</option>
+                {% for category in categoryData %}
+                <option value="{{ category.id }}">{{ category.c_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+      
+          <!-- Row 2: Three columns -->
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="brand" class="form-label">Brand:</label>
+              <select class="form-control" id="brand" name="brand" required>
+                <option value="" disabled selected>Select Brand</option>
+                {% for brand in brandData %}
+                <option value="{{ brand.id }}">{{ brand.bname }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="tax" class="form-label">Tax (%):</label>
+              <input type="text" class="form-control" id="tax" name="tax" required>
+            </div>
+            <div class="col-md-4">
+              <label for="taxtype" class="form-label">Tax Type:</label>
+              <select class="form-control" id="taxtype" name="taxtype" required>
+                <option value="" disabled selected>Select Tax Type</option>
+                {% for tax in taxData %}
+                <option value="{{ tax.id }}">{{ tax.taxname }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+      
+          <!-- Row 3: Three columns -->
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="punit" class="form-label">Primary Unit:</label>
+              <input type="text" class="form-control" id="punit" name="punit" required>
+            </div>
+            <div class="col-md-4">
+              <label for="aunit" class="form-label">Alternate Unit:</label>
+              <input type="text" class="form-control" id="aunit" name="aunit">
+            </div>
+            <div class="col-md-4">
+              <label for="cfactor" class="form-label">Conversion Factor:</label>
+              <input type="text" class="form-control" id="cfactor" name="cfactor" required>
+            </div>
+          </div>
+      
+          <!-- Row 4: One column -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="price" class="form-label">Unit Price:</label>
+              <input type="text" class="form-control" id="price" name="price" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
   <script>
     
-
+    document.getElementById('search-btn').addEventListener('click', function () {
+      // Open the modal when the plus icon is clicked
+      $('#productAddModal').modal('show');
+    });
+  
 
     document.getElementById('customer').addEventListener('change', function () {
       const selectedOption = this.options[this.selectedIndex];
