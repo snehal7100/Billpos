@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from Employee.models import Employee
 from django.contrib import messages
 
@@ -88,10 +88,17 @@ def editemployee(request, id):
         return redirect(emp)  # Replace with the correct view name for your employee list
 
 def deleteemployee(request, id):
-    EmployeeData = Employee.objects.get(id=int(id))
-    EmployeeData.delete()
-    messages.success(request, "Employee deleted successfully!")
-    return redirect(emp)
+    try:
+        employee = get_object_or_404(Employee, id=id)  # Fetch employee or raise 404 if not found
+        employee.delete()
+        messages.success(request, "Employee deleted successfully!")
+    except Exception as e:
+        messages.error(request, f"Error deleting employee: {e}")
+    return redirect(emp) 
+
+
+
+
 def Addemployee(request):
     if request.method == "GET":
         return render(request, "Employee/index.html")
