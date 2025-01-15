@@ -353,16 +353,13 @@
     document.addEventListener('DOMContentLoaded', loadFromLocalStorage);
 
     // Event listener for 'Enter' key
-    document.getElementById('search-bar').addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        document.getElementById('search-btn').click();
-      }
-    });
-
-
-
-
+   // Event listener for 'Enter' key
+document.getElementById('search-bar').addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Prevent the default form submission
+    document.getElementById('search-btn').click(); // Trigger the search button click
+  }
+});
 
     // Event listener for "Delete All" button
 document.getElementById('delete-all-btn').addEventListener('click', function () {
@@ -375,9 +372,6 @@ document.getElementById('delete-all-btn').addEventListener('click', function () 
     calculateTotals(); // Recalculate totals to update the UI
   }
 });
-
-
-
 
 // document.getElementById('search-btn').addEventListener('click', function () {
 //     window.location.href = 'addproduct'; // Change 'addproduct' to the actual URL or route if necessary
