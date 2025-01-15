@@ -126,8 +126,10 @@
                       </option>
                     {% endfor %}
                   </datalist>
-                  <button id="search-btn" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-  
+                  <button id="search-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBrandModal"><i class="fa fa-plus"></i></button>
+                  {% comment %} <button type="button" id="search-btn" class="btn btn-primary btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+                    Add product
+                  </button> {% endcomment %}
 
                 </div>
                 <table class="table table-bordered">
@@ -221,8 +223,7 @@
         <h5 class="modal-title" id="productAddModalLabel">Add Product</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="post" action="product-add/"> <!-- Update action URL as needed -->
-        {% csrf_token %}
+      <form action="/product-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">        {% csrf_token %}
         <div class="modal-body">
           <!-- Row 1: Three columns -->
           <div class="row mb-3">
@@ -306,127 +307,134 @@
 
 
 
-  <script>
-    
-    document.getElementById('search-btn').addEventListener('click', function () {
-      // Open the modal when the plus icon is clicked
-      $('#productAddModal').modal('show');
+<script>
+  // Open modal only when the button is clicked
+  document.getElementById('search-btn').addEventListener('click', function () {
+    // Open the modal when the search button is clicked
+    $('#productAddModal').modal('show');
+  });
+
+  // Handling customer selection change to display info
+  document.getElementById('customer').addEventListener('change', function () {
+    const selectedOption = this.options[this.selectedIndex];
+    const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
+    const address = selectedOption.getAttribute('data-address') || 'N/A';
+    const creditLimit = selectedOption.getAttribute('data-credit_limit') || 'N/A';
+
+    document.getElementById('mobile-no').textContent = mobileNo;
+    document.getElementById('address').textContent = address;
+    document.getElementById('credit_limit').textContent = creditLimit;
+  });
+
+  // Save cart data to localStorage
+  function saveToLocalStorage() {
+    const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
+    const products = Array.from(productRows).map((row) => {
+      return {
+        id: row.id.replace('product-', ''),
+        name: row.children[1].textContent,
+        quantity: parseInt(row.querySelector('.quantity').textContent, 10),
+        price: parseFloat(row.children[3].textContent.replace('₹', '')),
+      };
     });
-  
+    localStorage.setItem('products', JSON.stringify(products));
+    calculateTotals();  // Recalculate totals when saving
+  }
 
-    document.getElementById('customer').addEventListener('change', function () {
-      const selectedOption = this.options[this.selectedIndex];
-      const mobileNo = selectedOption.getAttribute('data-mobile') || 'N/A';
-      const address = selectedOption.getAttribute('data-address') || 'N/A';
-      const creditLimit = selectedOption.getAttribute('data-credit_limit') || 'N/A';
-  
-      document.getElementById('mobile-no').textContent = mobileNo;
-      document.getElementById('address').textContent = address;
-      document.getElementById('credit_limit').textContent = creditLimit;
-    });
+  // Load cart data from localStorage
+  function loadFromLocalStorage() {
+    const productData = JSON.parse(localStorage.getItem('products')) || [];
+    const productTable = document.getElementById('product-table');
+    const emptyRow = document.getElementById('empty-row');
 
-
-
-    
-
-
-
-
-  
-    function saveToLocalStorage() {
-      const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
-      const products = Array.from(productRows).map((row) => {
-        return {
-          id: row.id.replace('product-', ''),
-          name: row.children[1].textContent,
-          quantity: parseInt(row.querySelector('.quantity').textContent, 10),
-          price: parseFloat(row.children[3].textContent.replace('₹', '')),
-        };
-      });
-      localStorage.setItem('products', JSON.stringify(products));
+    if (productData.length === 0) {
+      const emptyRow = document.createElement('tr');
+      emptyRow.id = 'empty-row';
+      emptyRow.innerHTML = `<td colspan="7">No products available</td>`;
+      productTable.appendChild(emptyRow);
     }
-  
-    function loadFromLocalStorage() {
-      const productData = JSON.parse(localStorage.getItem('products')) || [];
-      const productTable = document.getElementById('product-table');
-      const emptyRow = document.getElementById('empty-row');
-  
-      productData.forEach((product, index) => {
-        const row = document.createElement('tr');
-        row.id = `product-${product.id}`;
-        row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${product.name}</td>
-          <td>
-            <div class="btn-group">
-              <button class="btn btn-sm btn-secondary decrement">-</button>
-              <span class="quantity">${product.quantity}</span>
-              <button class="btn btn-sm btn-secondary increment">+</button>
-            </div>
-          </td>
-          <td>₹${product.price.toFixed(2)}</td>
-          <td>₹${product.price.toFixed(2)}</td>
-          <td>₹${(product.quantity * product.price).toFixed(2)}</td>
-          <td>
-            <button class="btn btn-sm btn-danger remove">
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        `;
-        productTable.appendChild(row);
-  
-        row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
-        row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
-        row.querySelector('.remove').addEventListener('click', () => {
-          const confirmDelete = confirm("Are you sure you want to delete this product?");
-          if (confirmDelete) {
-            row.remove();
-            saveToLocalStorage();
-            calculateTotals();
-          }
-        });
-  
-        if (emptyRow) emptyRow.remove();
-      });
-  
-      calculateTotals(); // Recalculate totals after loading
-    }
-  
-    function calculateTotals() {
-      const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
-      let total = 0;
-  
-      productRows.forEach((row) => {
-        const totalCell = row.children[5];
-        if (totalCell) {
-          total += parseFloat(totalCell.textContent.replace('₹', '')) || 0;
+
+    productData.forEach((product, index) => {
+      const row = document.createElement('tr');
+      row.id = `product-${product.id}`;
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${product.name}</td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-sm btn-secondary decrement">-</button>
+            <span class="quantity">${product.quantity}</span>
+            <button class="btn btn-sm btn-secondary increment">+</button>
+          </div>
+        </td>
+        <td>₹${product.price.toFixed(2)}</td>
+        <td>₹${product.price.toFixed(2)}</td>
+        <td>₹${(product.quantity * product.price).toFixed(2)}</td>
+        <td>
+          <button class="btn btn-sm btn-danger remove">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      `;
+      productTable.appendChild(row);
+
+      row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
+      row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
+      row.querySelector('.remove').addEventListener('click', () => {
+        const confirmDelete = confirm("Are you sure you want to delete this product?");
+        if (confirmDelete) {
+          row.remove();
+          saveToLocalStorage();
+          calculateTotals();
         }
       });
-  
-      document.querySelector('.total-amount').textContent = `₹${total.toFixed(2)}`;
-      document.querySelectorAll('.fixed-summary-bar div')[4].textContent = `Total Bill: ₹${total.toFixed(2)}`;
-      document.getElementById('bill-total').textContent = total.toFixed(2);
-  
-      localStorage.setItem('total', total.toFixed(2));
-    }
-  
-    document.getElementById('search-btn').addEventListener('click', function () {
+
+      if (emptyRow) emptyRow.remove();
+    });
+
+    calculateTotals();  // Recalculate totals after loading
+  }
+
+  // Calculate the total amount for the products
+  function calculateTotals() {
+    const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
+    let total = 0;
+
+    productRows.forEach((row) => {
+      const totalCell = row.children[5];
+      if (totalCell) {
+        total += parseFloat(totalCell.textContent.replace('₹', '')) || 0;
+      }
+    });
+
+    document.querySelector('.total-amount').textContent = `₹${total.toFixed(2)}`;
+    document.querySelectorAll('.fixed-summary-bar div')[4].textContent = `Total Bill: ₹${total.toFixed(2)}`;
+    document.getElementById('bill-total').textContent = total.toFixed(2);
+
+    localStorage.setItem('total', total.toFixed(2));
+  }
+
+  // Handling the search bar and adding products to the table
+  document.getElementById('search-bar').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent default action
+
       const searchBar = document.getElementById('search-bar');
       const query = searchBar.value.toLowerCase().trim();
       const productOption = Array.from(document.querySelectorAll('#product-list option')).find(
         (option) => option.value.toLowerCase() === query
       );
-  
+
       if (productOption) {
         const pid = productOption.getAttribute('data-pid');
         const pname = productOption.value;
         const price = parseFloat(productOption.getAttribute('data-price'));
         const productTable = document.getElementById('product-table');
-  
+
         let existingRow = Array.from(productTable.children).find(
           (row) => row.id === `product-${pid}` && row.querySelector('td:nth-child(2)').textContent === pname
         );
-  
+
         if (existingRow) {
           updateQuantity(existingRow, 1);
         } else {
@@ -453,7 +461,7 @@
             </td>
           `;
           productTable.appendChild(row);
-  
+
           row.querySelector('.increment').addEventListener('click', () => updateQuantity(row, 1));
           row.querySelector('.decrement').addEventListener('click', () => updateQuantity(row, -1));
           row.querySelector('.remove').addEventListener('click', () => {
@@ -462,124 +470,101 @@
             calculateTotals();
           });
         }
-  
+
         saveToLocalStorage();
         calculateTotals();
       } else {
         alert('Product not found!');
       }
-  
-      searchBar.value = ''; // Clear the search bar
-    });
-  
-    function updateQuantity(row, delta) {
-      const quantitySpan = row.querySelector('.quantity');
-      let quantity = parseInt(quantitySpan.textContent, 10);
-      quantity = Math.max(1, quantity + delta);
-      quantitySpan.textContent = quantity;
-  
-      const price = parseFloat(row.children[3].textContent.replace('₹', ''));
-      row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
-  
-      saveToLocalStorage();
-      calculateTotals();
+
+      searchBar.value = ''; // Clear the search bar after the action
     }
-  
-    document.addEventListener('DOMContentLoaded', () => {
-      loadFromLocalStorage();
-  
-      document.getElementById('search-bar').addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          document.getElementById('search-btn').click();
-        }
-      });
+  });
+
+  // Update the quantity of products in the cart
+  function updateQuantity(row, delta) {
+    const quantitySpan = row.querySelector('.quantity');
+    let quantity = parseInt(quantitySpan.textContent, 10);
+    quantity = Math.max(1, quantity + delta);
+    quantitySpan.textContent = quantity;
+
+    const price = parseFloat(row.children[3].textContent.replace('₹', ''));
+    row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
+
+    saveToLocalStorage();
+    calculateTotals();
+  }
+
+  // Save bill and print receipt
+  document.getElementById('save-bill-btn').addEventListener('click', function () {
+    // Collect customer data and product list
+    const customerSelect = document.getElementById('customer');
+    const customerName = customerSelect.options[customerSelect.selectedIndex].text;
+    const customerAddress = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-address') || 'N/A';
+
+    const paymentTermSelect = document.getElementById('payment-term');
+    const paymentTermText = paymentTermSelect.options[paymentTermSelect.selectedIndex].text;
+
+    const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
+    const products = Array.from(productRows).map(row => ({
+      name: row.children[1].textContent,
+      quantity: row.querySelector('.quantity').textContent,
+      price: row.children[3].textContent,
+      total: row.children[5].textContent
+    }));
+
+    let totalAmount = 0;
+    products.forEach(product => {
+      totalAmount += parseFloat(product.total.replace('₹', ''));
     });
 
-    document.getElementById('save-bill-btn').addEventListener('click', function () {
-      // Get customer name, address, and payment term
-      const customerSelect = document.getElementById('customer');
-      const customerName = customerSelect.options[customerSelect.selectedIndex].text;
-      const customerAddress = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-address') || 'N/A';
-      
-      const paymentTermSelect = document.getElementById('payment-term');
-      const paymentTermId = paymentTermSelect.value;
-      const paymentTermText = paymentTermSelect.options[paymentTermSelect.selectedIndex].text;
-    
-      // Get the list of products added to the cart
-      const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
-      const products = Array.from(productRows).map(row => {
-        const name = row.children[1].textContent;
-        const quantity = row.querySelector('.quantity').textContent;
-        const price = row.children[3].textContent;
-        const total = row.children[5].textContent;
-        return {
-          name,
-          quantity,
-          price,
-          total
-        };
-      });
-      
-      // Calculate total bill
-      let totalAmount = 0;
-      products.forEach(product => {
-        totalAmount += parseFloat(product.total.replace('₹', ''));
-      });
-      
-      // Create printable content with customer address and payment term
-      const printContent = `
-        <h3>Bill Receipt</h3>
-        <p><strong>Customer:</strong> ${customerName}</p>
-        <p><strong>Address:</strong> ${customerAddress}</p>
-        <p><strong>Payment Term:</strong> ${paymentTermText}</p>
-        <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-          <thead>
+    const printContent = `
+      <h3>Bill Receipt</h3>
+      <p><strong>Customer:</strong> ${customerName}</p>
+      <p><strong>Address:</strong> ${customerAddress}</p>
+      <p><strong>Payment Term:</strong> ${paymentTermText}</p>
+      <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Item Name</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${products.map((product, index) => `
             <tr>
-              <th>No.</th>
-              <th>Item Name</th>
-              <th>Qty</th>
-              <th>Price</th>
-              <th>Total</th>
+              <td>${index + 1}</td>
+              <td>${product.name}</td>
+              <td>${product.quantity}</td>
+              <td>${product.price}</td>
+              <td>${product.total}</td>
             </tr>
-          </thead>
-          <tbody>
-            ${products.map((product, index) => `
-              <tr>
-                <td>${index + 1}</td>
-                <td>${product.name}</td>
-                <td>${product.quantity}</td>
-                <td>${product.price}</td>
-                <td>${product.total}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-        <p><strong>Total Amount:</strong> ₹${totalAmount.toFixed(2)}</p>
-      `;
-      
-      // Create a new window to display the printable content
-      const printWindow = window.open('', '', 'height=600,width=800');
-      printWindow.document.write('<html><head><title>Bill Receipt</title></head><body>');
-      printWindow.document.write(printContent);
-      printWindow.document.write('</body></html>');
-      printWindow.document.close();
-      
-      // Trigger the print dialog
-      printWindow.print();
-    });
+          `).join('')}
+        </tbody>
+      </table>
+      <p><strong>Total Amount:</strong> ₹${totalAmount.toFixed(2)}</p>
+    `;
 
+    const printWindow = window.open('', '', 'height=600,width=800');
+    printWindow.document.write('<html><head><title>Bill Receipt</title></head><body>');
+    printWindow.document.write(printContent);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+  });
 
-
-//event listner for delete all records
-    document.getElementById('delete-all-btn').addEventListener('click', function () {
+  // Delete all products and reset
+  document.getElementById('delete-all-btn').addEventListener('click', function () {
     const confirmDeleteAll = confirm("Are you sure you want to delete all products?");
     if (confirmDeleteAll) {
       const productTable = document.getElementById('product-table');
       productTable.innerHTML = ''; // Remove all rows
       localStorage.removeItem('products'); // Clear products from localStorage
       calculateTotals(); // Update totals
-      
+
       // Add the empty row back
       const emptyRow = document.createElement('tr');
       emptyRow.id = 'empty-row';
@@ -588,9 +573,13 @@
     }
   });
 
-    
-  </script>
-  
+  // Load the cart from localStorage when the page loads
+  window.onload = function() {
+    loadFromLocalStorage();
+  };
+</script>
+
+
    
 
        
