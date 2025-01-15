@@ -210,7 +210,7 @@
                         <td>{{ i.price }}</td>
                         <td>
                           <a href="/product-edit/{{ i.id }}" class="fa fa-edit"></a>
-                          <a href="/product-delete/{{ i.id }}" class="fa fa-trash"></a>
+                          <a href="javascript:void(0);" class="fa fa-trash" onclick="confirmDelete('{{ i.id }}')"></a>
                         </td>
                       </tr>
                       {% empty %}
@@ -334,6 +334,14 @@
     }
     return true;
   }
+
+
+
+  function confirmDelete(PaymentID) {
+    if (confirm("Are you sure you want to delete this Product?")) {
+        window.location.href = `/product-delete/${PaymentID}`;
+    }
+}
 </script>
 
 
