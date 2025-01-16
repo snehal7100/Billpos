@@ -1,34 +1,33 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from Reward.models import RewarsPoints
 from django.contrib import messages
-from django.http import JsonResponse
 
 def Rewards(request):
     rData = RewarsPoints.objects.all()
-    rdata = {
-        "rData": rData
-    }
-    return render(request, "Rewards/index.html", rdata)
+    return render(request, "Rewards/index.html", {"rData": rData})
 
 def editRewards(request, id):
-    rData = RewarsPoints.objects.get(id=int(id))
-    if request.method == "GET":
-        rData = {
-            "rData": rData,
-        }
-        return render(request, "Rewards/edit.html", rData)
-    else:
-        minrange = request.POST.get("minrage")
+    rData = get_object_or_404(RewarsPoints, id=id)
+
+    if request.method == "POST":
+        minrange = request.POST.get("minrange")
         maxrange = request.POST.get("maxrange")
         points = request.POST.get("points")
 
+        if not minrange or not maxrange or not points:
+            messages.error(request, "All fields are required.")
+            return redirect(f"/rewards-edit/{id}")
+
         # Update the reward
-        rData.minrage = minrange
+        rData.minrange = minrange
         rData.maxrange = maxrange
         rData.points = points
         rData.save()
-        return redirect(Rewards)
 
+        messages.success(request, "Reward updated successfully.")
+        return redirect(Rewards)
+    else:
+        return render(request, "Rewards/edit.html", {"rData": rData})
 
 def AddRewards(request):
     if request.method == "POST":
@@ -37,31 +36,26 @@ def AddRewards(request):
         points = request.POST.get("points", "").strip()
 
         if not minrange or not maxrange or not points:
-            return JsonResponse({"message": "All fields are required."}, status=400)
+            messages.error(request, "All fields are required.")
+            return redirect("/rewards-add/")
 
         if RewarsPoints.objects.filter(minrange=minrange, maxrange=maxrange).exists():
-            return JsonResponse({"message": "A reward with the same range already exists."}, status=400)
+            messages.error(request, "A reward with the same range already exists.")
+            return redirect("/rewards-add/")
 
-        saveData = RewarsPoints(
+        RewarsPoints.objects.create(
             minrange=minrange,
             maxrange=maxrange,
             points=points,
         )
-        saveData.save()
-        return JsonResponse({
-            "message": "Reward added successfully!",
-            "data": {
-                "id": saveData.id,
-                "minrange": saveData.minrange,
-                "maxrange": saveData.maxrange,
-                "points": saveData.points
-            }
-        }, status=200)
+        messages.success(request, "Reward added successfully!")
+        return redirect(Rewards)
 
-    return JsonResponse({"message": "Invalid request method."}, status=405)
-
+    messages.error(request, "Invalid request method.")
+    return redirect(Rewards)
 
 def delete(request, id):
-    rData = RewarsPoints.objects.get(id=int(id))
+    rData = get_object_or_404(RewarsPoints, id=id)
     rData.delete()
+    messages.success(request, "Reward deleted successfully.")
     return redirect(Rewards)
