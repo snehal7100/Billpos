@@ -208,7 +208,9 @@
     </div>
     <div class="fixed-summary-bar">
       <div>Last Bill: 5 | Amt: ₹89</div>
-      <div>Total Qty: <span>11</span></div>
+      <div id="total-qty">Total Qty: <span>0</span></div>
+
+
       <div>Total MRP: ₹500.00</div>
       <div>Total Discount: ₹-545.00</div>
       <div>Total Bill: ₹1045</div>
@@ -306,7 +308,6 @@
 </div>
 
 
-
 <script>
   // Open modal only when the button is clicked
   document.getElementById('search-btn').addEventListener('click', function () {
@@ -339,6 +340,7 @@
     });
     localStorage.setItem('products', JSON.stringify(products));
     calculateTotals();  // Recalculate totals when saving
+    updateTotalQty();  // Update the total quantity
   }
 
   // Load cart data from localStorage
@@ -393,6 +395,7 @@
     });
 
     calculateTotals();  // Recalculate totals after loading
+    updateTotalQty();   // Update the total quantity
   }
 
   // Calculate the total amount for the products
@@ -412,6 +415,34 @@
     document.getElementById('bill-total').textContent = total.toFixed(2);
 
     localStorage.setItem('total', total.toFixed(2));
+  }
+
+  // Update the quantity of products in the cart
+  function updateQuantity(row, delta) {
+    const quantitySpan = row.querySelector('.quantity');
+    let quantity = parseInt(quantitySpan.textContent, 10);
+    quantity = Math.max(1, quantity + delta);
+    quantitySpan.textContent = quantity;
+
+    const price = parseFloat(row.children[3].textContent.replace('₹', ''));
+    row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
+
+    saveToLocalStorage();
+    calculateTotals();
+    updateTotalQty();  // Update the total quantity
+  }
+
+  // Update the total quantity displayed
+  function updateTotalQty() {
+    const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
+    let totalQty = 0;
+
+    productRows.forEach((row) => {
+      const quantity = parseInt(row.querySelector('.quantity').textContent, 10);
+      totalQty += quantity;
+    });
+
+    document.querySelector('#total-qty span').textContent = totalQty;
   }
 
   // Handling the search bar and adding products to the table
@@ -473,6 +504,7 @@
 
         saveToLocalStorage();
         calculateTotals();
+        updateTotalQty();  // Update the total quantity
       } else {
         alert('Product not found!');
       }
@@ -480,20 +512,6 @@
       searchBar.value = ''; // Clear the search bar after the action
     }
   });
-
-  // Update the quantity of products in the cart
-  function updateQuantity(row, delta) {
-    const quantitySpan = row.querySelector('.quantity');
-    let quantity = parseInt(quantitySpan.textContent, 10);
-    quantity = Math.max(1, quantity + delta);
-    quantitySpan.textContent = quantity;
-
-    const price = parseFloat(row.children[3].textContent.replace('₹', ''));
-    row.children[5].textContent = `₹${(quantity * price).toFixed(2)}`;
-
-    saveToLocalStorage();
-    calculateTotals();
-  }
 
   // Save bill and print receipt
   document.getElementById('save-bill-btn').addEventListener('click', function () {
@@ -580,6 +598,8 @@
 </script>
 
 
+
+
    
 
        
@@ -594,6 +614,4 @@
 </html>
 
 {% include "Component/Footer.html" %}
-
-
 
