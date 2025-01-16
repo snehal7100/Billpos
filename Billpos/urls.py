@@ -115,11 +115,11 @@ urlpatterns = [
 
 
 
+path('rewards-list/', rewardsview.Rewards),
+path('rewards-add/', rewardsview.AddRewards),
+path('rewards-edit/<id>/', rewardsview.editRewards),  
+path('rewards-delete/<id>', rewardsview.delete),
 
-    path('rewards-list/', rewardsview.Rewards),
-    path('rewards-add/', rewardsview.AddRewards),
-    path('rewards-edit/<id>/', rewardsview.editRewards),  
-    path('rewards-delete/<id>', rewardsview.delete),
 
 
 
