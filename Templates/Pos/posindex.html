@@ -146,7 +146,7 @@
                   </thead>
                   <tbody id="product-table">
                     <tr id="empty-row">
-                      <td colspan="7">No products available</td>
+                      <td colspan="7"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -352,7 +352,7 @@
     if (productData.length === 0) {
       const emptyRow = document.createElement('tr');
       emptyRow.id = 'empty-row';
-      emptyRow.innerHTML = `<td colspan="7">No products available</td>`;
+      emptyRow.innerHTML = `<td colspan="7"></td>`;
       productTable.appendChild(emptyRow);
     }
 
