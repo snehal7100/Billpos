@@ -20,21 +20,24 @@ def Brands(request):
 #     }
 #     return render(request,"Brand/view.html",bData)
 
-def editBrand(request,id):
-    bData= BrandForm.objects.get(id=int(id))
+def editBrand(request, id):
+    bData = get_object_or_404(BrandForm, id=id)
     if request.method == "GET":
-        bData={
-        "bData":bData,
-    }
-        return render(request,"Brand/edit.html",bData)
+        context = {
+            "bData": bData,
+        }
+        return render(request, "Brand/edit.html", context)
     else:
         name = request.POST.get("bname")
-        img= request.FILES.get("img")
-        bData.bname=name
-        bData.img=img  
+        img = request.FILES.get("img")
+        bData.bname = name
+        if img:  # Update image only if a new one is uploaded
+            bData.img = img
         bData.save()
+
+        # Add success message
+        messages.success(request, "Brand updated successfully!")
         return redirect(Brands)
-    
 def delete(request, id):
     bData = get_object_or_404(BrandForm, id=id)
     bData.delete()
