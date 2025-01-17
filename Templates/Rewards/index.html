@@ -1,116 +1,194 @@
 {% include "Component/header.html" %}
 {% include "Component/sidebar.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Range and Points Form</title>
-    <style>
-       
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .form-group input {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .form-group button {
-            background-color:rgb(40, 110, 167);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .form-group button:hover {
-            background-color:rgb(58, 136, 210);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table th, table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        table th {
-            background-color: #f1f1f1;
-        }
-        .action-icons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .action-icons a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        .action-icons a.delete {
-            color: #dc3545;
-        }
-        .btn-primary {
-          background-color: #007bff;
-          border-color: #007bff;
-          border-radius: 10px;
-          padding: 12px 25px; 
-          font-size: 16px; 
-          font-weight: 600;  
-        }
-      
-        .btn-primary:hover {
-          background-color: #0056b3;
-          border-color: #0056b3;
-        }
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f7fc;
+    }
 
-        /* Styles for messages */
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+    .container-fluid {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
 
-        .alert-success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
+    .content-wrapper {
+        margin-top: 80px;
+    }
 
-        .alert-danger {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
+    .modal-content {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-  
-    </style>
-</head>
-<body>
+    .modal-header {
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #ddd;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .modal-body .form-label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .modal-body .form-control {
+        border-radius: 10px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+    }
+
+    .modal-footer button {
+        border-radius: 10px;
+    }
+
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    table th, table td {
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    table thead {
+        background-color: #343a40;
+        color: white;
+    }
+
+    table tbody tr {
+        background-color: #ffffff;
+        transition: background-color 0.3s ease;
+    }
+
+    table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 10px;
+        padding: 12px 25px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .a {
+        border-radius: 10px;
+        padding: 10px 15px;
+        font-size: 14px;
+        font-weight: 600;
+        background-color: #007bff;
+        border: none;
+    }
+
+    .a:hover {
+        background-color: #0056b3;
+    }
+
+    .fa {
+        color: #007bff;
+        cursor: pointer;
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .fa:hover {
+        color: #0056b3;
+    }
+
+    .fa-edit {
+        color: #6a0dad;
+        cursor: pointer;
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .fa-edit:hover {
+        color: #4b0082;
+    }
+
+    .fa-trash {
+        color: red;
+        cursor: pointer;
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .fa-trash:hover {
+        color: darkred;
+    }
+
+    .no-records {
+        text-align: center;
+        color: #777;
+        font-size: 16px;
+        padding: 20px 0;
+    }
+
+    .form-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .form-group input {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .form-group button {
+        background-color: rgb(40, 110, 167);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .form-group button:hover {
+        background-color: rgb(58, 136, 210);
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+    }
+</style>
 
 <div class="container-fluid mt-5">
     <div class="content-wrapper">
@@ -135,7 +213,17 @@
             </div>
         </form>
 
-        <table>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <!-- Optional content for left side (if needed) -->
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <!-- Optional content for right side (if needed) -->
+            </div>
+        </div>
+
+        <table id="rewardsTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -167,28 +255,35 @@
     </div>
 </div>
 
+<!-- Add DataTables CSS -->
+<link href="https://cdn.jsdelivr.net/npm/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<!-- Add DataTables JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/datatables.net/js/jquery.dataTables.min.js"></script>
+
 <script>
+    $(document).ready(function() {
+        // Initialize DataTables
+        $('#rewardsTable').DataTable({
+            "paging": true, // Enable pagination
+            "searching": true, // Enable search
+            "lengthChange": false, // Disable the "Show entries" option
+            "order": [[0, 'asc']]  // Sort by the first column (ID) by default
+        });
 
-
-
-// Check if the message exists
-window.onload = function() {
-    var message = document.getElementById('message');
-    if (message) {
-        var msgContent = message.getAttribute('data-message');
-        var msgTag = message.getAttribute('data-tag');
-        
-        // Display alert based on the message type
-        if (msgTag == 'error') {
-            alert("Error: " + msgContent);
-        } else {
-            alert("Success: " + msgContent);
+        var message = document.getElementById('message');
+        if (message) {
+            var msgContent = message.getAttribute('data-message');
+            var msgTag = message.getAttribute('data-tag');
+            
+            if (msgTag == 'error') {
+                alert("Error: " + msgContent);
+            } else {
+                alert("Success: " + msgContent);
+            }
         }
-    }
-}
+    });
 </script>
-
-</body>
-</html>
 
 {% include "Component/footer.html" %}
