@@ -80,12 +80,12 @@ urlpatterns = [
     path('brand-add/', brandview.AddBrand),
 
 
-    path('tax-list/', Taxview.TaxList),  
-    path('tax-view/<id>', Taxview.TaxView), 
-    
-    path('tax-edit/<id>', Taxview.editTax),  
-    path('tax-delete/<id>', Taxview.deleteTax), 
+   path('tax-list/', Taxview.TaxList),  
+    path('tax-view/<id>/', Taxview.TaxView),  
+    path('tax-edit/<id>/', Taxview.editTax),  
+    path('tax-delete/<id>/', Taxview.deleteTax),  
     path('tax-add/', Taxview.addTax),  
+
 
     path('customer-list/', customerview.Customers),
     path('customer-view/<int:id>', customerview.editCustomer),
