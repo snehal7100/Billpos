@@ -31,9 +31,9 @@ def editTax(request, id):
         # Server-side validation for empty fields
         if not taxname or not taxpercentage:
             if not taxname:
-                messages.error(request, "Tax Name is required.")
+                messages.error(request, "")
             if not taxpercentage:
-                messages.error(request, "Tax Percentage is required.")
+                messages.error(request, "")
 
             # Re-render the form with the current data if validation fails
             return render(request, "Tax/Taxedit.html", {
@@ -44,8 +44,9 @@ def editTax(request, id):
         taxData.taxname = taxname
         taxData.taxpercentage = taxpercentage
         taxData.save()
-        messages.success(request, "Tax record updated successfully.")
-        return redirect('tax-view', id=id)  # Redirect to the updated tax record detail
+       
+        return redirect(TaxList)
+ # Redirect to the updated tax record detail
 
     context = {
         "taxData": taxData
@@ -109,4 +110,4 @@ def addTax(request):
         return redirect(TaxList)  # Redirect to the tax list page
 
     # Render the form for GET requests
-    return render(request, "Tax/Taxaddform.html")
+    return render(request, TaxList)
