@@ -45,7 +45,7 @@ def editTax(request, id):
         taxData.taxpercentage = taxpercentage
         taxData.save()
        
-        return redirect('tax-view', id=id)
+        return redirect(TaxList)
  # Redirect to the updated tax record detail
 
     context = {
