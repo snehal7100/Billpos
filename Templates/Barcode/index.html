@@ -21,60 +21,107 @@
     </style>
 </head>
 <body>
-
-<div class="container-fluid mt-5">
-    <div class="content-wrapper">
-        <div class="card">
-            <h2>Barcode Print</h2>
-            <div class="input-group search-bar">
-                <input type="text" class="form-control" id="search-bar" placeholder="Search" list="product-list">
-                <datalist id="product-list">
-                    {% for product in productData %}
-                        <option value="{{ product.pname }}" data-pid="{{ product.pid }}" data-price="{{ product.price }}">
-                            {{ product.pname }} (₹{{ product.price }})
-                        </option>
-                    {% endfor %}
-                </datalist>
-                <div class="input-group-append">
-                    <!-- Button to open the modal -->
-                    <button id="search-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBrandModal">
-                        <i class="fa fa-plus"></i> 
-                    </button>
+    <div class="container-fluid mt-5">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header d-flex align-items-center">
+                  <h2>Barcode Print &amp; View</h2>
                 </div>
+                  <div class="input-group search-bar">
+                    <input type="text" class="form-control" id="search-bar" placeholder="" list="product-list">
+                    <datalist id="product-list">
+                        {% for product in productData %}
+                            <option value="{{ product.pname }}" data-pid="{{ product.pid }}" data-price="{{ product.price }}">
+                                {{ product.pname }} (₹{{ product.price }})
+                            </option>
+                        {% endfor %}
+                    </datalist>
+                    <div class="input-group-append">
+                        <!-- Button to open the modal -->
+                        <button id="search-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+                            <i class="fa fa-plus"></i> 
+                        </button>
+                    </div>
+                
+                  
+                </div>
+                <div class="card-body">
+                  <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6">
+                    </div>
+      
+                    <div class="col-sm-12 col-md-6">
+                    </div>
+      
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <!-- Scrollable Table Container -->
+                        
+                          <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                            <thead>
+                                <tr>
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                                    No</th>
+                                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Browser: activate to sort column ascending">Item Name</th>
+                                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Platform(s): activate to sort column ascending">Qty</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Platform(s): activate to sort column ascending">Mrp</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Platform(s): activate to sort column ascending">Sale Price</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Platform(s): activate to sort column ascending">Total</th>
+                                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending">Action</th>
+                                  </tr>
+                            </thead>
+                            <tbody id="product-table">
+                                <tr id="empty-row">
+                                    <td colspan="7" class="text-center">No products added yet</td>
+                                </tr>
+                            </tbody>
+                        </div>
+                        <!-- End Scrollable Table Container -->
+                      </div>
+                    </div>
+                    
+                         
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <table class="table table-bordered">
-                <div class="row  ">
-                    <div class="col-sm-12">
-                      <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
-                        <thead>
-                          <tr>
-                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                            No</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Browser: activate to sort column ascending">Item Name</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Qty</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Mrp</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Sale Price</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">Total</th>
-                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending">Action</th>
-                          </tr>
-                        </thead>
-                <tbody id="product-table">
-                    <tr id="empty-row">
-                        <td colspan="7" class="text-center">No products added yet</td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- <button type="button" class="btn btn-primary" style="text-align:center; height:40px; width: 100px; font-weight: bold;">Print</button> -->
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- Modal for Add Product -->

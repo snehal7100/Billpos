@@ -110,3 +110,18 @@ def AddProduct(request):
         saveData.save()
         messages.success(request, "Product added successfully!")
         return redirect(Products)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
