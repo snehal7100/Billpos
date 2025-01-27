@@ -602,7 +602,8 @@
 
 
   
-  document.getElementById('save-bill-btn').addEventListener('click', function() {
+  document.getElementById('save-bill-btn').addEventListener('click', function () {
+    // Collecting PosMaster fields
     const customerName = document.getElementById('customer').selectedOptions[0].text;
     const mobileNo = document.getElementById('mobile-no').innerText;
     const address = document.getElementById('address').innerText;
@@ -610,7 +611,18 @@
     const paymentTerm = document.getElementById('payment-term').value;
     const total = document.getElementById('bill-total').innerText;
     const billDate = document.querySelector('input[type="date"]').value;
-
+  
+    // Collecting PosChild fields (item details from the table)
+    const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
+    const items = Array.from(productRows).map(row => ({
+      item_name: row.children[1].textContent,  // Product name
+      qty: row.querySelector('.quantity').textContent,  // Quantity
+      mrp: parseFloat(row.children[3].textContent.replace('₹', '')), // MRP
+      sale_price: parseFloat(row.children[4].textContent.replace('₹', '')), // Sale Price
+      total: parseFloat(row.children[5].textContent.replace('₹', ''))  // Total for the product
+    }));
+  
+    // Sending the data to the server
     fetch('/save-bill/', {
       method: 'POST',
       headers: {
@@ -624,23 +636,24 @@
         credit_amt: creditAmt,
         payment_term: paymentTerm,
         total: total,
-        bill_date: billDate
+        bill_date: billDate,
+        items: JSON.stringify(items)  // Sending PosChild data
       })
     })
     .then(response => response.json())
     .then(data => {
-      alert(data.message);
+      alert(data.message);  // Show server response
       // Optionally, clear the form or navigate to another page
     })
     .catch(error => {
       console.error('Error:', error);
     });
   });
-</script>
+  </script>
 
 
 
-</script>
+
 
 
 
