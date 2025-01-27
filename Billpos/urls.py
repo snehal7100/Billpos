@@ -69,7 +69,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), 
     path('', view.Login),  
     path('valid/', loginvalid.login_view), 
-    path('index/', view.Index), 
+    path('index/', Dashboardview.dashboard), 
 
    
  
