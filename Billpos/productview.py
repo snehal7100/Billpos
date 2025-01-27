@@ -108,7 +108,7 @@ def AddProduct(request):
             price=price,
         )
         saveData.save()
-        messages.success(request, "Product added successfully!")
+        
         return redirect(Products)
     
 
