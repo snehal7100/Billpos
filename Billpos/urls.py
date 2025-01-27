@@ -45,10 +45,12 @@ from Billpos import Paymentview
 from Billpos import rewardsview
 from Billpos import barcodeview
 from Billpos import posmasterview
+# from Billpos import poschildview
 
 
 urlpatterns = [
     path('save-bill/', posmasterview.save_bill, name='save_bill'),
+    #  path('save_billchild/', poschildview.save_billchild, name='save_billchild'),
 
 
 

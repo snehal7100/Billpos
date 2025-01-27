@@ -5,7 +5,7 @@ from posmaster.models import PosMaster
 from poschild.models import PosChild
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt  # Only needed if you are using AJAX
+@csrf_exempt
 def save_bill(request):
     if request.method == 'POST':
         customer_name = request.POST.get('customer_name')
@@ -27,23 +27,17 @@ def save_bill(request):
             bill_date=bill_date,
         )
 
-        item_name = request.POST.get('item_name')  
-        qty = request.POST.get('qty')
-        mrp = request.POST.get('mrp')
-        sale_price = request.POST.get('sale_price')
-        item_total = request.POST.get('item_total')  
-
-        items = json.loads(request.POST.get('items'))  # Parse JSON list of items
+        # Parse JSON list of items
+        items = json.loads(request.POST.get('items', '[]'))  # Default to empty list if items is missing
         for item in items:
             PosChild.objects.create(
-            pos_master=temp,
-            item_name=item['item_name'],
-            qty=item['qty'],
-            mrp=item['mrp'],
-            sale_price=item['sale_price'],
-            total=item['total'],
-        )
-
+                pos_master=temp,  # Correctly associate the PosMaster entry
+                item_name=item['item_name'],
+                qty=item['qty'],
+                mrp=item['mrp'],
+                sale_price=item['sale_price'],
+                total=item['total'],
+            )
 
         return JsonResponse({'message': 'Bill saved successfully!'}, status=200)
 
