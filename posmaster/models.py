@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class PosMaster(models.Model):
     customer_name = models.CharField(max_length=100)  # Customer Name
     mobile_no = models.CharField(max_length=15)  # Mobile Number

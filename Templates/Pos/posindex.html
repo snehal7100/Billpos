@@ -595,6 +595,51 @@
   window.onload = function() {
     loadFromLocalStorage();
   };
+
+
+
+
+
+
+  
+  document.getElementById('save-bill-btn').addEventListener('click', function() {
+    const customerName = document.getElementById('customer').selectedOptions[0].text;
+    const mobileNo = document.getElementById('mobile-no').innerText;
+    const address = document.getElementById('address').innerText;
+    const creditAmt = document.getElementById('credit_limit').innerText;
+    const paymentTerm = document.getElementById('payment-term').value;
+    const total = document.getElementById('bill-total').innerText;
+    const billDate = document.querySelector('input[type="date"]').value;
+
+    fetch('/save-bill/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: new URLSearchParams({
+        customer_name: customerName,
+        mobile_no: mobileNo,
+        address: address,
+        credit_amt: creditAmt,
+        payment_term: paymentTerm,
+        total: total,
+        bill_date: billDate
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(data.message);
+      // Optionally, clear the form or navigate to another page
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+</script>
+
+
+
 </script>
 
 

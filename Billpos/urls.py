@@ -44,11 +44,11 @@ from Billpos import Paymentview
 
 from Billpos import rewardsview
 from Billpos import barcodeview
-
+from Billpos import posmasterview
 
 
 urlpatterns = [
-
+    path('save-bill/', posmasterview.save_bill, name='save_bill'),
 
 
 
