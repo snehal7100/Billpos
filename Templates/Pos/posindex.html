@@ -519,53 +519,65 @@
     const customerSelect = document.getElementById('customer');
     const customerName = customerSelect.options[customerSelect.selectedIndex].text;
     const customerAddress = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-address') || 'N/A';
-
+    const customerMobile = customerSelect.options[customerSelect.selectedIndex].getAttribute('data-mobile') || 'N/A';
+  
     const paymentTermSelect = document.getElementById('payment-term');
     const paymentTermText = paymentTermSelect.options[paymentTermSelect.selectedIndex].text;
-
+  
     const productRows = document.querySelectorAll('#product-table tr:not(#empty-row)');
-    const products = Array.from(productRows).map(row => ({
+    const products = Array.from(productRows).map((row) => ({
       name: row.children[1].textContent,
       quantity: row.querySelector('.quantity').textContent,
       price: row.children[3].textContent,
-      total: row.children[5].textContent
+      total: row.children[5].textContent,
     }));
-
+  
     let totalAmount = 0;
-    products.forEach(product => {
+    products.forEach((product) => {
       totalAmount += parseFloat(product.total.replace('₹', ''));
     });
-
+  
+    // Build the receipt layout
     const printContent = `
-      <h3>Bill Receipt</h3>
-      <p><strong>Customer:</strong> ${customerName}</p>
-      <p><strong>Address:</strong> ${customerAddress}</p>
-      <p><strong>Payment Term:</strong> ${paymentTermText}</p>
-      <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Item Name</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${products.map((product, index) => `
-            <tr>
-              <td>${index + 1}</td>
-              <td>${product.name}</td>
-              <td>${product.quantity}</td>
-              <td>${product.price}</td>
-              <td>${product.total}</td>
+      <div style="font-family: Arial, sans-serif; width: 280px; margin: 0 auto; text-align: left;">
+        <h3 style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 5px;">Store Name</h3>
+        <p style="margin: 0; font-size: 14px;"><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+        <p style="margin: 0; font-size: 14px;"><strong>Customer:</strong> ${customerName}</p>
+        <p style="margin: 0; font-size: 14px;"><strong>Mobile:</strong> ${customerMobile}</p>
+        <p style="margin: 0; font-size: 14px;"><strong>Address:</strong> ${customerAddress}</p>
+        <p style="margin: 0; font-size: 14px;"><strong>Payment Term:</strong> ${paymentTermText}</p>
+        <hr>
+        <table style="width: 100%; font-size: 14px; border-collapse: collapse; margin-top: 10px;">
+          <thead>
+            <tr style="border-bottom: 1px solid #000;">
+              <th style="text-align: left;">Item</th>
+              <th style="text-align: center;">Qty</th>
+              <th style="text-align: right;">Price</th>
+              <th style="text-align: right;">Total</th>
             </tr>
-          `).join('')}
-        </tbody>
-      </table>
-      <p><strong>Total Amount:</strong> ₹${totalAmount.toFixed(2)}</p>
+          </thead>
+          <tbody>
+            ${products
+              .map(
+                (product) => `
+              <tr>
+                <td>${product.name}</td>
+                <td style="text-align: center;">${product.quantity}</td>
+                <td style="text-align: right;">${product.price}</td>
+                <td style="text-align: right;">${product.total}</td>
+              </tr>
+            `
+              )
+              .join('')}
+          </tbody>
+        </table>
+        <hr>
+        <p style="font-size: 16px; font-weight: bold; text-align: right;">Total: ₹${totalAmount.toFixed(2)}</p>
+        <p style="font-size: 12px; text-align: center; margin-top: 10px;">Thank you for shopping with us!</p>
+      </div>
     `;
-
+  
+    // Open the print window
     const printWindow = window.open('', '', 'height=600,width=800');
     printWindow.document.write('<html><head><title>Bill Receipt</title></head><body>');
     printWindow.document.write(printContent);
@@ -573,6 +585,7 @@
     printWindow.document.close();
     printWindow.print();
   });
+  
 
   // Delete all products and reset
   document.getElementById('delete-all-btn').addEventListener('click', function () {
