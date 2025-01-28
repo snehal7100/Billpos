@@ -3,7 +3,6 @@
     <span class="brand-text">Biller Pos</span>
   </a>
 
-
   <style>
     /* Style for the scrollbar */
     .sidebar::-webkit-scrollbar {
@@ -22,34 +21,10 @@
     }
   </style>
 
-  <!-- Sidebar -->
   <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    {% comment %}
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img
-          src="/static/dist\img\user2-160x160.jpg"
-          class="img-circle elevation-2"
-          alt="User Image"
-        />
-      </div>
-      <div class="info">
-        <a href="#" class="d-block">Itachi Uchiha</a>
-      </div>
-    </div>
-    {% endcomment %}
-
     <nav class="mt-2">
-      <ul
-        class="nav nav-pills nav-sidebar flex-column"
-        data-widget="treeview"
-        role="menu"
-        data-accordion="false"
-        
-      >
-        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Other menu items -->
         <li class="nav-item">
           <a href="/dashboard/" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -129,7 +104,8 @@
             <!-- Stock Icon -->
             <p class="dark">Stock</p>
           </a>
-        </li> 
+        </li>
+
         <li class="nav-item">
           <a href="#" class="nav-link" id="settings-toggle">
             <i class="nav-icon fas fa-cog"></i>
@@ -165,7 +141,6 @@
             </li>
           </ul>
         </li>
-
         <li class="nav-item">
           <a href="/payment-receipt/" class="nav-link">
             <i class="nav-icon fas fa-credit-card"></i>
@@ -190,14 +165,39 @@
           </a>
         </li>
 
+        <!-- Dropdown for Reports -->
         <li class="nav-item">
-          <a href="/reports/" class="nav-link">
+          <a href="#" class="nav-link" id="reports-toggle">
             <i class="nav-icon fas fa-chart-line"></i>
-            <!-- Reports Icon -->
-            <p class="dark">Reports</p>
+            <p>
+              Reports
+              <i class="fas fa-angle-left right"></i>
+            </p>
           </a>
+          <ul class="nav nav-treeview d-none" id="reports-menu">
+            <li class="nav-item">
+              <a href="/sales-report/" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Bill Report</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/customer-report/" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Customer Report</p>
+              </a>
+            </li>
+            
+            {% comment %} <li class="nav-item">
+              <a href="/inventory-report/" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Inventory Report</p>
+              </a>
+            </li> {% endcomment %}
+          </ul>
         </li>
 
+        <!-- Other menu items -->
         <li class="nav-item">
           <a href="/Employee-list/" class="nav-link">
             <i class="nav-icon fas fa-user-shield"></i>
@@ -214,18 +214,21 @@
   document.addEventListener("DOMContentLoaded", function () {
     const settingsToggle = document.getElementById("settings-toggle");
     const settingsMenu = document.getElementById("settings-menu");
+    const reportsToggle = document.getElementById("reports-toggle");
+    const reportsMenu = document.getElementById("reports-menu");
 
     settingsToggle.addEventListener("click", function (event) {
       event.preventDefault();
       settingsMenu.classList.toggle("d-none");
     });
-  });
 
+    reportsToggle.addEventListener("click", function (event) {
+      event.preventDefault();
+      reportsMenu.classList.toggle("d-none");
+    });
+  });
 </script>
 <style>
-  .d-none {
-    display: none;
-  }
   .d-none {
     display: none;
   }

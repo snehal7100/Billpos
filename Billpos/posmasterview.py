@@ -44,3 +44,7 @@ def save_bill(request):
         return JsonResponse({"message": "Bill saved successfully!"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
+def customer_report(request):
+    posmaster_data = PosMaster.objects.all()  # Fetch data
+    return render(request, 'Report/custreport.html', {'posmaster_data': posmaster_data})
