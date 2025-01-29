@@ -1,0 +1,109 @@
+{% include "Component/Header.html" %}
+{% include "Component/Sidebar.html" %}
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+  }
+
+  .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .content-wrapper {
+    margin-top: 30px;
+  }
+
+  table {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+
+  table th, table td {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  table thead {
+    background-color: #343a40;
+    color: white;
+  }
+
+  table tbody tr {
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+  }
+
+  table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .no-records {
+    text-align: center;
+    color: #777;
+    font-size: 16px;
+    padding: 20px 0;
+  }
+</style>
+
+<div class="container-fluid mt-5">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h2>Bill Report</h2>
+          </div>
+          <div class="card-body">
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
+                    aria-describedby="example1_info">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>POS Master</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>MRP</th>
+                        <th>Sale Price</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for bill in poschild_data %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ bill.pos_master }}</td>
+                        <td>{{ bill.item_name }}</td>
+                        <td>{{ bill.qty }}</td>
+                        <td>{{ bill.mrp }}</td>
+                        <td>{{ bill.sale_price }}</td>
+                        <td>{{ bill.total }}</td>
+                      </tr>
+                      {% empty %}
+                      <tr>
+                        <td colspan="7" class="no-records">No bill records found.</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "Component/Footer.html" %}
