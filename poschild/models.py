@@ -9,5 +9,6 @@ class PosChild(models.Model):
     mrp = models.DecimalField(max_digits=10, decimal_places=2)  # MRP
     sale_price = models.DecimalField(max_digits=10, decimal_places=2)  # Sale Price
     total = models.DecimalField(max_digits=10, decimal_places=2)  # Total for the item
+    
 class meta:
     db_table="tbl_child"
