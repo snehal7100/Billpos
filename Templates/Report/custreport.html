@@ -76,24 +76,24 @@
                     <thead>
                       <tr>
                         <th>Id</th>
+                        <th>Bill Date</th>
                         <th>Customer Name</th>
                         <th>Mobile Number</th>
                         <th>Credit Amount</th>
                         <th>Payment Term</th>
                         <th>Total</th>
-                        <th>Bill Date</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% for customer in posmaster_data %}
                       <tr>
                         <td>{{ forloop.counter }}</td>
+                        <td>{{ customer.bill_date }}</td>
                         <td>{{ customer.customer_name }}</td>
                         <td>{{ customer.mobile_no }}</td>
                         <td>{{ customer.credit_amt }}</td>
                         <td>{{ customer.payment_term }}</td>
                         <td>{{ customer.total }}</td>
-                        <td>{{ customer.bill_date }}</td>
                       </tr>
                       {% empty %}
                       <tr>
