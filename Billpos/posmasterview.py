@@ -5,6 +5,7 @@ from posmaster.models import PosMaster
 from poschild.models import PosChild
 from django.views.decorators.csrf import csrf_exempt
 
+<<<<<<< HEAD
 
 def posbills_list(request):
     pos_bills = PosMaster.objects.all()
@@ -13,8 +14,12 @@ def posbills_list(request):
 
 
 @csrf_exempt  # Only needed if you are using AJAX
+=======
+@csrf_exempt  
+>>>>>>> e28fac944ce518e978412dbecdc85e0991d5b7e7
 def save_bill(request):
-    if request.method == 'POST':
+    if request.method == "POST":
+        # Extracting the data from the request
         customer_name = request.POST.get('customer_name')
         mobile_no = request.POST.get('mobile_no')
         address = request.POST.get('address')
@@ -22,38 +27,41 @@ def save_bill(request):
         payment_term = request.POST.get('payment_term')
         total = request.POST.get('total')
         bill_date = request.POST.get('bill_date')
+        items = json.loads(request.POST.get('items'))  # PosChild items data
 
-        # Create a new PosMaster entry
-        temp = PosMaster.objects.create(
+        # Create a new PosMaster record
+        pos_master = PosMaster.objects.create(
             customer_name=customer_name,
             mobile_no=mobile_no,
             address=address,
             credit_amt=credit_amt,
             payment_term=payment_term,
             total=total,
-            bill_date=bill_date,
+            bill_date=bill_date
         )
 
+<<<<<<< HEAD
         
         items = json.loads(request.POST.get('items'))
         # return print( "item: s",items)  # Parse JSON list of items
+=======
+        # Create PosChild records for each product
+>>>>>>> e28fac944ce518e978412dbecdc85e0991d5b7e7
         for item in items:
-            item_name = request.POST.get('item_name')  
-            qty = request.POST.get('qty')
-            mrp = request.POST.get('mrp')
-            sale_price = request.POST.get('sale_price')
-            item_total = request.POST.get('item_total')  
-
             PosChild.objects.create(
-            pos_master=temp,
-            item_name=item['item_name'],
-            qty=item['qty'],
-            mrp=item['mrp'],
-            sale_price=item['sale_price'],
-            total=item['total'],
-        )
+                pos_master=pos_master,  # Link to PosMaster
+                item_name=item['item_name'],
+                qty=item['qty'],
+                mrp=item['mrp'],
+                sale_price=item['sale_price'],
+                total=item['total']
+            )
 
+        # Return a response (success message)
+        return JsonResponse({"message": "Bill saved successfully!"})
 
-        return JsonResponse({'message': 'Bill saved successfully!'}, status=200)
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
-    return JsonResponse({'error': 'Invalid request'}, status=400)
+def customer_report(request):
+    posmaster_data = PosMaster.objects.all()  # Fetch data
+    return render(request, 'Report/custreport.html', {'posmaster_data': posmaster_data})
