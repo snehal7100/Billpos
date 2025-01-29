@@ -87,24 +87,23 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for customer in posmaster_data %}
-                      <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ customer.bill_date }}</td>
-                        <td>{{ customer.customer_name }}</td>
-                        <td>{{ customer.mobile_no }}</td>
-                        <td>{{ customer.address }}</td>
-                        <td>{{ customer.credit_amt }}</td>
-                        <td>{{ customer.payment_term }}</td>
-                        <td>{{ customer.total }}</td>
-                        <td><a href="/bill_view/{{customer.id}}" class="fa fa-eye" title="View"></a></td>
-                      </tr>
-                      {% empty %}
-                      <tr>
-                        <td colspan="8" class="no-records">No customer records found.</td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
+                        {% for customer in posmaster_data %}
+                          {% if customer.id == id %}
+                            <tr>
+                              <td>{{ forloop.counter }}</td>
+                              <td>{{ customer.bill_date }}</td>
+                              <td>{{ customer.customer_name }}</td>
+                              <td>{{ customer.mobile_no }}</td>
+                              <td>{{ customer.address }}</td>
+                              <td>{{ customer.credit_amt }}</td>
+                              <td>{{ customer.payment_term }}</td>
+                              <td>{{ customer.total }}</td>
+                              <td><a href="/BillList/" class="btn btn-primary"><i class="fa fa-arrow-left"></i>
+                            </tr>
+                          {% endif %}
+                        {% endfor %}
+                      </tbody>
+                      
                   </table>
                 </div>
               </div>
@@ -120,12 +119,12 @@
   </div>
 </div>
 
-<script>
+{% comment %} <script>
   function confirmDelete(customerID) {
     if (confirm("Are you sure you want to delete this customer?")) {
-      window.location.href = `/customer-delete/${customerID}`;
+      window.location.href = /customer-delete/${customerID};
     }
   }
-</script>
+</script> {% endcomment %}
 
 {% include "Component/Footer.html" %}
