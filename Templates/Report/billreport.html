@@ -70,7 +70,6 @@
                     <thead>
                       <tr>
                         <th>Id</th>
-                        <th>POS Master</th>
                         <th>Item Name</th>
                         <th>Quantity</th>
                         <th>MRP</th>
@@ -82,7 +81,6 @@
                       {% for bill in poschild_data %}
                       <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ bill.pos_master }}</td>
                         <td>{{ bill.item_name }}</td>
                         <td>{{ bill.qty }}</td>
                         <td>{{ bill.mrp }}</td>
@@ -91,7 +89,7 @@
                       </tr>
                       {% empty %}
                       <tr>
-                        <td colspan="7" class="no-records">No bill records found.</td>
+                        <td colspan="6" class="no-records">No bill records found.</td>
                       </tr>
                       {% endfor %}
                     </tbody>
