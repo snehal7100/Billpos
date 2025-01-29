@@ -14,13 +14,13 @@ def save_billchild(request):
         total = request.POST.get('total')
        
         return JsonResponse({'message': 'Bill saved successfully!'}, status=200)
-<<<<<<< HEAD
+
     return JsonResponse({'error': 'Invalid request'}, status=400)
-=======
-    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+   
 
 
 def bill_report(request):
     poschild_data = PosChild.objects.all()  # Fetch data
     return render(request, 'Report/billreport.html', {'poschild_data': poschild_data})
->>>>>>> bee439c56fdb16be628ec2e570c29f29020c7374
+
