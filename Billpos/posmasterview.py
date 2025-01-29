@@ -5,6 +5,13 @@ from posmaster.models import PosMaster
 from poschild.models import PosChild
 from django.views.decorators.csrf import csrf_exempt
 
+
+def posbills_list(request):
+    pos_bills = PosMaster.objects.all()
+    return render(request, 'posindex.html', {'pos_bills': pos_bills})
+
+
+
 @csrf_exempt  # Only needed if you are using AJAX
 def save_bill(request):
     if request.method == 'POST':
@@ -28,7 +35,8 @@ def save_bill(request):
         )
 
         
-        items = json.loads(request.POST.get('items'))  # Parse JSON list of items
+        items = json.loads(request.POST.get('items'))
+        # return print( "item: s",items)  # Parse JSON list of items
         for item in items:
             item_name = request.POST.get('item_name')  
             qty = request.POST.get('qty')

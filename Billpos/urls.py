@@ -50,15 +50,13 @@ from Billpos import posmasterview
 
 urlpatterns = [
     path('save-bill/', posmasterview.save_bill, name='save_bill'),
-    #  path('save_billchild/', poschildview.save_billchild, name='save_billchild'),
-
-
+ 
 
     path('dashboard/', Dashboardview.dashboard),
 
     path('pos/', posview.posdashboard),
 
-     path('barcode-print/', barcodeview.Barcodes),
+    path('barcode-print/', barcodeview.Barcodes),
 
 
     path('category-list/',categoryview.category),
