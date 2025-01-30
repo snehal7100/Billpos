@@ -1,10 +1,10 @@
 <aside class="main-sidebar sidebar-light-mode elevation-4">
   <a href="index3.html" class="brand-link">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <span class="brand-text">Biller Pos</span>
   </a>
 
   <style>
-    /* Style for the scrollbar */
     .sidebar::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -18,6 +18,9 @@
     }
     .sidebar::-webkit-scrollbar-track {
       background-color: #f1f1f1;
+    }
+    .d-none {
+      display: none;
     }
   </style>
 
@@ -98,16 +101,10 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a href="/stock/" class="nav-link">
-            <i class="nav-icon fas fa-warehouse"></i>
-            <!-- Stock Icon -->
-            <p class="dark">Stock</p>
-          </a>
-        </li>
+        
 
         <li class="nav-item">
-          <a href="#" class="nav-link" id="settings-toggle">
+          <a href="#" class="nav-link" id="settings-toggle" aria-expanded="false">
             <i class="nav-icon fas fa-cog"></i>
             <p>
               Settings
@@ -117,37 +114,29 @@
           <ul class="nav nav-treeview d-none" id="settings-menu">
             <li class="nav-item">
               <a href="/category-list/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-arrow-right"></i>
                 <p>Category</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/brand-list/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-arrow-right"></i>
                 <p>Brand</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/tax-list/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-arrow-right"></i>
                 <p>Tax</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/Payment-list/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-arrow-right"></i>
                 <p>Payment Term</p>
               </a>
             </li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a href="/payment-receipt/" class="nav-link">
-            <i class="nav-icon fas fa-credit-card"></i>
-            <!-- Payment/Receipt Icon -->
-            <p class="dark">Payment/Receipt</p>
-          </a>
-        </li>
 
         <li class="nav-item">
           <a href="/rewards-list/" class="nav-link">
@@ -177,13 +166,13 @@
           <ul class="nav nav-treeview d-none" id="reports-menu">
             <li class="nav-item">
               <a href="/bill-report/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-arrow-right"></i>
                 <p>Bill Report</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/customer-report/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-arrow-right"></i>
                 <p>Customer Report</p>
               </a>
             </li>

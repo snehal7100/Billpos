@@ -55,15 +55,14 @@ urlpatterns = [
 
     #  path('save_billchild/', poschildview.save_billchild, name='save_billchild'),
     path('customer-report/',posmasterview.customer_report),
-<<<<<<< HEAD
+
     path('BillList/', billlistview.BillList, name='bill_list'),  # List page
     path('bill_view/<int:id>/', billlistview.BillView, name='bill_view'), 
     
-=======
+
     path('bill-report/', poschildview.bill_report),
 
 
->>>>>>> b2db44583809230eb2e025052cd0ea39a8ca87c6
 
 
     path('dashboard/', Dashboardview.dashboard),
