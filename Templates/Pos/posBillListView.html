@@ -1,5 +1,6 @@
 {% include "Component/Header.html" %}
 {% include "Component/Sidebar.html" %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 <style>
   .bill-container {
@@ -86,7 +87,6 @@
     </thead>
 
     <tbody>
-     
       <tr>
         <td>{{ customer.bill_date }}</td>
         <td>{{ customer.customer_name }}</td>
@@ -103,7 +103,8 @@
   {%endif%}
     {%endfor%}
   
-  <a href="/BillList/" class="back-btn">Back to Bill List</a>
+  <a href="/BillList/" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+  
 </div>
 
 {% include "Component/Footer.html" %}

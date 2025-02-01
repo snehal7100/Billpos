@@ -1,0 +1,43 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid mt-5">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2>Generate Barcode</h2>
+                        </div>
+                        <div class="card-body">
+                           
+                            <svg id="barcode"></svg>
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+                        <script>
+                            
+                            const barcodeId = "123456789"; 
+                            jsBarcode("#barcode", barcodeId, {
+                                format: "CODE39",
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% include "Component/footer.html" %}
