@@ -78,19 +78,33 @@
             </div>
           </div>
 
-          <!-- Card 4: Total Sales -->
+
+
           <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
               <div class="inner">
+                <h3>{{ total_bills }}</h3>
+                <p>Total Bills</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="/supplier-list/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- Card 4: Total Sales -->
+          {% comment %} <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
                 <h3>{{ total_sales }}</h3>
-                <p>Total Sales</p>
+                <p>Bill List</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
     </section>
