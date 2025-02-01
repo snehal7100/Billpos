@@ -1,0 +1,42 @@
+{% include "Component/header.html" %}
+{% include "Component/sidebar.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid mt-5">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2>Generate Barcode</h2>
+
+                        </div>
+                        <!-- <script>
+                            const svgDocument = new DOMImplementation().createDocument('');
+                            const svg = svgDocument.createElementNS('', 'svg');
+
+                            jsBarcode(svg, document.id, {
+                                xmlDocument: svgDocument,
+                                format: 'CODE39',
+                            });
+                        </script> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+{% include "Component/footer.html" %}
