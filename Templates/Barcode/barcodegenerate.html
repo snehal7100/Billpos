@@ -18,17 +18,19 @@
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
                             <h2>Generate Barcode</h2>
-
                         </div>
-                        <!-- <script>
-                            const svgDocument = new DOMImplementation().createDocument('');
-                            const svg = svgDocument.createElementNS('', 'svg');
-
-                            jsBarcode(svg, document.id, {
-                                xmlDocument: svgDocument,
-                                format: 'CODE39',
+                        <div class="card-body">
+                           
+                            <svg id="barcode"></svg>
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+                        <script>
+                            
+                            const barcodeId = "123456789"; 
+                            jsBarcode("#barcode", barcodeId, {
+                                format: "CODE39",
                             });
-                        </script> -->
+                        </script>
                     </div>
                 </div>
             </div>
@@ -37,6 +39,5 @@
 </body>
 
 </html>
-
 
 {% include "Component/footer.html" %}

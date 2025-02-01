@@ -19,3 +19,6 @@ def Barcodes(request):
         "taxData": taxData,
     }
     return render(request, "Barcode/index.html", context)
+
+def BarcodeGenerate(request):
+    return render(request, "Barcode/barcodegenerate.html")
