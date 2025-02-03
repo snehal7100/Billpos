@@ -15,6 +15,50 @@
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        .container-fluid {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .content-wrapper {
+            margin-top: 30px;
+        }
+
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        table thead {
+            background-color: #343a40;
+            color: white;
+        }
+
+        table tbody tr {
+            background-color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
         .container {
             margin-top: 20px;
         }
@@ -25,10 +69,6 @@
 
         .action-buttons button {
             margin-right: 10px;
-        }
-
-        .btn-primary {
-            margin-left: 650px;
         }
 
         /* Add custom styles for printing */
@@ -50,7 +90,7 @@
 
             .product-card {
                 width: 200px;
-                height: 250px;
+                height: 150px;
                 margin: 10px;
                 padding: 10px;
                 border: 1px solid #ccc;
@@ -73,10 +113,7 @@
                 font-weight: bold;
             }
 
-            .product-price,
-            .product-qty {
-                font-size: 12px;
-            }
+
         }
     </style>
 </head>
@@ -101,14 +138,16 @@
                             <input type="text" class="form-control" id="search-bar" placeholder="" list="product-list">
                             <datalist id="product-list">
                                 {% for product in productData %}
-                                <option value="{{ product.pname }}" data-pid="{{ product.pid }}" data-price="{{ product.price }}">
+                                <option value="{{ product.pname }}" data-pid="{{ product.pid }}"
+                                    data-price="{{ product.price }}">
                                     {{ product.pname }} (₹{{ product.price }})
                                 </option>
                                 {% endfor %}
                             </datalist>
                             <div class="input-group-append">
                                 <!-- Button to open the modal -->
-                                <button id="search-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+                                <button id="search-btn" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#addBrandModal">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
@@ -119,7 +158,8 @@
                                 <div class="col-sm-12">
                                     <!-- Scrollable Table Container -->
 
-                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
+                                        aria-describedby="example1_info">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -161,7 +201,8 @@
                     <h5 class="modal-title" id="addBrandModalLabel">Add Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/product-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <form action="/product-add/" method="post" enctype="multipart/form-data"
+                    onsubmit="return validateForm()">
                     {% csrf_token %}
                     <!-- Form content here -->
                 </form>
@@ -175,26 +216,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        var count = 1000;
         $(document).ready(function () {
             $("#search-bar").keydown(function (e) {
                 if (e.key === "Enter") {
-                    e.preventDefault(); 
+                    e.preventDefault();
                     let productName = $("#search-bar").val();
                     let selectedOption = $("#product-list option[value='" + productName + "']");
 
                     if (selectedOption.length > 0) {
-                        let productId = selectedOption.data("pid");
+                        let productId = count++;
                         let price = parseFloat(selectedOption.data("price")); // Convert to number
 
                         let tableBody = $("#product-table");
                         let rowCount = $("#product-table tr").length;
 
                         if ($("#empty-row").length) {
-                            $("#empty-row").remove(); 
+                            $("#empty-row").remove();
                         }
 
                         let newRow = `<tr>
-                                        <td>${rowCount}</td>
+                                        <td>${rowCount}</td> 
                                         <td>${productName}</td>
                                         <td>
                                             <button class="btn btn-sm btn-secondary decrement">-</button>
@@ -221,16 +263,13 @@
                         tableBody.append(newRow);
                         $("#search-bar").val(""); // Clear input
 
-                        // Generate barcode for the newly added product after it's in the DOM
-                        setTimeout(() => {
-                            JsBarcode(`#barcode-${productId}`, productId.toString(), {
-                                format: "CODE128",
-                                displayValue: true,
-                                fontSize: 14,
-                                width: 2,
-                                height: 50
-                            });
-                        }, 10);  // Adding a small delay to ensure the element is fully rendered before barcode generation
+                        JsBarcode(`#barcode-${productId}`, productId.toString(), {
+                            format: "CODE128",
+                            displayValue: true,
+                            fontSize: 14,
+                            width: 2,
+                            height: 50
+                        });
                     }
                 }
             });
@@ -270,6 +309,7 @@
             });
 
             // Print functionality
+            // Print functionality
             $("#print-btn").on("click", function () {
                 let printArea = $("#printable-area");
                 printArea.html(""); // Clear previous content
@@ -277,43 +317,48 @@
                 // Create each product card
                 $("#product-table tr").each(function () {
                     let row = $(this);
-                    
+
                     // Get product data
                     let productName = row.find("td:eq(1)").text();
                     let qty = row.find(".qty-input").val();
                     let price = row.find(".sale-price").text();
                     let total = row.find(".total").text();
                     let productId = row.find(".barcode").attr("id").split("-")[1];
-
+                    
+                    
                     // Create the product card HTML
                     let productCard = `<div class="product-card">
-                                        <div class="product-name">${productName}</div>
-                                        <div class="product-details">Qty: ${qty}</div>
-                                        <div class="product-details">Price: ₹${price}</div>
-                                        <div class="product-details">Total: ₹${total}</div>
-                                        <svg class="barcode" id="barcode-${productId}"></svg>
-                                    </div>`;
+                        <svg class="barcode" id="barcode-${productId}"></svg>
+                        <div >${productName}</div>
+                        <div style='display:flex; justify-content: space-between;'> 
+                            <div >MRP: ₹${price}</div>
+                            <div >Sale: ₹${total}</div>
+                            </div>    
+                        </div>`;
 
                     // Append product card to the printable area
                     printArea.append(productCard);
 
-                    // Generate barcode for the product
+                    // Generate barcode for the product with a slight delay
                     setTimeout(() => {
                         JsBarcode(`#barcode-${productId}`, productId.toString(), {
                             format: "CODE128",
                             displayValue: true,
-                            fontSize: 14,
+                            fontSize: 10,
                             width: 2,
                             height: 50
                         });
-                    }, 100);  // Delay to ensure the element is fully rendered
+                    }, 200);  // Slight delay to ensure barcode is generated
                 });
 
-                // Show the printable area and trigger the print dialog
-                printArea.show();
-                window.print();
-                printArea.hide();
+                // Give some time for the barcodes to render, then trigger print
+                setTimeout(() => {
+                    printArea.show();
+                    window.print();
+                    printArea.hide();
+                }, 500);  // Adjust this delay based on how long rendering takes
             });
+
         });
     </script>
 
