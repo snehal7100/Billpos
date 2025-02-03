@@ -110,7 +110,14 @@
           <div>
             <button class="btn btn-danger" onclick="window.location.href='/dashboard/'">Dashboard</button>
             <button class="btn btn-primary" onclick="window.location.href='/BillList/'">POS Bills List</button>
+<<<<<<< HEAD
             
+=======
+
+          
+
+
+>>>>>>> 3f5981be3e0216051b8deaf248abcaf74743cca3
           </div>
         </div>
         <div class="row">
@@ -657,6 +664,16 @@
     .then((data) => {
       alert(data.message);
 
+       // Clear all products from the table
+  const productTable = document.getElementById('product-table');
+  productTable.innerHTML = ''; // Remove all rows
+
+  // Remove products from localStorage
+  localStorage.removeItem('products');
+  localStorage.removeItem('total');
+  calculateTotals();
+  updateTotalQty();  
+
     // Collecting PosMaster fields
     const customerName = document.getElementById('customer').selectedOptions[0].text;
     const mobileNo = document.getElementById('mobile-no').innerText;
@@ -697,6 +714,26 @@
     .then(response => response.json())
     .then(data => {
       alert(data.message);  // Show server response
+// Clear customer-related fields after saving the bill
+document.getElementById('customer').selectedIndex = 0;  // Reset customer dropdown
+document.getElementById('mobile-no').innerText = '';    // Clear mobile number
+document.getElementById('address').innerText = '';      // Clear address
+document.getElementById('credit_limit').innerText = ''; // Clear credit limit
+document.getElementById('payment-term').selectedIndex = 0; // Reset payment term
+document.getElementById('bill-total').innerText = '0.00'; // Reset total bill amount
+document.querySelector('input[type="date"]').value = ''; // Clear bill date
+
+// Optionally, reset the product table
+const productTable = document.getElementById('product-table');
+productTable.innerHTML = ''; // Clear all products
+const emptyRow = document.createElement('tr');
+emptyRow.id = 'empty-row';
+emptyRow.innerHTML = `<td colspan="7">No products available</td>`;
+productTable.appendChild(emptyRow);
+
+// Clear localStorage as well
+localStorage.removeItem('products');
+localStorage.removeItem('total');
 
       // Optionally, clear the form or navigate to another page
     })

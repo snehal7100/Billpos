@@ -58,15 +58,12 @@ urlpatterns = [
 
     path('BillList/', billlistview.BillList, name='bill_list'),  # List page
     path('bill_view/<int:id>/', billlistview.BillView, name='bill_view'), 
-    
     path('bill-report/', poschildview.bill_report),
 
 
     path('dashboard/', Dashboardview.dashboard),
     path('pos/', posview.posdashboard),
-
     path('barcode-print/', barcodeview.Barcodes),
-    path('barcode-print/', barcodeview.BarcodeGenerate),
 
 
     path('category-list/',categoryview.category),
@@ -81,16 +78,13 @@ urlpatterns = [
     path('valid/', loginvalid.login_view), 
     path('index/', Dashboardview.dashboard), 
 
-   
- 
-    
     path('brand-list/', brandview.Brands),
     path('brand-edit/<id>', brandview.editBrand),
     path('brand-delete/<id>', brandview.delete),
     path('brand-add/', brandview.AddBrand),
 
 
-   path('tax-list/', Taxview.TaxList),  
+    path('tax-list/', Taxview.TaxList),  
     path('tax-view/<id>/', Taxview.TaxView),  
     path('tax-edit/<id>/', Taxview.editTax),  
     path('tax-delete/<id>/', Taxview.deleteTax),  
