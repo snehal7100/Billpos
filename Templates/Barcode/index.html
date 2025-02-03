@@ -14,9 +14,7 @@
     <script src="https://cdn.jsdelivr.net/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 
-
     <style>
-        
         .container {
             margin-top: 20px;
         }
@@ -29,16 +27,9 @@
             margin-right: 10px;
         }
 
-        .btn-primary{
-            margin-left:650px;
+        .btn-primary {
+            margin-left: 650px;
         }
-
-
-
-
-        
-        
-
 
         /* Add custom styles for printing */
         @media print {
@@ -56,25 +47,50 @@
                 left: 0;
                 top: 0;
             }
-        }
 
+            .product-card {
+                width: 200px;
+                height: 250px;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                text-align: center;
+                display: inline-block;
+                vertical-align: top;
+                box-sizing: border-box;
+            }
+
+            .product-card svg {
+                margin-top: 10px;
+            }
+
+            .product-details {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+
+            .product-name {
+                font-weight: bold;
+            }
+
+            .product-price,
+            .product-qty {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-
     <div class="container-fluid mt-5">
         <div class="content-wrapper">
-          
-                
 
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
                             <h2>Barcode Print &amp; View</h2>
-
 
                             <!-- Add Print Button -->
                             <div class="col-6 px-1">
@@ -85,20 +101,17 @@
                             <input type="text" class="form-control" id="search-bar" placeholder="" list="product-list">
                             <datalist id="product-list">
                                 {% for product in productData %}
-                                <option value="{{ product.pname }}" data-pid="{{ product.pid }}"
-                                    data-price="{{ product.price }}">
+                                <option value="{{ product.pname }}" data-pid="{{ product.pid }}" data-price="{{ product.price }}">
                                     {{ product.pname }} (₹{{ product.price }})
                                 </option>
                                 {% endfor %}
                             </datalist>
                             <div class="input-group-append">
                                 <!-- Button to open the modal -->
-                                <button id="search-btn" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#addBrandModal">
+                                <button id="search-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBrandModal">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
-
                         </div>
                         <div class="card-body">
                             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -106,39 +119,17 @@
                                 <div class="col-sm-12">
                                     <!-- Scrollable Table Container -->
 
-                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline"
-                                        aria-describedby="example1_info">
+                                    <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                                         <thead>
                                             <tr>
-                                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
-                                                    rowspan="1" colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending">
-                                                    No</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="Browser: activate to sort column ascending">
-                                                    Item Name</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="Platform(s): activate to sort column ascending">Qty</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="Platform(s): activate to sort column ascending">Mrp</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="Platform(s): activate to sort column ascending">Sale
-                                                    Price</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="Platform(s): activate to sort column ascending">Total
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="Platform(s): activate to sort column ascending">Barcode
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="CSS grade: activate to sort column ascending">Action
-                                                </th>
+                                                <th>No</th>
+                                                <th>Item Name</th>
+                                                <th>Qty</th>
+                                                <th>Mrp</th>
+                                                <th>Sale Price</th>
+                                                <th>Total</th>
+                                                <th>Barcode</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="product-table">
@@ -159,27 +150,8 @@
 
     <!-- Printable Area (Hidden from print) -->
     <div id="printable-area" style="display: none;">
-        <h2>Barcode Print Details</h2>
-        <div id="barcodeContainer"></div>
-        <table id="product-table-print" class="table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Item Name</th>
-                    <th>Qty</th>
-                    <th>Mrp</th>
-                    <th>Sale Price</th>
-                    <th>Total</th>
-                    <th>Barcode</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="print-table-body">
-                <!-- This will be dynamically populated -->
-            </tbody>
-        </table>
+        <!-- This area will be dynamically populated with product cards -->
     </div>
-    
 
     <!-- Modal for Add Product -->
     <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
@@ -189,8 +161,7 @@
                     <h5 class="modal-title" id="addBrandModalLabel">Add Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/product-add/" method="post" enctype="multipart/form-data"
-                    onsubmit="return validateForm()">
+                <form action="/product-add/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                     {% csrf_token %}
                     <!-- Form content here -->
                 </form>
@@ -202,156 +173,149 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Bootstrap 5 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  
-
 
     <script>
         $(document).ready(function () {
-    $("#search-bar").keydown(function (e) {
-        if (e.key === "Enter") {
-            e.preventDefault(); 
-            let productName = $("#search-bar").val();
-            let selectedOption = $("#product-list option[value='" + productName + "']");
+            $("#search-bar").keydown(function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault(); 
+                    let productName = $("#search-bar").val();
+                    let selectedOption = $("#product-list option[value='" + productName + "']");
 
-            if (selectedOption.length > 0) {
-                let productId = selectedOption.data("pid");
-                let price = parseFloat(selectedOption.data("price")); // Convert to number
+                    if (selectedOption.length > 0) {
+                        let productId = selectedOption.data("pid");
+                        let price = parseFloat(selectedOption.data("price")); // Convert to number
 
-                let tableBody = $("#product-table");
-                let rowCount = $("#product-table tr").length;
+                        let tableBody = $("#product-table");
+                        let rowCount = $("#product-table tr").length;
 
-                if ($("#empty-row").length) {
-                    $("#empty-row").remove(); 
+                        if ($("#empty-row").length) {
+                            $("#empty-row").remove(); 
+                        }
+
+                        let newRow = `<tr>
+                                        <td>${rowCount}</td>
+                                        <td>${productName}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary decrement">-</button>
+                                            <input type="text" class="qty-input text-center" value="1" style="width: 40px;" readonly>
+                                            <button class="btn btn-sm btn-secondary increment">+</button>
+                                        </td>
+                                        <td class="price">${price.toFixed(2)}</td>
+                                        <td class="sale-price">${price.toFixed(2)}</td>
+                                        <td class="total">${price.toFixed(2)}</td>
+                                        <td>
+                                            <div class="card p-2" style="width: 150px;">
+                                                <div class="card-body text-center">
+                                                    <svg class="barcode" id="barcode-${productId}"></svg>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm delete-row">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>`;
+
+                        tableBody.append(newRow);
+                        $("#search-bar").val(""); // Clear input
+
+                        // Generate barcode for the newly added product after it's in the DOM
+                        setTimeout(() => {
+                            JsBarcode(`#barcode-${productId}`, productId.toString(), {
+                                format: "CODE128",
+                                displayValue: true,
+                                fontSize: 14,
+                                width: 2,
+                                height: 50
+                            });
+                        }, 10);  // Adding a small delay to ensure the element is fully rendered before barcode generation
+                    }
                 }
+            });
 
-                let newRow = `<tr>
-                                <td>${rowCount}</td>
-                                <td>${productName}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-secondary decrement">-</button>
-                                    <input type="text" class="qty-input text-center" value="1" style="width: 40px;" readonly>
-                                    <button class="btn btn-sm btn-secondary increment">+</button>
-                                </td>
-                                <td class="price">${price.toFixed(2)}</td>
-                                <td class="sale-price">${price.toFixed(2)}</td>
-                                <td class="total">${price.toFixed(2)}</td>
-                                <td>
-                                    <div class="card p-2" style="width: 150px;">
-                                        <div class="card-body text-center">
-                                            <svg class="barcode" id="barcode-${productId}"></svg>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm delete-row">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                              </tr>`;
+            // Quantity increment
+            $(document).on("click", ".increment", function () {
+                let qtyInput = $(this).siblings(".qty-input");
+                let qty = parseInt(qtyInput.val()) + 1;
+                qtyInput.val(qty);
+                updateTotal($(this).closest("tr"));
+            });
 
-                tableBody.append(newRow);
-                $("#search-bar").val(""); // Clear input
+            // Quantity decrement
+            $(document).on("click", ".decrement", function () {
+                let qtyInput = $(this).siblings(".qty-input");
+                let qty = parseInt(qtyInput.val());
+                if (qty > 1) {
+                    qtyInput.val(qty - 1);
+                    updateTotal($(this).closest("tr"));
+                }
+            });
 
-                // Generate barcode for the newly added product after it's in the DOM
-                setTimeout(() => {
-                    JsBarcode(`#barcode-${productId}`, productId.toString(), {
-                        format: "CODE128",
-                        displayValue: true,
-                        fontSize: 14,
-                        width: 2,
-                        height: 50
-                    });
-                }, 10);  // Adding a small delay to ensure the element is fully rendered before barcode generation
+            // Function to update total price
+            function updateTotal(row) {
+                let qty = parseInt(row.find(".qty-input").val());
+                let price = parseFloat(row.find(".sale-price").text());
+                let total = qty * price;
+                row.find(".total").text(total.toFixed(2));
             }
-        }
-    });
 
-    // Quantity increment
-    $(document).on("click", ".increment", function () {
-        let qtyInput = $(this).siblings(".qty-input");
-        let qty = parseInt(qtyInput.val()) + 1;
-        qtyInput.val(qty);
-        updateTotal($(this).closest("tr"));
-    });
+            // Delete row functionality
+            $(document).on("click", ".delete-row", function () {
+                $(this).closest("tr").remove();
+                if ($("#product-table tr").length === 0) {
+                    $("#product-table").append('<tr id="empty-row"><td colspan="7" class="text-center">No products added yet</td></tr>');
+                }
+            });
 
-    // Quantity decrement
-    $(document).on("click", ".decrement", function () {
-        let qtyInput = $(this).siblings(".qty-input");
-        let qty = parseInt(qtyInput.val());
-        if (qty > 1) {
-            qtyInput.val(qty - 1);
-            updateTotal($(this).closest("tr"));
-        }
-    });
+            // Print functionality
+            $("#print-btn").on("click", function () {
+                let printArea = $("#printable-area");
+                printArea.html(""); // Clear previous content
 
-    // Function to update total price
-    function updateTotal(row) {
-        let qty = parseInt(row.find(".qty-input").val());
-        let price = parseFloat(row.find(".sale-price").text());
-        let total = qty * price;
-        row.find(".total").text(total.toFixed(2));
-    }
+                // Create each product card
+                $("#product-table tr").each(function () {
+                    let row = $(this);
+                    
+                    // Get product data
+                    let productName = row.find("td:eq(1)").text();
+                    let qty = row.find(".qty-input").val();
+                    let price = row.find(".sale-price").text();
+                    let total = row.find(".total").text();
+                    let productId = row.find(".barcode").attr("id").split("-")[1];
 
-    // Delete row functionality
-    $(document).on("click", ".delete-row", function () {
-        $(this).closest("tr").remove();
-        if ($("#product-table tr").length === 0) {
-            $("#product-table").append('<tr id="empty-row"><td colspan="7" class="text-center">No products added yet</td></tr>');
-        }
-    });
+                    // Create the product card HTML
+                    let productCard = `<div class="product-card">
+                                        <div class="product-name">${productName}</div>
+                                        <div class="product-details">Qty: ${qty}</div>
+                                        <div class="product-details">Price: ₹${price}</div>
+                                        <div class="product-details">Total: ₹${total}</div>
+                                        <svg class="barcode" id="barcode-${productId}"></svg>
+                                    </div>`;
 
-    // Print functionality
-    $("#print-btn").on("click", function () {
-        let printTableBody = $("#print-table-body");
-        printTableBody.html(""); // Clear previous data
+                    // Append product card to the printable area
+                    printArea.append(productCard);
 
-        $("#product-table tr").each(function () {
-            let row = $(this);
-            let rowData = `<tr>
-                            <td>${row.find("td:eq(0)").text()}</td>
-                            <td>${row.find("td:eq(1)").text()}</td>
-                            <td>${row.find(".qty-input").val()}</td>
-                            <td>${row.find(".price").text()}</td>
-                            <td>${row.find(".sale-price").text()}</td>
-                            <td>${row.find(".total").text()}</td>
-                            <td>
-                                <div class="card p-2" style="width: 150px;">
-                                    <div class="card-body text-center">
-                                        <svg class="barcode-print"></svg>
-                                    </div>
-                                </div>
-                            </td>
-                          </tr>`;
-            printTableBody.append(rowData);
-
-            let barcodeSVG = printTableBody.find(".barcode-print").last();
-            let productId = row.find(".barcode").attr("id").split("-")[1];
-
-            setTimeout(() => {
-                JsBarcode(barcodeSVG[0], productId.toString(), {
-                    format: "CODE128",
-                    displayValue: true,
-                    fontSize: 14,
-                    width: 2,
-                    height: 50
+                    // Generate barcode for the product
+                    setTimeout(() => {
+                        JsBarcode(`#barcode-${productId}`, productId.toString(), {
+                            format: "CODE128",
+                            displayValue: true,
+                            fontSize: 14,
+                            width: 2,
+                            height: 50
+                        });
+                    }, 100);  // Delay to ensure the element is fully rendered
                 });
-            }, 100);
+
+                // Show the printable area and trigger the print dialog
+                printArea.show();
+                window.print();
+                printArea.hide();
+            });
         });
-
-        $("#printable-area").show();
-        window.print();
-        $("#printable-area").hide();
-    });
-});
-
     </script>
-    
-    
-    
-
-
-
-
 
 </body>
 
