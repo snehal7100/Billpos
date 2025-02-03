@@ -207,13 +207,13 @@
 
     <script>
         $(document).ready(function () {
-    $("#search-bar").keydown(function (e) {
+        $("#search-bar").keydown(function (e) {
         if (e.key === "Enter") {
             e.preventDefault(); 
             let productName = $("#search-bar").val();
             let selectedOption = $("#product-list option[value='" + productName + "']");
 
-            if (selectedOption.length > 0) {
+            if (selectedOption.length > 0) {     
                 let productId = selectedOption.data("pid");
                 let price = parseFloat(selectedOption.data("price")); // Convert to number
 
@@ -343,6 +343,56 @@
         $("#printable-area").hide();
     });
 });
+
+
+
+$("#print-btn").on("click", function () {
+    let printContainer = $("#barcodeContainer");
+    printContainer.html(""); // Clear previous content
+
+    $("#product-table tr").each(function () {
+        let row = $(this);
+        let productName = row.find("td:eq(1)").text();
+        let qty = row.find(".qty-input").val();
+        let price = row.find(".price").text();
+        let total = row.find(".total").text();
+        let productId = row.find(".barcode").attr("id").split("-")[1];
+
+        let newCard = `
+            <div class="card p-2 mb-3 text-center" style="width: 300px; border: 1px solid #ddd; padding: 10px;">
+                <h5>${productName}</h5>
+                <p>Qty: ${qty}</p>
+                <p>Price: ₹${price}</p>
+                <p>Total: ₹${total}</p>
+                <svg class="barcode-print" id="print-barcode-${productId}"></svg>
+            </div>`;
+
+        printContainer.append(newCard);
+
+        setTimeout(() => {
+            JsBarcode(`#print-barcode-${productId}`, productId.toString(), {
+                format: "CODE128",
+                displayValue: true,
+                fontSize: 14,
+                width: 2,
+                height: 50
+            });
+        }, 50);
+    });
+
+    // **Hide everything except the printable area**
+    $("body > *").not("#printable-area").hide();
+    $("#printable-area").show();
+
+    // Trigger print
+    window.print();
+
+    // Restore original view after printing
+    $("body > *").not("#printable-area").show();
+    $("#printable-area").hide();
+});
+
+
 
     </script>
     
