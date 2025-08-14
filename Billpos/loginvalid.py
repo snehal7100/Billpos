@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 def login_view(request):
     if request.method == "POST":
@@ -8,7 +9,7 @@ def login_view(request):
         if not username or not password:
             messages.error(request, "Both email and password are required.")
             return render(request, 'Component/index.html')
-        if username == "admin@gmail.com" and password == "admin":
+        if username == getattr(settings, "ADMIN_LOGIN_EMAIL", "admin@gmail.com") and password == getattr(settings, "ADMIN_LOGIN_PASSWORD", "admin"):
             messages.success(request, f"Welcome back, Admin!")
             return redirect('/index/')  
         else:

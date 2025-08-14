@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -93,7 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
 
-        'NAME': 'billerpos',  # Replace with your database name
+        'NAME': 'billerpos2',  # Replace with your database name
         'USER': 'root',          # Replace with your username
         'PASSWORD': '',          # Replace with your password (empty for default XAMPP setup)
         'HOST': '127.0.0.1',     # Host where XAMPP MySQL is running
@@ -155,3 +156,8 @@ STATICFILES_DIRS=[
 ]
 MEDIA_ROOT=BASE_DIR/"media"
 MEDIA_URL="/media/"
+
+# Admin login credentials for simple auth in `Billpos/loginvalid.py`
+# Change these to update the login email and password.
+ADMIN_LOGIN_EMAIL = os.getenv("ADMIN_LOGIN_EMAIL", "admin@gmail.com")
+ADMIN_LOGIN_PASSWORD = os.getenv("ADMIN_LOGIN_PASSWORD", "1234")
