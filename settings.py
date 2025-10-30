@@ -95,7 +95,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
 
-        'NAME': 'billerpos',  # Replace with your database name
+        'NAME': 'billerpos2',  # Replace with your database name
         'USER': 'root',          # Replace with your username
         'PASSWORD': '',          # Replace with your password (empty for default XAMPP setup)
         'HOST': '127.0.0.1',     # Host where XAMPP MySQL is running
